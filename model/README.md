@@ -55,6 +55,16 @@ python hankshaw.py --param Simulation num_cycles 10
 
 ## Result Data
 
+The model produces the following data files, which are placed in the `data` directory:
+
+* `configuration.cfg`: A configuration file that can be used to reproduce the simulation
+* `demographics.csv.bz2`: Information about the abundances of cooperators and defectors in each population
+* `fitness.csv.bz2`: Information about the fitnesses of cooperators and defectors
+* `genotypes.csv.bz2`: Information about the abundances of each possible genotype over time
+
+In the base configuration file, data are written every 10 simulation cycles.
+
+
 ### Uncompressing the Data Files
 
 To save space, the resulting data files are compressed. To open these files in Python:
