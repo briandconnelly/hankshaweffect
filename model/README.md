@@ -1,4 +1,4 @@
-# Genetic Niche Hiking Model
+# Hankshaw Effect Model
 
 ## Dependiencies
 
@@ -9,24 +9,22 @@
 
 ## Running the Model
 
-Simulations using this model are run using the `niche_hike.py` script. To see
-what options can be provided to `niche_hike.py`, run it with the `--help`
-argument:
+Simulations using this model are run using the `hankshaw.py` script. To see what options can be provided to `hankshaw.py`, run it with the `--help` argument:
 
 ```sh
-python niche_hike.py --help
+python hankshaw.py --help
 ```
 ```
-usage: niche_hike.ph [-h] [--config FILE] [--data_dir DIR]
+usage: hankshaw.py [-h] [--config FILE] [--data_dir DIR]
                      [--param SECTION NAME VALUE] [--seed S] [--quiet]
                      [--version]
 
-Run a GNH simluation
+Run a simluation
 
 optional arguments:
 -h, --help            show this help message and exit
 --config FILE, -c FILE
-Configuration file to use (default: gnh.cfg)
+Configuration file to use (default: run.cfg)
 --data_dir DIR, -d DIR
 Directory to store data (default: data)
 --param SECTION NAME VALUE, -p SECTION NAME VALUE
@@ -39,20 +37,20 @@ Set a parameter value
 
 ## Configuring the Model
 
-The parameters for the model are specified in the `gnh.cfg` file. Alternate
+The parameters for the model are specified in the `run.cfg` file. Alternate
 configuration files can be used with the `--config` argument to
-`niche_hike.py`:
+`hankshaw.py`:
 
 ```sh
-python niche_hike.py --config other_config.cfg
+python hankshaw.py --config other_config.cfg
 ```
 
 Additionally, parameter values can be set from the command line with the
-`--param` argument. For example, to use the configuration `gnh.cfg`, but
+`--param` argument. For example, to use the configuration `run.cfg`, but
 set the simulation to run for 10 cycles:
 
 ```sh
-python niche_hike.py --param Simulation num_cycles 10
+python hankshaw.py --param Simulation num_cycles 10
 ```
 
 ## Result Data
