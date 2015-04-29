@@ -2,7 +2,10 @@
 
 [![DOI](https://zenodo.org/badge/8494/briandconnelly/hankshaweffect.svg)](http://dx.doi.org/10.5281/zenodo.16490)
 
+
 ## Contents
+
+These subdirectories may contain additional information
 
 * [configuration](configuration) - Configuration files for reported simulations
 * [data](data) - Result data sets
