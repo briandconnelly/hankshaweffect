@@ -52,6 +52,8 @@ class Population(object):
                                                         option='mutation_rate_adaptation')
         self.dilution_factor = config.getfloat(section='Population',
                                                option='dilution_factor')
+        self.dilution_prob_min = config.getfloat(section='Population',
+                                                 option='dilution_prob_min')
         self.capacity_min = config.getint(section='Population',
                                           option='capacity_min')
         self.capacity_max = config.getint(section='Population',
@@ -66,6 +68,7 @@ class Population(object):
         assert self.mutation_rate_social >= 0 and self.mutation_rate_social <= 1
         assert self.mutation_rate_adaptation >= 0 and self.mutation_rate_adaptation <= 1
         assert self.dilution_factor >=0 and self.dilution_factor <= 1, 'dilution_factor must be between 0 and 1'
+        assert self.dilution_prob_min >=0 and self.dilution_prob_min <= 1, 'dilution_prob_min must be between 0 and 1'
         assert self.capacity_min >= 0
         assert self.capacity_max >= 0 and self.capacity_max >= self.capacity_min
         assert self.initialize.lower() in ['empty', 'random'], "initialize must be one of 'empty', 'random'"
@@ -77,6 +80,7 @@ class Population(object):
             self.randomize()
 
         self.delta = zeros(self.abundances.size, dtype=np.int32)
+        self.diluted = True
 
     def __repr__(self):
         """Return a string representation of a Population object"""
@@ -108,10 +112,16 @@ class Population(object):
         if self.is_empty():
             return
 
-        if stochastic:
-            self.abundances = binomial(self.abundances, self.dilution_factor)
+        prob_dilute = self.dilution_prob_min + (1.0 - self.dilution_prob_min) * self.prop_producers()
+
+        if prob_dilute == 1 or binomial(n=1, p=prob_dilute, size=1)[0]:
+            self.diluted = True
+            if stochastic:
+                self.abundances = binomial(self.abundances, self.dilution_factor)
+            else:
+                self.abundances = np.floor(self.abundances * self.dilution_factor).astype(np.uint32)
         else:
-            self.abundances = np.floor(self.abundances * self.dilution_factor).astype(np.uint32)
+            self.diluted = False
 
 
     def grow(self):
@@ -124,6 +134,9 @@ class Population(object):
         """
 
         if self.is_empty():
+            return
+
+        if not self.diluted:
             return
 
         landscape = self.metapopulation.fitness_landscape
@@ -151,6 +164,9 @@ class Population(object):
         """
 
         if self.is_empty():
+            return
+
+        if not self.diluted:
             return
 
         mutated_population = zeros(self.abundances.size, dtype=np.uint32)
