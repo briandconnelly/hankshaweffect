@@ -1,0 +1,1 @@
+This work is licensed under a [Creative Commons](http://creativecommons.org) [Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/). See [http://creativecommons.org/licenses/by-sa/4.0/](http://creativecommons.org/licenses/by-sa/4.0/) for details.
