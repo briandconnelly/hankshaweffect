@@ -42,7 +42,7 @@ devtools::install_github('briandconnelly/ggplot2bdc')
 | [figureS3b.R](figureS3b.R) | Create [Figure S3b](../figures/FigureS3b.png) |
 | [figureS4.R](figureS4.R) | Create [Figure S4](../figures/FigureS4.png) |
 | [figureS5.R](figureS5.R) | Create [Figure S5](../figures/FigureS5.png) |
-| [formatting.R](formatting.R) | Define some variables for formatting figures |
+| [formatting.R](formatting.R) | Define variables for formatting figures |
 | [theme_hankshaw.R](theme_hankshaw.R) | Theme for creating plots        |
 
 
