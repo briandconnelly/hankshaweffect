@@ -6,6 +6,12 @@
 * [NumPy](http://www.numpy.org) 1.8.0 or later
 * [NetworkX](https://networkx.github.io/)
 
+These dependencies can be installed in a modern Python environment using:       
+                                                                                
+```sh
+pip install numpy networkx
+```
+
 
 ## Running the Model
 
@@ -62,7 +68,7 @@ The model produces the following data files, which are placed in the `data` dire
 * `fitness.csv.bz2`: Information about the fitnesses of cooperators and defectors
 * `genotypes.csv.bz2`: Information about the abundances of each possible genotype over time
 
-In the base configuration file, data are written every 10 simulation cycles.
+In the [base configuration file](../configuration/base.cfg), data are written every 10 simulation cycles.
 
 
 ### Uncompressing the Data Files

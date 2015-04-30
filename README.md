@@ -11,7 +11,7 @@ These subdirectories may contain additional information
 * [data](data) - Result data sets
 * [figures](figures) - Figures
 * [model](model) - Model source code
-* [scripts](scripts) - Scripts for analyzing and plotting result data
+* [scripts](scripts) - Scripts for analyzing and plotting [result data](data)
 
 
 ## License
