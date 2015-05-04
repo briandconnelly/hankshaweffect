@@ -2,7 +2,7 @@
 # that ribbons aren't broken
 figsummary <- function(x, ...)
 {
-    v <- mean_cl_boot(x, ...)
+    v <- mean_cl_boot(x, B=5000, ...)
     v$ymin[v$ymin < 0] <- 0
     v$ymax[v$ymax > 1] <- 1
     v

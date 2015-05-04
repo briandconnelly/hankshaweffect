@@ -16,7 +16,6 @@ data_figs2$Replicate <- as.factor(data_figs2$Replicate)
 data_interval <- 10
 
 presence <- data_figs2 %>%
-    filter(Time <= integral_maxtime) %>%
     filter(MutationRateTolerance == 1) %>%
     group_by(EnvChangeFreq, Replicate) %>%
     summarise(Integral=data_interval*sum(ProducerProportion)/(max(Time)-min(Time)))
@@ -28,7 +27,7 @@ breaks <- 1/sort(breakpoints, decreasing = TRUE)
 label_breaks <- sprintf('1/%d', sort(breakpoints, decreasing = TRUE))
 
 figS2 <- ggplot(presence_change, aes(x=1/EnvChangeFreq, y=Integral)) +
-    stat_summary(fun.data='mean_cl_boot') +
+    stat_summary(fun.data='figsummary', size=point_size) +
     scale_y_continuous(limits=c(0,1)) +
     scale_x_continuous(trans=log2_trans(),
                        breaks=breaks,

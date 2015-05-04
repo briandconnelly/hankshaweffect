@@ -9,14 +9,15 @@ library(gtable)
 source('formatting.R')
 source('figsummary.R')
 
-data_figs1bc <- read.csv('../data/figureS1bc.csv')
+data_figs1bc <- read.csv('../data/figureS1bc.csv') %>%
+    filter(Time <= max_time)
 data_figs1bc$Replicate <- as.factor(data_figs1bc$Replicate)
 
 data_figs1c <- data_figs1bc %>%
     filter(MutationRateSocial == max(data_figs1bc$MutationRateSocial))
 
 figS1C <- ggplot(data_figs1c, aes(x=Time, y=ProducerProportion)) +
-    stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) + 
+    stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) +
     stat_summary(fun.y='mean', geom='line', color='black') +
     scale_y_continuous(limits=c(0,1)) +
     labs(x=label_time, y=label_producer_proportion)

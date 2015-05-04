@@ -7,7 +7,7 @@ library(gtable)
 
 source('formatting.R')
 
-data_fig2a <- read.csv('../data/figure2a.csv')
+data_fig2a <- read.csv('../data/figure2a.csv') %>% filter(Time <= max_time)
 data_fig2a$Replicate <- as.factor(data_fig2a$Replicate)
 
 fig2afacets <- function(variable, value)
@@ -15,13 +15,11 @@ fig2afacets <- function(variable, value)
     return(sprintf('%d Adaptive Loci', value))
 }
 
-data_shading <- data_fig2a %>% filter(Time <= integral_maxtime)
-
 fig2a <- ggplot(data_fig2a, aes(x=Time, y=MeanProducerProportion,
                                 color=as.factor(GenomeLength),
                                 fill=as.factor(GenomeLength))) +
     #geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70', size=0.1) +
-    stat_summary(data=data_shading, fun.ymax='mean', geom='ribbon', ymin=0, alpha=1, color=NA) +
+    stat_summary(fun.ymax='mean', geom='ribbon', ymin=0, alpha=1, color=NA) +
     stat_summary(fun.y='mean', geom='line', color='black') +
     facet_grid(GenomeLength ~ ., labeller=fig2afacets) +
     scale_color_manual(values=c('8'='#5086FF', '0'='#F35E5A'), guide=FALSE) +

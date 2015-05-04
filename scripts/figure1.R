@@ -11,7 +11,7 @@ fig1data <- read.csv('../data/figure1.csv')
 fig1data$Struct <- fig1data$PopulationStructure=='lattice, 25x25'
 fig1data$Replicate <- as.factor(fig1data$Replicate)
 
-fig1data <- filter(fig1data, Time <= 2000)
+fig1data <- filter(fig1data, Time <= max_time)
 
 facet_labels <- data.frame(Time=0, MeanProducerProportion=1,
                            GenomeLength=c(0,0,8,8),

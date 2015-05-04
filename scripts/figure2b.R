@@ -12,10 +12,9 @@ source('figsummary.R')
 # How often data were logged
 data_interval <- 10
 
-data_fig2b <- read.csv('../data/figure2b.csv')
+data_fig2b <- read.csv('../data/figure2b.csv') %>% filter(Time <= max_time)
 
 data_fig2b_integral <- data_fig2b %>%
-    filter(Time <= integral_maxtime) %>%
     group_by(GenomeLength, Source, Replicate) %>%
     summarise(Integral=data_interval * sum(MeanProducerProportion)/(max(Time)-min(Time)))
 

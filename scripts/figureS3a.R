@@ -11,6 +11,7 @@ source('formatting.R')
 source('figsummary.R')
 
 data_s3a <- read.csv('../data/figureS3.csv') %>%
+    filter(Time <= max_time) %>%
     filter(GenomeLength==8)
 
 data_s3a$Replicate <- as.factor(data_s3a$Replicate)                                       
@@ -25,16 +26,16 @@ figs3a <- ggplot(data_s3a, aes(x=Time, y=ProducerProportion,
     stat_summary(fun.y='mean', geom='line') +
     scale_y_continuous(limits=c(0,1)) +
     scale_linetype_manual(values=c('1'='solid', '1e-05'='dashed'),
-                          labels=c('1'='Without Stress Bottleneck',
-                                   '1e-05'='With Stress Bottleneck'),
+                          labels=c('1'=label_without_stress,
+                                   '1e-05'=label_with_stress),
                           name='') +
     scale_color_manual(values=c('1'='grey70', '1e-05'='grey20'),
-                       labels=c('1'='Without Stress Bottleneck',
-                                '1e-05'='With Stress Bottleneck'),
+                       labels=c('1'=label_without_stress,
+                                '1e-05'=label_with_stress),
                        name='') +
     scale_fill_manual(values=c('1'='grey70', '1e-05'='grey20'),
-                      labels=c('1'='Without Stress Bottleneck',
-                               '1e-05'='With Stress Bottleneck'),
+                      labels=c('1'=label_without_stress,
+                               '1e-05'=label_with_stress),
                       name='', guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
     theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5))

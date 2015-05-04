@@ -12,11 +12,11 @@ source('figsummary.R')
 # How often data were logged
 data_interval <- 10
 
-data_fig2f <- read.csv('../data/figure2f.csv')
+data_fig2f <- read.csv('../data/figure2f.csv') %>%
+    filter(Time <= max_time)
 data_fig2f$Replicate <- as.factor(data_fig2f$Replicate)
 
 data_fig2f_integral <- data_fig2f %>%
-    filter(Time <= integral_maxtime) %>%
     group_by(MutationRateSocial, MutationRateAdaptation, Source, Replicate) %>%
     summarise(Integral=data_interval * sum(MeanProducerProportion)/(max(Time)-min(Time)))
 
@@ -30,7 +30,7 @@ mutation_labels_log <- c(expression(paste(5, 'x', 10^{-7})),
 
 fig2f <- ggplot(data_fig2f_integral, aes(x=as.factor(MutationRateAdaptation), y=Integral)) +
     #geom_point(shape=1, alpha=replicate_alpha) +
-    stat_summary(fun.data='figsummary') +
+    stat_summary(fun.data='figsummary', size=point_size) +
     scale_x_discrete(breaks=sort(unique(data_fig2f_integral$MutationRateAdaptation)),
                      labels=mutation_labels_log) +
     scale_y_continuous(limits=c(0, 1)) +

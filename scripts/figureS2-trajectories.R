@@ -10,10 +10,9 @@ source('figsummary.R')
 source('formatting.R')
 
 data_figs2 <- read.csv('../data/figureS2.csv') %>%
+    filter(Time <= max_time) %>%
     filter(MutationRateTolerance == 1)
 data_figs2$Replicate <- as.factor(data_figs2$Replicate)
-
-
 
 data_figs2[data_figs2$EnvChangeFreq==0, 'EnvChangeFreq'] <- max(data_figs2$Time)
 change_points <- data.frame()

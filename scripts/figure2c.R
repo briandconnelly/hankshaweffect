@@ -12,18 +12,17 @@ source('figsummary.R')
 # How often data were logged
 data_interval <- 10
 
-data_fig2c <- read.csv('../data/figure2c.csv')
+data_fig2c <- read.csv('../data/figure2c.csv') %>% filter(Time <= max_time)
 data_fig2c$Replicate <- as.factor(data_fig2c$Replicate)
 data_fig2c$Benefit <- data_fig2c$MaxCarryingCapacity - data_fig2c$MinCarryingCapacity
 
 data_fig2c_integral <- data_fig2c %>%
-    filter(Time <= integral_maxtime) %>%
     group_by(Benefit, Source, Replicate) %>%
     summarise(Integral=data_interval * sum(MeanProducerProportion)/(max(Time)-min(Time)))
 
 fig2c <- ggplot(data_fig2c_integral, aes(x=as.factor(Benefit), y=Integral)) +
     #geom_point(shape=1, alpha=replicate_alpha) +
-    stat_summary(fun.data='figsummary') +
+    stat_summary(fun.data='figsummary', size=point_size) +
     scale_x_discrete(breaks=unique(data_fig2c_integral$Benefit),
                      labels=label_benefits) +
     scale_y_continuous(limits=c(0, 1)) +

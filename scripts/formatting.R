@@ -2,7 +2,8 @@ source('theme_hankshaw.R')
 ggplot2::theme_set(theme_hankshaw())
 
 figure_dpi <- 600
-integral_maxtime <- 1500
+point_size <- 0.8
+max_time <- 2000
 
 label_time <- 'Time'
 label_producer_proportion <- 'Cooperator Proportion'
@@ -19,6 +20,8 @@ label_envchange_freq <- 'Environmental Change Frequency'
 label_longdistance <- 'Prob. Random Migration'
 label_topology <- 'Migration Topology'
 label_dilute_min <- 'Minimum Probability of Dilution'
+label_with_stress <- 'With Stress Induced Thinning'
+label_without_stress <- 'Without Stress Induced Thinning'
 
 label_genomelengths <- c('0', '1', '2', '3', '4', '5', '6', '7', expression(bold('8')), '9', '10')
 label_genomelengths08 <- c('0', expression(bold('8')) )
