@@ -17,6 +17,7 @@ data_fig2c$Replicate <- as.factor(data_fig2c$Replicate)
 data_fig2c$Benefit <- data_fig2c$MaxCarryingCapacity - data_fig2c$MinCarryingCapacity
 
 data_fig2c_integral <- data_fig2c %>%
+    filter(Time <= integral_maxtime) %>%
     group_by(Benefit, Source, Replicate) %>%
     summarise(Integral=data_interval * sum(MeanProducerProportion)/(max(Time)-min(Time)))
 

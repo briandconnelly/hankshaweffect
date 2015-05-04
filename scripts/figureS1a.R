@@ -16,6 +16,7 @@ data_figs1a <- read.csv('../data/figureS1a.csv')
 data_figs1a$Replicate <- as.factor(data_figs1a$Replicate)
 
 data_figs1a_integral <- data_figs1a %>%
+    filter(Time <= integral_maxtime) %>%
     group_by(MutationRateAdaptation, Replicate) %>%
     summarise(Integral=data_interval * sum(ProducerProportion)/(max(Time)-min(Time)))
 

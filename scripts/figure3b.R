@@ -16,6 +16,7 @@ data_fig3b <- read.csv('../data/figure3.csv')
 data_interval <- 10
 
 data_fig3b_integral <- data_fig3b %>%                                                             
+    filter(Time <= integral_maxtime) %>%
     group_by(EnvChangeFreq, Replicate) %>%                                      
     summarise(Integral=data_interval * sum(ProducerProportion)/(max(Time)-min(Time)))    
 
@@ -61,7 +62,7 @@ figX_time <- ggplot(data_fig3b, aes(x=Time, y=MeanProducerProportion, group=Repl
     scale_y_continuous(limits=c(0,1), breaks=c(0, 0.5, 1)) +                    
     labs(x='Time', y='Producer Proportion') +                                   
     theme_bdc_paneled(grid.y=FALSE) + theme(axis.text.y=element_text(size=8))
-ggsave(plot=figX_time, '../figures/Supp Periodic Change: Cooperator Proportion over Time.png', width=6, res=figure_dpi)
+ggsave(plot=figX_time, '../figures/Supp Periodic Change: Cooperator Proportion over Time.png', width=6, dpi=figure_dpi)
 
 # Plot for just the 1000 data
 data_1000 <- filter(data_fig3b, EnvChangeFreq==1000)
@@ -73,5 +74,5 @@ figX_time1000 <- ggplot(data_1000, aes(x=Time, y=MeanProducerProportion, group=R
     labs(x='Time', y='Producer Proportion') +                                   
     theme_bdc_grey()
 rescale_golden(figX_time1000)
-ggsave(plot=fig3_time, '../figures/Supp Periodic Change Every 1000: Cooperator Proportion over Time.png', width=6, res=figure_dpi)
+ggsave(plot=fig3_time, '../figures/Supp Periodic Change Every 1000: Cooperator Proportion over Time.png', width=6, dpi=figure_dpi)
 

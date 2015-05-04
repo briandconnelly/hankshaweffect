@@ -11,6 +11,7 @@ figX2data <- read.csv('../data/figureS5.csv')
 figX2data$Replicate <- as.factor(figX2data$Replicate)
 
 figX2_integral <- figX2data %>%
+    filter(Time <= integral_maxtime) %>%
     group_by(MinProbDilution, Replicate) %>%
     summarise(Integral=1*sum(MeanProducerProportion)/(max(Time)-min(Time)))
 

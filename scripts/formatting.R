@@ -2,6 +2,7 @@ source('theme_hankshaw.R')
 ggplot2::theme_set(theme_hankshaw())
 
 figure_dpi <- 600
+integral_maxtime <- 1500
 
 label_time <- 'Time'
 label_producer_proportion <- 'Cooperator Proportion'

@@ -16,6 +16,7 @@ data_fig2e <- read.csv('../data/figure2e.csv')
 data_fig2e$Replicate <- as.factor(data_fig2e$Replicate)
 
 data_fig2e_integral <- data_fig2e %>%
+    filter(Time <= integral_maxtime) %>%
     group_by(MigrationRate, Source, Replicate) %>%
     summarise(Integral=data_interval * sum(MeanProducerProportion)/(max(Time)-min(Time)))
 

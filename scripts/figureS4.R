@@ -18,6 +18,7 @@ data_figs4$Treatment <- factor(data_figs4$Treatment, levels=c('Lattice',
 data_interval <- 10
 
 presence <- data_figs4 %>%
+    filter(Time <= integral_maxtime) %>%
     group_by(Treatment, Replicate) %>%
     summarise(Integral=data_interval * sum(MeanProducerProportion)/(max(Time)-min(Time)))
 

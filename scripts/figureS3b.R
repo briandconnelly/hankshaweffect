@@ -18,6 +18,7 @@ data_s3b$MutationRateTolerance <- as.factor(data_s3b$MutationRateTolerance)
 data_interval <- 10
 
 presence <- data_s3b %>%
+    filter(Time <= integral_maxtime) %>%
     group_by(GenomeLength, MutationRateTolerance, Replicate) %>%
     summarise(Integral=data_interval*sum(ProducerProportion)/(max(Time)-min(Time)))
 

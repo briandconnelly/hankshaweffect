@@ -16,6 +16,7 @@ data_fig2d <- read.csv('../data/figure2d.csv')
 data_fig2d$Replicate <- as.factor(data_fig2d$Replicate)
 
 data_fig2d_integral <- data_fig2d %>%
+    filter(Time <= integral_maxtime) %>%
     group_by(ProductionCost, Source, Replicate) %>%
     summarise(Integral=data_interval * sum(MeanProducerProportion)/(max(Time)-min(Time)))
 

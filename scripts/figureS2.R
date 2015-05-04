@@ -16,6 +16,7 @@ data_figs2$Replicate <- as.factor(data_figs2$Replicate)
 data_interval <- 10
 
 presence <- data_figs2 %>%
+    filter(Time <= integral_maxtime) %>%
     filter(MutationRateTolerance == 1) %>%
     group_by(EnvChangeFreq, Replicate) %>%
     summarise(Integral=data_interval*sum(ProducerProportion)/(max(Time)-min(Time)))
