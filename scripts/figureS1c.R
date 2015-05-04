@@ -17,6 +17,7 @@ data_figs1c <- data_figs1bc %>%
     filter(MutationRateSocial == max(data_figs1bc$MutationRateSocial))
 
 figS1C <- ggplot(data_figs1c, aes(x=Time, y=ProducerProportion)) +
+    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70', size=0.1) +
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) +
     stat_summary(fun.y='mean', geom='line', color='black') +
     scale_y_continuous(limits=c(0,1)) +

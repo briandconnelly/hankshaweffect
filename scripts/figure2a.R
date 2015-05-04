@@ -7,7 +7,8 @@ library(gtable)
 
 source('formatting.R')
 
-data_fig2a <- read.csv('../data/figure2a.csv') %>% filter(Time <= max_time)
+data_fig2a <- read.csv('../data/figure2a.csv') %>%
+    filter(Time <= max_time)
 data_fig2a$Replicate <- as.factor(data_fig2a$Replicate)
 
 fig2afacets <- function(variable, value)
@@ -18,7 +19,7 @@ fig2afacets <- function(variable, value)
 fig2a <- ggplot(data_fig2a, aes(x=Time, y=MeanProducerProportion,
                                 color=as.factor(GenomeLength),
                                 fill=as.factor(GenomeLength))) +
-    #geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70', size=0.1) +
+    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70', size=0.1) +
     stat_summary(fun.ymax='mean', geom='ribbon', ymin=0, alpha=1, color=NA) +
     stat_summary(fun.y='mean', geom='line', color='black') +
     facet_grid(GenomeLength ~ ., labeller=fig2afacets) +

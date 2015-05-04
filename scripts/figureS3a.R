@@ -21,7 +21,7 @@ figs3a <- ggplot(data_s3a, aes(x=Time, y=ProducerProportion,
                                color=MutationRateTolerance,
                                fill=MutationRateTolerance,
                                linetype=MutationRateTolerance)) +
-    #geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +
+    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) + 
     stat_summary(fun.y='mean', geom='line') +
     scale_y_continuous(limits=c(0,1)) +
