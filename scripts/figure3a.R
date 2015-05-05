@@ -21,7 +21,8 @@ fig3a <- ggplot(data_fig3a, aes(x=Time, y=ProducerProportion)) +
     geom_line(size=0.8) + 
     scale_y_continuous(limits=c(0,1)) +
     scale_x_continuous(breaks=c(0,2000,4000,6000,8000,10000)) +
-    labs(x=label_time, y=label_producer_proportion)
+    labs(x=label_time, y=label_producer_proportion) +
+    theme_hankshaw(base_size=17)
 fig3a <- rescale_golden(plot=fig3a)
 
 g <- ggplotGrob(fig3a)

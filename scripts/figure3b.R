@@ -30,7 +30,8 @@ fig3b <- ggplot(data_fig3b_integral, aes(x=1/EnvChangeFreq, y=Integral)) +
     scale_x_continuous(trans=log2_trans(),
                        breaks=breaks,
                        labels=label_breaks) +
-    labs(x=label_envchange_freq, y=label_producer_presence)
+    labs(x=label_envchange_freq, y=label_producer_presence) +
+    theme_hankshaw(base_size=17)
 fig3b <- rescale_golden(plot=fig3b)
 
 g <- ggplotGrob(fig3b)
