@@ -20,6 +20,7 @@ These configuration files can be used with the [model](../model) to reproduce ou
 | [figureS5-lattice.cfg](figureS5-lattice.cfg) | Migration topology modeled as a lattice (Moore neighborhood) |
 | [figureS5-singlepop.cfg](figureS5-singlepop.cfg) | Population consists of a single subpopulation |
 | [figureS6a.cfg](figureS6a.cfg) | Spite simulations (where `Population/dilution_prob_min` is varied) |
+| [figureS6b.cfg](figureS6b.cfg) | Spite simulations with environmental change every 1000 cycles |
 
 
 ## Other Simulations
