@@ -16,9 +16,9 @@ data_fig3a <- read.csv('../data/figure3.csv') %>%
     filter(Replicate==17)
 
 fig3a <- ggplot(data_fig3a, aes(x=Time, y=ProducerProportion)) +
-    geom_vline(aes(xintercept=seq(from=0, to=max(data_fig3a$Time), by=change_freq)), color='grey80', size=0.2) +
+    geom_vline(aes(xintercept=seq(from=0, to=max(data_fig3a$Time), by=change_freq)), color='grey80', size=0.3) +
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70', size=0.1) +
-    geom_line() + 
+    geom_line(size=0.8) + 
     scale_y_continuous(limits=c(0,1)) +
     scale_x_continuous(breaks=c(0,2000,4000,6000,8000,10000)) +
     labs(x=label_time, y=label_producer_proportion)

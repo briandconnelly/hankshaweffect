@@ -20,16 +20,20 @@ data_figs1b_integral <- data_figs1b %>%
     group_by(MutationRateSocial, Replicate) %>%
     summarise(Integral=data_interval * sum(ProducerProportion)/(max(Time)-min(Time)))
 
-mutation_labels <- c('1e-07'='0.0000001', '1e-06'='0.000001',
-                     '1e-05'=expression(bold('0.00001')), '1e-04'='0.0001',
-                     '1e-03'='0.001', '1e-02'='0.01', '1e-01'='0.1')
+mutation_labels_log <- c(expression(paste(1, 'x', 10^{-7})),
+                         expression(paste(1, 'x', 10^{-6})),
+                         expression(bold(paste('1', 'x', '10'^{'-5'}))),
+                         expression(paste(1, 'x', 10^{-4})),
+                         expression(paste(1, 'x', 10^{-3})),
+                         expression(paste(1, 'x', 10^{-2})),
+                         expression(paste(1, 'x', 10^{-1})))
 
 figS1B <- ggplot(data_figs1b_integral, aes(x=MutationRateSocial, y=Integral)) +
     #geom_point(shape=1, alpha=replicate_alpha) +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_y_continuous(limits=c(0,1)) +
     scale_x_log10(breaks=unique(data_figs1b_integral$MutationRateSocial),
-                  labels=mutation_labels) +
+                  labels=mutation_labels_log) +
     labs(x=label_socialmu, y=label_producer_presence)
 figS1B <- rescale_golden(plot=figS1B)
 
