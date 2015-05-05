@@ -34,7 +34,8 @@ fig2e <- ggplot(data_fig2e_integral, aes(x=MigrationRate, y=Integral)) +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_x_log10(breaks=unique(data_fig2e_integral$MigrationRate), labels=migration_labels_log) +
     scale_y_continuous(limits=c(0, 1)) +
-    labs(x=label_migration_rate, y=label_producer_presence)
+    labs(x=label_migration_rate, y=label_producer_presence) +
+    theme_hankshaw(base_size=17)
 fig2e <- rescale_golden(plot=fig2e)
 
 g <- ggplotGrob(fig2e)

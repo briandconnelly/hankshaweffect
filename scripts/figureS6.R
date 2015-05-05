@@ -20,7 +20,8 @@ figS6 <- ggplot(figs6_integral, aes(x=MinProbDilution, y=Integral)) +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_y_continuous(limits=c(0, 1)) +
     scale_x_log10(limits=c(1e-3,1), breaks=c(1e-3, 1e-2, 1e-1, 1)) +
-    labs(x=label_dilute_min, y=label_spite_presence)
+    labs(x=label_dilute_min, y=label_spite_presence) +
+    theme_hankshaw(base_size=17)
 figS6 <- rescale_golden(plot=figS6)
 
 png('../figures/FigureS6.png', width=6, height=3.708204, units='in', res=figure_dpi)

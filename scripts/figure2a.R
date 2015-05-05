@@ -30,7 +30,8 @@ fig2a <- ggplot(data_fig2a, aes(x=Time, y=MeanProducerProportion,
     scale_color_manual(values=c('8'=color_L08, '0'=color_L00), guide=FALSE) +
     scale_fill_manual(values=c('8'=color_L08, '0'=color_L00), guide=FALSE) +
     scale_y_continuous(limits=c(0,1)) +
-    labs(x=label_time, y=label_producer_proportion)
+    labs(x=label_time, y=label_producer_proportion) +
+    theme_hankshaw(base_size=17)
 fig2a <- rescale_plot(plot=fig2a, ratio=(1 + sqrt(5)))
 
 g <- ggplotGrob(fig2a)

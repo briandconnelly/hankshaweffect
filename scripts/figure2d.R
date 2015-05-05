@@ -24,7 +24,8 @@ fig2d <- ggplot(data_fig2d_integral, aes(x=ProductionCost, y=Integral)) +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_x_continuous(breaks=unique(data_fig2d_integral$ProductionCost), labels=cost_labels) +
     scale_y_continuous(limits=c(0, 1)) +
-    labs(x=label_cost, y=label_producer_presence)
+    labs(x=label_cost, y=label_producer_presence) +
+    theme_hankshaw(base_size=17)
 fig2d <- rescale_golden(plot=fig2d)
 
 g <- ggplotGrob(fig2d)

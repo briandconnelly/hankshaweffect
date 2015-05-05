@@ -34,7 +34,8 @@ fig2f <- ggplot(data_fig2f_integral, aes(x=as.factor(MutationRateAdaptation), y=
     scale_x_discrete(breaks=sort(unique(data_fig2f_integral$MutationRateAdaptation)),
                      labels=mutation_labels_log) +
     scale_y_continuous(limits=c(0, 1)) +
-    labs(x=label_mu, y=label_producer_presence)
+    labs(x=label_mu, y=label_producer_presence) +
+    theme_hankshaw(base_size=17)
 fig2f <- rescale_golden(plot=fig2f)
 
 g <- ggplotGrob(fig2f)

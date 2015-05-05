@@ -31,7 +31,8 @@ fig2b <- ggplot(data_fig2b_integral, aes(x=GenomeLength, y=Integral, color=Genom
     scale_x_discrete(breaks=unique(data_fig2b_integral$GenomeLength),
                      labels=label_genomelengths) +
     scale_y_continuous(limits=c(0, 1)) +
-    labs(x=label_genome_length, y=label_producer_presence)
+    labs(x=label_genome_length, y=label_producer_presence) +
+    theme_hankshaw(base_size=17)
 fig2b <- rescale_golden(plot=fig2b)
 
 g <- ggplotGrob(fig2b)

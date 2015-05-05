@@ -26,7 +26,9 @@ fig2c <- ggplot(data_fig2c_integral, aes(x=as.factor(Benefit), y=Integral)) +
     scale_x_discrete(breaks=unique(data_fig2c_integral$Benefit),
                      labels=label_benefits) +
     scale_y_continuous(limits=c(0, 1)) +
-    labs(x=label_benefit, y=label_producer_presence)
+    labs(x=label_benefit, y=label_producer_presence) +
+    theme_hankshaw(base_size=17) +
+    theme(axis.text.x = element_text(size=rel(0.9)))
 fig2c <- rescale_golden(plot=fig2c)
 
 g <- ggplotGrob(fig2c)
