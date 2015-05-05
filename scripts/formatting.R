@@ -8,6 +8,7 @@ max_time <- 2000
 label_time <- 'Time'
 label_producer_proportion <- 'Cooperator Proportion'
 label_producer_presence <- 'Cooperator Presence'
+label_spite_proportion <- 'Proportion of\nSpiteful Individuals'
 label_spite_presence <- 'Presence of\nSpiteful Individuals'
 label_genome_length <- 'Number of Adaptive Loci'
 label_migration_rate <- 'Migration Rate'
