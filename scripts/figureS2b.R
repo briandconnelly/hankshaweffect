@@ -12,11 +12,11 @@ source('figsummary.R')
 # How often data were logged
 data_interval <- 10
 
-data_figs1b <- read.csv('../data/figureS1bc.csv') %>%
+data_figs2b <- read.csv('../data/figureS2bc.csv') %>%
     filter(Time <= max_time)
-data_figs1b$Replicate <- as.factor(data_figs1b$Replicate)
+data_figs2b$Replicate <- as.factor(data_figs2b$Replicate)
 
-data_figs1b_integral <- data_figs1b %>%
+data_figs2b_integral <- data_figs2b %>%
     group_by(MutationRateSocial, Replicate) %>%
     summarise(Integral=data_interval * sum(ProducerProportion)/(max(Time)-min(Time)))
 
@@ -28,19 +28,19 @@ mutation_labels_log <- c(expression(paste(1, 'x', 10^{-7})),
                          expression(paste(1, 'x', 10^{-2})),
                          expression(paste(1, 'x', 10^{-1})))
 
-figS1B <- ggplot(data_figs1b_integral, aes(x=MutationRateSocial, y=Integral)) +
+figS2B <- ggplot(data_figs2b_integral, aes(x=MutationRateSocial, y=Integral)) +
     #geom_point(shape=1, alpha=replicate_alpha) +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_y_continuous(limits=c(0,1)) +
-    scale_x_log10(breaks=unique(data_figs1b_integral$MutationRateSocial),
+    scale_x_log10(breaks=unique(data_figs2b_integral$MutationRateSocial),
                   labels=mutation_labels_log) +
     labs(x=label_socialmu, y=label_producer_presence)
-figS1B <- rescale_golden(plot=figS1B)
+figS2B <- rescale_golden(plot=figS2B)
 
-g <- ggplotGrob(figS1B)
+g <- ggplotGrob(figS2B)
 g <- gtable_add_grob(g, textGrob(expression(bold("B")), gp=gpar(col='black', fontsize=20), x=0, hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/FigureS1b.png', width=6, height=3.708204, units='in', res=figure_dpi)
+png('../figures/FigureS2b.png', width=6, height=3.708204, units='in', res=figure_dpi)
 grid.newpage()
 grid.draw(g)
 dev.off()

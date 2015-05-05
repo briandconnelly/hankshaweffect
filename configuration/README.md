@@ -33,6 +33,9 @@ These configuration files can be used with the [model](../model) to reproduce ou
 | [Figure 2E](../figures/Figure2e.png) | Varying parameter `Metapopulation/migration_rate` in [base.cfg](base.cfg) |
 | [Figure 2F](../figures/Figure2f.png) | Varying parameter `Population/mutation_rate_social` and `Population/mutation_rate_social` in [base.cfg](base.cfg) |
 | [Figure 3B](../figures/Figure3b.png) | Varying parameter `Metapopulation/env_change_frequency` in [figure3a.cfg](figure3a.cfg) |
+| [Figure S2A](../figures/FigureS2a.png) | Varying parameter `Population/mutation_rate_adaptation` in [base.cfg](base.cfg) |
+| [Figure S2B](../figures/FigureS2b.png) | Varying parameter `Population/mutation_rate_social` in [base.cfg](base.cfg) |
+| [Figure S2C](../figures/FigureS2c.png) | Varying parameter `Population/mutation_rate_social` in [base.cfg](base.cfg) |
 | [Figure S4A](../figures/FigureS4a.png) | Using `Population/genome_length` = 8 in [base.cfg](base.cfg) (with stress induced thinning) and [figureS4-nothinning.cfg](figureS4-nothinning.cfg) (without stress induced thinning) |
 | [Figure S4B](../figures/FigureS4b.png) | Varying parameter `Population/genome_length` in [base.cfg](base.cfg) (with stress induced thinning) and [figureS4-nothinning.cfg](figureS4-nothinning.cfg) (without stress induced thinning) |
 
