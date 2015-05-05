@@ -7,6 +7,10 @@ library(gtable)
 
 source('formatting.R')
 
+#data_fig2a <- read.csv('../data/figure1.csv')  %>%
+#    filter(PopulationStructure == 'lattice, 25x25') %>%
+#    filter(Time <= max_time)
+
 data_fig2a <- read.csv('../data/figure2a.csv') %>%
     filter(Time <= max_time)
 data_fig2a$Replicate <- as.factor(data_fig2a$Replicate)
