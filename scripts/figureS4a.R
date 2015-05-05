@@ -38,13 +38,15 @@ figs4a <- ggplot(data_s4a, aes(x=Time, y=ProducerProportion,
                                '1e-05'=label_with_stress),
                       name='', guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
-    theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5))
+    theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5)) +
+    theme_hankshaw(base_size=17) +
+    theme(legend.text = element_text(size=rel(0.5), , colour="grey40"))
 figs4a <- rescale_golden(plot=figs4a)
 
 g <- ggplotGrob(figs4a)
 g <- gtable_add_grob(g, textGrob(expression(bold("A")), gp=gpar(col='black', fontsize=20), x=0, hjust=0, vjust=0.5), t=1, l=2)
 
 png('../figures/FigureS4a.png', width=6, height=3.708204, units='in', res=figure_dpi)
-grid.newpage()
 grid.draw(g)
 dev.off()
+
