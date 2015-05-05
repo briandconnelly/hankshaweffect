@@ -35,5 +35,5 @@ fig1 <- ggplot(fig1data, aes(x=Time, y=MeanProducerProportion)) +
     scale_y_continuous(limits=c(0,1)) +
     facet_grid(Struct ~ GenomeLength, labeller=fig1facets) +
     labs(x=label_time, y=label_producer_proportion)
-fig1stats <- rescale_square(plot=fig1)
+fig1 <- rescale_square(plot=fig1)
 ggsave(plot=fig1, '../figures/Figure1.png', width=6, height=6, dpi=figure_dpi)

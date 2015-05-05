@@ -26,7 +26,8 @@ figS5 <- ggplot(presence, aes(x=Treatment, y=Integral)) +
     #geom_point(shape=1, alpha=replicate_alpha) +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_y_continuous(limits=c(0, 1)) +
-    labs(x=label_topology, y=label_producer_presence)
+    labs(x=label_topology, y=label_producer_presence) +
+    theme_hankshaw(base_size=18)
 figS5 <- rescale_golden(plot=figS5)
 
 png('../figures/FigureS5.png', width=6, height=3.708204, units='in', res=figure_dpi)

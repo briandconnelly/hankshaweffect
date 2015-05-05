@@ -34,6 +34,7 @@ devtools::install_github('briandconnelly/ggplot2bdc')
 | [figure2f.R](figure2f.R) | Create [Figure 2f](../figures/Figure2f.png) |
 | [figure3a.R](figure3a.R) | Create [Figure 3a](../figures/Figure3a.png) |
 | [figure3b.R](figure3b.R) | Create [Figure 3b](../figures/Figure3b.png) |
+| [figureS1.R](figureS1.R) | Create [Figure S1](../figures/FigureS1.png) |
 | [figureS2a.R](figureS2a.R) | Create [Figure S2a](../figures/FigureS2a.png) |
 | [figureS2b.R](figureS2b.R) | Create [Figure S2b](../figures/FigureS2b.png) |
 | [figureS2c.R](figureS2c.R) | Create [Figure S2c](../figures/FigureS2c.png) |
