@@ -13,12 +13,12 @@ These configuration files can be used with the [model](../model) to reproduce ou
 | [figure3a.cfg](figure3a.cfg) | Runs where environment changes every 1000 cycles |
 | [figureS2.cfg](figureS2.cfg) | Runs with periodic environmental change and no stress-induced thinning |
 | [figureS3-nobottleneck.cfg](figureS3-nobottleneck.cfg) | Runs with no stress-induced thinning |
-| [figureS4-128regular.cfg](figureS4-128regular.cfg) | Migration topology modeled as a 128-regular graph |
-| [figureS4-16regular.cfg](figureS4-16regular.cfg) | Migration topology modeled as a 16-regular graph |
-| [figureS4-complete.cfg](figureS4-complete.cfg) | Migration topology modeled as a complete graph |
-| [figureS4-lattice.cfg](figureS4-lattice.cfg) | Migration topology modeled as a lattice (Moore neighborhood) |
-| [figureS4-singlepop.cfg](figureS4-singlepop.cfg) | Population consists of a single subpopulation |
-| [figureS5.cfg](figureS5.cfg) | Spite simulations (where `Population/dilution_prob_min` is varied) |
+| [figureS5-128regular.cfg](figureS5-128regular.cfg) | Migration topology modeled as a 128-regular graph |
+| [figureS5-16regular.cfg](figureS5-16regular.cfg) | Migration topology modeled as a 16-regular graph |
+| [figureS5-complete.cfg](figureS5-complete.cfg) | Migration topology modeled as a complete graph |
+| [figureS5-lattice.cfg](figureS5-lattice.cfg) | Migration topology modeled as a lattice (Moore neighborhood) |
+| [figureS5-singlepop.cfg](figureS5-singlepop.cfg) | Population consists of a single subpopulation |
+| [figureS6.cfg](figureS6.cfg) | Spite simulations (where `Population/dilution_prob_min` is varied) |
 
 
 ## Other Simulations

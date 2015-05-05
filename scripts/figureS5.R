@@ -8,7 +8,7 @@ library(ggplot2bdc)
 source('formatting.R')
 source('figsummary.R')
 
-data_figs4 <- read.csv('../data/figureS4.csv') %>%
+data_figs4 <- read.csv('../data/figureS5.csv') %>%
     filter(Time <= max_time)
 data_figs4$Treatment <- factor(data_figs4$Treatment, levels=c('Lattice',
                                                               '16-Regular',
