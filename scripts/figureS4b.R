@@ -10,19 +10,19 @@ library(gtable)
 source('formatting.R')
 source('figsummary.R')
 
-data_s3b <- read.csv('../data/figureS3.csv') %>%
+data_s4b <- read.csv('../data/figureS4.csv') %>%
     filter(Time <= max_time)
-data_s3b$Replicate <- as.factor(data_s3b$Replicate)
-data_s3b$MutationRateTolerance <- as.factor(data_s3b$MutationRateTolerance)
+data_s4b$Replicate <- as.factor(data_s4b$Replicate)
+data_s4b$MutationRateTolerance <- as.factor(data_s4b$MutationRateTolerance)
 
 # How often data were logged
 data_interval <- 10
 
-presence <- data_s3b %>%
+presence <- data_s4b %>%
     group_by(GenomeLength, MutationRateTolerance, Replicate) %>%
     summarise(Integral=data_interval*sum(ProducerProportion)/(max(Time)-min(Time)))
 
-figS3b <- ggplot(presence, aes(x=GenomeLength, y=Integral,
+figS4b <- ggplot(presence, aes(x=GenomeLength, y=Integral,
                               shape=MutationRateTolerance,
                               color=MutationRateTolerance)) +
     stat_summary(fun.data='figsummary', size=point_size) +
@@ -39,14 +39,14 @@ figS3b <- ggplot(presence, aes(x=GenomeLength, y=Integral,
                        name='') +
     labs(x=label_genome_length, y=label_producer_presence) +
     theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5))
-figS3b <- rescale_golden(plot=figS3b)
+figS4b <- rescale_golden(plot=figS4b)
 
-g <- ggplotGrob(figS3b)
+g <- ggplotGrob(figS4b)
 g <- gtable_add_grob(g, textGrob(expression(bold("B")),
                                  gp=gpar(col='black', fontsize=20), x=0,
                                  hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/FigureS3b.png', width=6, height=3.708204, units='in', res=600)
+png('../figures/FigureS4b.png', width=6, height=3.708204, units='in', res=600)
 grid.newpage()
 grid.draw(g)
 dev.off()

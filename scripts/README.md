@@ -38,10 +38,10 @@ devtools::install_github('briandconnelly/ggplot2bdc')
 | [figureS1b.R](figureS1b.R) | Create [Figure S1b](../figures/FigureS1b.png) |
 | [figureS1c.R](figureS1c.R) | Create [Figure S1c](../figures/FigureS1c.png) |
 | [figureS2.R](figureS2.R) | Create [Figure S2](../figures/FigureS2.png) |
-| [figureS3a.R](figureS3a.R) | Create [Figure S3a](../figures/FigureS3a.png) |
-| [figureS3b.R](figureS3b.R) | Create [Figure S3b](../figures/FigureS3b.png) |
-| [figureS4.R](figureS4.R) | Create [Figure S4](../figures/FigureS4.png) |
-| [figureS5.R](figureS5.R) | Create [Figure S5](../figures/FigureS5.png) |
+| [figureS4a.R](figureS4a.R) | Create [Figure S4a](../figures/FigureS4a.png) |
+| [figureS4b.R](figureS4b.R) | Create [Figure S4b](../figures/FigureS4b.png) |
+| [figureS5.R](figureS4.R) | Create [Figure S5](../figures/FigureS5.png) |
+| [figureS6.R](figureS6.R) | Create [Figure S6](../figures/FigureS6.png) |
 | [formatting.R](formatting.R) | Define variables for formatting figures |
 | [theme_hankshaw.R](theme_hankshaw.R) | Theme for creating plots        |
 

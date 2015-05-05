@@ -10,14 +10,14 @@ library(scales)
 source('formatting.R')
 source('figsummary.R')
 
-data_s3a <- read.csv('../data/figureS3.csv') %>%
+data_s4a <- read.csv('../data/figureS4.csv') %>%
     filter(Time <= max_time) %>%
     filter(GenomeLength==8)
 
-data_s3a$Replicate <- as.factor(data_s3a$Replicate)                                       
-data_s3a$MutationRateTolerance <- as.factor(data_s3a$MutationRateTolerance)
+data_s4a$Replicate <- as.factor(data_s4a$Replicate)                                       
+data_s4a$MutationRateTolerance <- as.factor(data_s4a$MutationRateTolerance)
 
-figs3a <- ggplot(data_s3a, aes(x=Time, y=ProducerProportion,
+figs4a <- ggplot(data_s4a, aes(x=Time, y=ProducerProportion,
                                color=MutationRateTolerance,
                                fill=MutationRateTolerance,
                                linetype=MutationRateTolerance)) +
@@ -39,12 +39,12 @@ figs3a <- ggplot(data_s3a, aes(x=Time, y=ProducerProportion,
                       name='', guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
     theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5))
-figs3a <- rescale_golden(plot=figs3a)
+figs4a <- rescale_golden(plot=figs4a)
 
-g <- ggplotGrob(figs3a)
+g <- ggplotGrob(figs4a)
 g <- gtable_add_grob(g, textGrob(expression(bold("A")), gp=gpar(col='black', fontsize=20), x=0, hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/FigureS3a.png', width=6, height=3.708204, units='in', res=figure_dpi)
+png('../figures/FigureS4a.png', width=6, height=3.708204, units='in', res=figure_dpi)
 grid.newpage()
 grid.draw(g)
 dev.off()
