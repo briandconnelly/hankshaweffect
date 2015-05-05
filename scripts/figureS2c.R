@@ -19,9 +19,10 @@ data_figs2c <- data_figs2bc %>%
 figS2C <- ggplot(data_figs2c, aes(x=Time, y=ProducerProportion)) +
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70', size=0.1) +
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) +
-    stat_summary(fun.y='mean', geom='line', color='black') +
+    stat_summary(fun.y='mean', geom='line', color='black', size=point_size) +
     scale_y_continuous(limits=c(0,1)) +
-    labs(x=label_time, y=label_producer_proportion)
+    labs(x=label_time, y=label_producer_proportion) +
+    theme_hankshaw(base_size=17)
 figS2C <- rescale_golden(plot=figS2C)
 
 g <- ggplotGrob(figS2C)

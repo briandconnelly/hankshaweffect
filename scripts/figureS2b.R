@@ -34,7 +34,8 @@ figS2B <- ggplot(data_figs2b_integral, aes(x=MutationRateSocial, y=Integral)) +
     scale_y_continuous(limits=c(0,1)) +
     scale_x_log10(breaks=unique(data_figs2b_integral$MutationRateSocial),
                   labels=mutation_labels_log) +
-    labs(x=label_socialmu, y=label_producer_presence)
+    labs(x=label_socialmu, y=label_producer_presence) +
+    theme_hankshaw(base_size=17)
 figS2B <- rescale_golden(plot=figS2B)
 
 g <- ggplotGrob(figS2B)
