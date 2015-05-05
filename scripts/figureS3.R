@@ -16,7 +16,6 @@ data_figs3$Replicate <- as.factor(data_figs3$Replicate)
 data_interval <- 10
 
 presence <- data_figs3 %>%
-    filter(MutationRateTolerance == 1) %>%
     group_by(EnvChangeFreq, Replicate) %>%
     summarise(Integral=data_interval*sum(ProducerProportion)/(max(Time)-min(Time)))
 
@@ -32,6 +31,10 @@ figS3 <- ggplot(presence_change, aes(x=1/EnvChangeFreq, y=Integral)) +
     scale_x_continuous(trans=log2_trans(),
                        breaks=breaks,
                        labels=label_breaks) +
-    labs(x=label_envchange_freq, y=label_producer_presence)
+    labs(x=label_envchange_freq, y=label_producer_presence) +
+    theme_hankshaw(base_size=17)
 figS3 <- rescale_golden(plot=figS3)
-ggsave(plot=figS3, '../figures/FigureS3.png', width=6, height=3.708204, dpi=figure_dpi)
+
+png('../figures/FigureS3.png', width=6, height=3.708204, units='in', res=figure_dpi)
+figS3                                                                   
+dev.off() 
