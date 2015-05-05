@@ -22,11 +22,11 @@ data_fig2b_integral$GenomeLength <- as.factor(data_fig2b_integral$GenomeLength)
 
 fig2b <- ggplot(data_fig2b_integral, aes(x=GenomeLength, y=Integral, color=GenomeLength)) +
     #geom_point(shape=1, alpha=replicate_alpha, color='black') +
-    stat_summary(fun.data='figsummary', geom='errorbar', color='black', width=0, size=0.8) +
-    stat_summary(fun.y='mean', geom='point') +
-    scale_color_manual(values=c('0'='#F35E5A', '1'='black', '2'='black',
+    stat_summary(fun.data='figsummary', size=point_size, color='black') +
+    stat_summary(fun.y='mean', geom='point', size=3.3) +
+    scale_color_manual(values=c('0'=color_L00, '1'='black', '2'='black',
                                 '3'='black', '4'='black', '5'='black',
-                                '6'='black', '7'='black', '8'='#5086FF',
+                                '6'='black', '7'='black', '8'=color_L08,
                                 '9'='black', '10'='black'), guide=FALSE) +
     scale_x_discrete(breaks=unique(data_fig2b_integral$GenomeLength),
                      labels=label_genomelengths) +

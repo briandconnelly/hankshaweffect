@@ -44,3 +44,6 @@ mutation_labels2 <- c('1e-05'=expression(bold('0.00001')), '1e-04'='0.0001',
                      '1e-03'='0.001', '1e-02'='0.01', '1e-01'='0.1', '1e+00'=1)
 
 replicate_alpha <- 0.1
+
+color_L00 <- '#666666'
+color_L08 <- '#BBBBBB'

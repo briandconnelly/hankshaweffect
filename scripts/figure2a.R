@@ -23,8 +23,8 @@ fig2a <- ggplot(data_fig2a, aes(x=Time, y=MeanProducerProportion,
     stat_summary(fun.ymax='mean', geom='ribbon', ymin=0, alpha=1, color=NA) +
     stat_summary(fun.y='mean', geom='line', color='black') +
     facet_grid(GenomeLength ~ ., labeller=fig2afacets) +
-    scale_color_manual(values=c('8'='#5086FF', '0'='#F35E5A'), guide=FALSE) +
-    scale_fill_manual(values=c('8'='#5086FF', '0'='#F35E5A'), guide=FALSE) +
+    scale_color_manual(values=c('8'=color_L08, '0'=color_L00), guide=FALSE) +
+    scale_fill_manual(values=c('8'=color_L08, '0'=color_L00), guide=FALSE) +
     scale_y_continuous(limits=c(0,1)) +
     labs(x=label_time, y=label_producer_proportion)
 fig2a <- rescale_plot(plot=fig2a, ratio=(1 + sqrt(5)))
