@@ -11,7 +11,7 @@ These configuration files can be used with the [model](../model) to reproduce ou
 | [figure1b.cfg](figure1b.cfg) | Single subpopulation runs with adaptation |
 | [figure1c.cfg](figure1c.cfg) | Lattice-structured population runs without adaptation |
 | [figure3a.cfg](figure3a.cfg) | Runs where environment changes every 1000 cycles |
-| [figureS2.cfg](figureS2.cfg) | Runs with periodic environmental change and no stress-induced thinning |
+| [figureS3.cfg](figureS3.cfg) | Runs with periodic environmental change and no stress-induced thinning |
 | [figureS4-nothinning.cfg](figureS4-nothinning.cfg) | Runs with no stress-induced thinning |
 | [figureS5-128regular.cfg](figureS5-128regular.cfg) | Migration topology modeled as a 128-regular graph |
 | [figureS5-16regular.cfg](figureS5-16regular.cfg) | Migration topology modeled as a 16-regular graph |

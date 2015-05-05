@@ -37,7 +37,8 @@ devtools::install_github('briandconnelly/ggplot2bdc')
 | [figureS1a.R](figureS1a.R) | Create [Figure S1a](../figures/FigureS1a.png) |
 | [figureS1b.R](figureS1b.R) | Create [Figure S1b](../figures/FigureS1b.png) |
 | [figureS1c.R](figureS1c.R) | Create [Figure S1c](../figures/FigureS1c.png) |
-| [figureS2.R](figureS2.R) | Create [Figure S2](../figures/FigureS2.png) |
+| [figureS3.R](figureS3.R) | Create [Figure S3](../figures/FigureS3.png) |
+| [figureS3-trajectories.R](figureS3-trajectories.R) | Plot the trajectories for data shown in [Figure S3](../figures/FigureS3.png) |
 | [figureS4a.R](figureS4a.R) | Create [Figure S4a](../figures/FigureS4a.png) |
 | [figureS4b.R](figureS4b.R) | Create [Figure S4b](../figures/FigureS4b.png) |
 | [figureS5.R](figureS4.R) | Create [Figure S5](../figures/FigureS5.png) |
