@@ -21,12 +21,12 @@ data_fig2f_integral <- data_fig2f %>%
     summarise(Integral=data_interval * sum(MeanProducerProportion)/(max(Time)-min(Time)))
 
 mutation_labels_log <- c(expression(10^{-7}),
-                          expression(10^{-6}),
-                          expression(bold('10'^{'-5'})),
-                          expression(10^{-4}),
-                          expression(10^{-3}),
-                          expression(10^{-2}),
-                          expression(10^{-1}))
+                         expression(10^{-6}),
+                         expression(bold('10'^{'-5'})),
+                         expression(10^{-4}),
+                         expression(10^{-3}),
+                         expression(10^{-2}),
+                         expression(10^{-1}))
 
 fig2f <- ggplot(data_fig2f_integral, aes(x=as.factor(MutationRateAdaptation), y=Integral)) +
     #geom_point(shape=1, alpha=replicate_alpha) +
