@@ -20,13 +20,13 @@ data_figs2b_integral <- data_figs2b %>%
     group_by(MutationRateSocial, Replicate) %>%
     summarise(Integral=data_interval * sum(ProducerProportion)/(max(Time)-min(Time)))
 
-mutation_labels_log <- c(expression(paste(1, 'x', 10^{-7})),
-                         expression(paste(1, 'x', 10^{-6})),
-                         expression(bold(paste('1', 'x', '10'^{'-5'}))),
-                         expression(paste(1, 'x', 10^{-4})),
-                         expression(paste(1, 'x', 10^{-3})),
-                         expression(paste(1, 'x', 10^{-2})),
-                         expression(paste(1, 'x', 10^{-1})))
+mutation_labels_log <- c(expression(10^{-7}),
+                          expression(10^{-6}),
+                          expression(bold('10'^{'-5'})),
+                          expression(10^{-4}),
+                          expression(10^{-3}),
+                          expression(10^{-2}),
+                          expression(10^{-1}))
 
 figS2B <- ggplot(data_figs2b_integral, aes(x=MutationRateSocial, y=Integral)) +
     #geom_point(shape=1, alpha=replicate_alpha) +
