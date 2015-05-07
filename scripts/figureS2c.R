@@ -17,7 +17,8 @@ data_figs2c <- data_figs2bc %>%
     filter(MutationRateSocial == max(data_figs2bc$MutationRateSocial))
 
 figS2C <- ggplot(data_figs2c, aes(x=Time, y=ProducerProportion)) +
-    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70', size=0.1) +
+    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70',
+               size=0.1) +
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) +
     stat_summary(fun.y='mean', geom='line', color='black', size=point_size) +
     scale_y_continuous(limits=c(0,1)) +
@@ -26,9 +27,12 @@ figS2C <- ggplot(data_figs2c, aes(x=Time, y=ProducerProportion)) +
 figS2C <- rescale_golden(plot=figS2C)
 
 g <- ggplotGrob(figS2C)
-g <- gtable_add_grob(g, textGrob(expression(bold("C")), gp=gpar(col='black', fontsize=20), x=0, hjust=0, vjust=0.5), t=1, l=2)
+g <- gtable_add_grob(g, textGrob(expression(bold("C")),
+                                 gp=gpar(col='black', fontsize=20),
+                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/FigureS2c.png', width=6, height=3.708204, units='in', res=600)
+png('../figures/FigureS2c.png', width=6, height=3.708204, units='in',
+    res=figure_dpi)
 grid.newpage()
 grid.draw(g)
 dev.off()

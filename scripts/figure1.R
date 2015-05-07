@@ -28,7 +28,8 @@ fig1facets <- function(variable, value)
 }
 
 fig1 <- ggplot(fig1data, aes(x=Time, y=MeanProducerProportion)) +
-    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70', size=0.1) +
+    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70',
+               size=0.1) +
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) + 
     stat_summary(fun.y='mean', geom='line') +
     geom_text(data=facet_labels, aes(label=Label), vjust=1, hjust=0) +

@@ -32,9 +32,12 @@ fig2c <- ggplot(data_fig2c_integral, aes(x=as.factor(Benefit), y=Integral)) +
 fig2c <- rescale_golden(plot=fig2c)
 
 g <- ggplotGrob(fig2c)
-g <- gtable_add_grob(g, textGrob(expression(bold("C")), gp=gpar(col='black', fontsize=20), x=0, hjust=0, vjust=0.5), t=1, l=2)
+g <- gtable_add_grob(g, textGrob(expression(bold("C")),
+                                 gp=gpar(col='black', fontsize=20),
+                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/Figure2c.png', width=6, height=3.708204, units='in', res=figure_dpi)
+png('../figures/Figure2c.png', width=6, height=3.708204, units='in',
+    res=figure_dpi)
 grid.newpage()
 grid.draw(g)
 dev.off()

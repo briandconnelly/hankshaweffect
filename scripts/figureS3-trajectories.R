@@ -33,12 +33,16 @@ S3b_facets <- function(variable, value)
     return(res)
 }
 
-ggplot(data_figs3, aes(x=Time, y=ProducerProportion, group=Replicate, color=EnvChangeFreq==max(data_figs3$Time))) +
-    geom_vline(data=change_points, aes(xintercept=TimeStep), alpha=0.1, size=0.1) +
-    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70', size=0.1) +
+ggplot(data_figs3, aes(x=Time, y=ProducerProportion, group=Replicate,
+                       color=EnvChangeFreq==max(data_figs3$Time))) +
+    geom_vline(data=change_points, aes(xintercept=TimeStep), alpha=0.1,
+               size=0.1) +
+    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70',
+               size=0.1) +
     geom_line(alpha=0.1) +
     facet_grid(EnvChangeFreq ~ ., labeller = S3b_facets) +
-    scale_color_manual(values=c('TRUE'='#F35E5A', 'FALSE'='#3B51A0'), guide=FALSE) +
+    scale_color_manual(values=c('TRUE'='#F35E5A', 'FALSE'='#3B51A0'),
+                       guide=FALSE) +
     scale_y_continuous(limits=c(0,1), breaks=c(0, 0.5, 1)) +
     labs(x='Time', y='Producer Proportion') +
     theme_bdc_paneled(grid.y=FALSE) +

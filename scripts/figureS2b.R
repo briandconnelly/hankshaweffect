@@ -39,9 +39,12 @@ figS2B <- ggplot(data_figs2b_integral, aes(x=MutationRateSocial, y=Integral)) +
 figS2B <- rescale_golden(plot=figS2B)
 
 g <- ggplotGrob(figS2B)
-g <- gtable_add_grob(g, textGrob(expression(bold("B")), gp=gpar(col='black', fontsize=20), x=0, hjust=0, vjust=0.5), t=1, l=2)
+g <- gtable_add_grob(g, textGrob(expression(bold("B")),
+                                 gp=gpar(col='black', fontsize=20),
+                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/FigureS2b.png', width=6, height=3.708204, units='in', res=figure_dpi)
+png('../figures/FigureS2b.png', width=6, height=3.708204, units='in',
+    res=figure_dpi)
 grid.newpage()
 grid.draw(g)
 dev.off()

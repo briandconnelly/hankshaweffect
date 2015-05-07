@@ -44,9 +44,12 @@ figs4a <- ggplot(data_s4a, aes(x=Time, y=ProducerProportion,
 figs4a <- rescale_golden(plot=figs4a)
 
 g <- ggplotGrob(figs4a)
-g <- gtable_add_grob(g, textGrob(expression(bold("A")), gp=gpar(col='black', fontsize=20), x=0, hjust=0, vjust=0.5), t=1, l=2)
+g <- gtable_add_grob(g, textGrob(expression(bold("A")),
+                                 gp=gpar(col='black', fontsize=20),
+                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/FigureS4a.png', width=6, height=3.708204, units='in', res=figure_dpi)
+png('../figures/FigureS4a.png', width=6, height=3.708204, units='in',
+    res=figure_dpi)
 grid.draw(g)
 dev.off()
 

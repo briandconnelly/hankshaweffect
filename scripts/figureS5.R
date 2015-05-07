@@ -10,12 +10,12 @@ source('figsummary.R')
 
 data_figs5 <- read.csv('../data/figureS5.csv') %>%
     filter(Time <= max_time)
-data_figs5$Treatment <- factor(data_figs5$Treatment, levels=c('Lattice',
-                                                              '16-Regular',
-                                                              '128-Regular',
-                                                              'Complete',
-                                                              'Single Population'),
-                                                     labels=c('Lattice' ,'16\nRegular', '128\nRegular', 'Complete', 'Single\nPopulation'))
+data_figs5$Treatment <- factor(data_figs5$Treatment,
+                               levels=c('Lattice', '16-Regular', '128-Regular',
+                                        'Complete','Single Population'),
+                               labels=c('Lattice' ,'16\nRegular',
+                                        '128\nRegular', 'Complete',
+                                        'Single\nPopulation'))
 
 data_interval <- 10
 
@@ -32,7 +32,8 @@ figS5 <- ggplot(presence, aes(x=Treatment, y=Integral)) +
     theme(axis.text.x = element_text(vjust=1, size=rel(0.9)))
 figS5 <- rescale_golden(plot=figS5)
 
-png('../figures/FigureS5.png', width=6, height=3.708204, units='in', res=figure_dpi)
+png('../figures/FigureS5.png', width=6, height=3.708204, units='in',
+    res=figure_dpi)
 figS5
 dev.off()
 

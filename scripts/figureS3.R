@@ -35,6 +35,7 @@ figS3 <- ggplot(presence_change, aes(x=1/EnvChangeFreq, y=Integral)) +
     theme_hankshaw(base_size=17)
 figS3 <- rescale_golden(plot=figS3)
 
-png('../figures/FigureS3.png', width=6, height=3.708204, units='in', res=figure_dpi)
+png('../figures/FigureS3.png', width=6, height=3.708204, units='in',
+    res=figure_dpi)
 figS3                                                                   
 dev.off() 

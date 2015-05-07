@@ -21,7 +21,8 @@ fig2afacets <- function(variable, value)
 fig2a <- ggplot(data_fig2a, aes(x=Time, y=MeanProducerProportion,
                                 color=as.factor(GenomeLength),
                                 fill=as.factor(GenomeLength))) +
-    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70', size=0.1) +
+    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70',
+               size=0.1) +
     stat_summary(fun.ymax='mean', geom='ribbon', ymin=0, alpha=1, color=NA) +
     stat_summary(fun.y='mean', geom='line', color='black') +
     facet_grid(GenomeLength ~ ., labeller=fig2afacets) +
@@ -33,9 +34,12 @@ fig2a <- ggplot(data_fig2a, aes(x=Time, y=MeanProducerProportion,
 fig2a <- rescale_plot(plot=fig2a, ratio=(1 + sqrt(5)))
 
 g <- ggplotGrob(fig2a)
-g <- gtable_add_grob(g, textGrob(expression(bold("A")), gp=gpar(col='black', fontsize=20), x=0, hjust=0, vjust=0.5), t=1, l=2)
+g <- gtable_add_grob(g, textGrob(expression(bold("A")),
+                                 gp=gpar(col='black', fontsize=20),
+                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/Figure2a.png', width=6, height=3.708204, units='in', res=figure_dpi)
+png('../figures/Figure2a.png', width=6, height=3.708204, units='in',
+    res=figure_dpi)
 grid.newpage()
 grid.draw(g)
 dev.off()

@@ -20,7 +20,8 @@ data_fig2b_integral <- data_fig2b %>%
 
 data_fig2b_integral$GenomeLength <- as.factor(data_fig2b_integral$GenomeLength)
 
-fig2b <- ggplot(data_fig2b_integral, aes(x=GenomeLength, y=Integral, color=GenomeLength)) +
+fig2b <- ggplot(data_fig2b_integral, aes(x=GenomeLength, y=Integral,
+                                         color=GenomeLength)) +
     #geom_point(shape=1, alpha=replicate_alpha, color='black') +
     stat_summary(fun.data='figsummary', size=point_size, color='black') +
     stat_summary(fun.y='mean', geom='point', size=3.3) +
@@ -36,9 +37,12 @@ fig2b <- ggplot(data_fig2b_integral, aes(x=GenomeLength, y=Integral, color=Genom
 fig2b <- rescale_golden(plot=fig2b)
 
 g <- ggplotGrob(fig2b)
-g <- gtable_add_grob(g, textGrob(expression(bold("B")), gp=gpar(col='black', fontsize=20), x=0, hjust=0, vjust=0.5), t=1, l=2)
+g <- gtable_add_grob(g, textGrob(expression(bold("B")),
+                                 gp=gpar(col='black', fontsize=20),
+                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/Figure2b.png', width=6, height=3.708204, units='in', res=figure_dpi)
+png('../figures/Figure2b.png', width=6, height=3.708204, units='in',
+    res=figure_dpi)
 grid.newpage()
 grid.draw(g)
 dev.off()

@@ -29,9 +29,12 @@ fig2d <- ggplot(data_fig2d_integral, aes(x=ProductionCost, y=Integral)) +
 fig2d <- rescale_golden(plot=fig2d)
 
 g <- ggplotGrob(fig2d)
-g <- gtable_add_grob(g, textGrob(expression(bold('D')), gp=gpar(col='black', fontsize=20), x=0, hjust=0, vjust=0.5), t=1, l=2)
+g <- gtable_add_grob(g, textGrob(expression(bold('D')),
+                                 gp=gpar(col='black', fontsize=20),
+                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/Figure2d.png', width=6, height=3.708204, units='in', res=figure_dpi)
+png('../figures/Figure2d.png', width=6, height=3.708204, units='in',
+    res=figure_dpi)
 grid.newpage()
 grid.draw(g)
 dev.off()

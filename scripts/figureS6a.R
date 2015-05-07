@@ -26,9 +26,12 @@ figS6A <- ggplot(figs6a_integral, aes(x=MinProbDilution, y=Integral)) +
 figS6A <- rescale_golden(plot=figS6A)
 
 g <- ggplotGrob(figS6A)
-g <- gtable_add_grob(g, textGrob(expression(bold("A")), gp=gpar(col='black', fontsize=20), x=0, hjust=0, vjust=0.5), t=1, l=2)
+g <- gtable_add_grob(g, textGrob(expression(bold("A")),
+                                 gp=gpar(col='black', fontsize=20),
+                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/FigureS6a.png', width=6, height=3.708204, units='in', res=figure_dpi)
+png('../figures/FigureS6a.png', width=6, height=3.708204, units='in',
+    res=figure_dpi)
 grid.draw(g)
 dev.off()
 
