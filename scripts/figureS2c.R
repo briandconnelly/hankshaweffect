@@ -33,6 +33,6 @@ g <- gtable_add_grob(g, textGrob(expression(bold("C")),
 
 png('../figures/FigureS2c.png', width=6, height=3.708204, units='in',
     res=figure_dpi)
-grid.newpage()
 grid.draw(g)
 dev.off()
+
