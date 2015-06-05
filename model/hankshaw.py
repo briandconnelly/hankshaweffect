@@ -6,12 +6,13 @@ import datetime
 import getpass
 import os
 import shutil
+import signal
 import sys
 import warnings
 
 try:
-    from ConfigParser import SafeConfigParser                                         
-except ImportError:                                                             
+    from ConfigParser import SafeConfigParser
+except ImportError:
     from configparser import SafeConfigParser
 
 import networkx as nx
@@ -19,7 +20,7 @@ import numpy as np
 
 from Metapopulation import Metapopulation
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 def parse_arguments():
     """Parse command line arguments"""
@@ -60,7 +61,7 @@ def main():
             config.set(section=p[0], option=p[1], value=p[2])
 
     # If the random number generator seed specified, add it to the config,
-    # overwriting any previous value. Otherwise, if it wasn't in the 
+    # overwriting any previous value. Otherwise, if it wasn't in the
     # supplied configuration file, create one.
     if args.seed:
         config.set(section='Simulation', option='seed', value=str(args.seed))
@@ -99,8 +100,6 @@ def main():
 
     os.mkdir(data_dir)
 
-    m = Metapopulation(config=config)
-
     # Write the configuration file and some additional information
     cfg_out = os.path.join(data_dir, 'configuration.cfg')
     with open(cfg_out, 'w') as configfile:
@@ -116,6 +115,19 @@ def main():
         config.write(configfile)
 
 
+    # Create and initialize the metapopulation
+    m = Metapopulation(config=config)
+
+
+    # Handle SIGINFO signals on OS X and BSD
+    def handle_siginfo(signum, frame):
+        print("Cycle {c}".format(c=m.time))
+
+    if hasattr(signal, 'SIGINFO'):
+        signal.signal(signal.SIGINFO, handle_siginfo)
+
+
+    # Run the simulation
     for t in range(config.getint(section='Simulation', option='num_cycles')):
         m.cycle()
 
