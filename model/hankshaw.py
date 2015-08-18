@@ -20,7 +20,7 @@ import numpy as np
 
 from Metapopulation import Metapopulation
 
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 
 def parse_arguments():
     """Parse command line arguments"""

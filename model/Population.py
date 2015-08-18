@@ -58,6 +58,8 @@ class Population(object):
                                           option='capacity_min')
         self.capacity_max = config.getint(section='Population',
                                           option='capacity_max')
+        self.capacity_shape = config.getfloat(section='Population',
+                                              option='capacity_shape')
         self.production_cost = config.getfloat(section='Population',
                                           option='production_cost')
         self.initialize = config.get(section='Population',
@@ -71,6 +73,7 @@ class Population(object):
         assert self.dilution_prob_min >=0 and self.dilution_prob_min <= 1, 'dilution_prob_min must be between 0 and 1'
         assert self.capacity_min >= 0
         assert self.capacity_max >= 0 and self.capacity_max >= self.capacity_min
+        assert self.capacity_shape >= 0
         assert self.initialize.lower() in ['empty', 'random'], "initialize must be one of 'empty', 'random'"
 
         # Create an empty population
@@ -143,7 +146,7 @@ class Population(object):
 
         final_size = self.capacity_min + \
                 (self.capacity_max - self.capacity_min) * \
-                self.prop_producers()
+                (self.prop_producers()**self.capacity_shape)
 
         grow_probs = self.abundances * (landscape/nsum(landscape))
 
