@@ -167,8 +167,8 @@ class Metapopulation(object):
                 num_producers = int(cap * initial_producer_proportion)
                 num_nonproducers = cap - num_producers
 
-                d['population'].abundances[0] = num_producers
-                d['population'].abundances[2**genome_length] = num_nonproducers
+                d['population'].abundances[0] = num_nonproducers
+                d['population'].abundances[2**genome_length] = num_producers
                 d['population'].bottleneck(survival_rate=mutation_rate_tolerance)
 
         # How frequently should the metapopulation be mixed?

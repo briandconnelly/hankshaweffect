@@ -20,7 +20,7 @@ import numpy as np
 
 from Metapopulation import Metapopulation
 
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 
 def parse_arguments():
     """Parse command line arguments"""
@@ -119,10 +119,12 @@ def main():
     m = Metapopulation(config=config)
 
 
-    # Handle SIGINFO signals on OS X and BSD
+    # Print a status message when SIGINFO (ctrl-T) is received on BSD or
+    # OS X systems or when SIGUSR1 is received on POSIX systems
     def handle_siginfo(signum, frame):
         print("Cycle {c}".format(c=m.time))
 
+    signal.signal(signal.SIGUSR1, handle_siginfo)
     if hasattr(signal, 'SIGINFO'):
         signal.signal(signal.SIGINFO, handle_siginfo)
 
