@@ -20,7 +20,7 @@ import numpy as np
 
 from Metapopulation import Metapopulation
 
-__version__ = '1.0.3'
+__version__ = '1.0.4'
 
 def parse_arguments():
     """Parse command line arguments"""
@@ -136,6 +136,9 @@ def main():
         if not args.quiet:
             msg = "[{t}] {m}".format(t=t, m=m)
             print(msg)
+
+        if config.getboolean(section='Simulation', option='stop_when_empty') == True and m.size() == 0:
+            break
 
     m.cleanup()
 
