@@ -250,25 +250,14 @@ class Metapopulation(object):
                                             option='base_fitness')
         production_cost = self.config.getfloat(section='Population',
                                                option='production_cost')
-        exponential = self.config.getboolean(section='Population',
-                                             option='fitness_exponential')
-        avg_effect = self.config.getfloat(section='Population',
-                                          option='fitness_avg_effect')
-        min_effect = self.config.getfloat(section='Population',
-                                          option='fitness_min_effect')
+        benefit_nonzero = self.config.getfloat(section='Population',
+                                               option='benefit_nonzero')
 
         assert genome_length >= 0
         assert base_fitness >= 0
 
-        if exponential:
-            effects = np.random.exponential(scale=avg_effect,
-                                            size=genome_length)
-        else:
-            effects = np.random.uniform(low=min_effect,
-                                        high=2*avg_effect-min_effect,
-                                        size=genome_length)
-
-        effects = np.append(-1.0*production_cost, effects)
+        effects = np.append(-1.0*production_cost,
+                            np.repeat(benefit_nonzero, genome_length))
 
         landscape = np.zeros(2**(genome_length + 1))
 
