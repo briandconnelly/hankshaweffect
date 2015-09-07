@@ -10,6 +10,7 @@ import genome
 from Population import Population
 import topology
 from DemographicsOutput import DemographicsOutput
+from MetapopulationOutput import MetapopulationOutput
 from GenotypesOutput import GenotypesOutput
 from FitnessOutput import FitnessOutput
 
@@ -185,6 +186,8 @@ class Metapopulation(object):
 
 
         data_dir = self.config.get(section='Simulation', option='data_dir')
+        self.log_metapopulation = self.config.getboolean(section='Simulation',
+                                                         option='log_metapopulation')
         self.log_demographics = self.config.getboolean(section='Simulation',
                                                        option='log_demographics')
         self.log_genotypes = self.config.getboolean(section='Simulation',
@@ -196,10 +199,13 @@ class Metapopulation(object):
         self.log_objects = []
 
 
+        if self.log_metapopulation:
+            self.log_objects.append(MetapopulationOutput(metapopulation=self,
+                                                         filename=os.path.join(data_dir, 'metapopulation.csv.bz2')))
+
         if self.log_demographics:
             out_demographics = DemographicsOutput(metapopulation=self,
                                                   filename=os.path.join(data_dir, 'demographics.csv.bz2'))
-
             self.log_objects.append(out_demographics)
 
         if self.log_genotypes:
