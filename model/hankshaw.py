@@ -122,7 +122,7 @@ def main():
     # Print a status message when SIGINFO (ctrl-T) is received on BSD or
     # OS X systems or when SIGUSR1 is received on POSIX systems
     def handle_siginfo(signum, frame):
-        print("Cycle {c}".format(c=m.time))
+        print("Cycle {c}: Size {ps}, {pc:.0%} cooperators".format(c=m.time, ps=m.size(), pc=m.prop_producers()))
 
     signal.signal(signal.SIGUSR1, handle_siginfo)
     if hasattr(signal, 'SIGINFO'):
