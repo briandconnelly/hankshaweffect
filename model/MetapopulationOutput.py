@@ -13,12 +13,13 @@ class MetapopulationOutput(OutputWriter):
                                                    filename=filename,
                                                    delimiter=delimiter)
 
-        self.writer.writerow(['Time', 'Size', 'CooperatorProportion',
+        self.writer.writerow(['Time', 'Births', 'Size', 'CooperatorProportion',
                               'MaxCooperatorFitness', 'MaxDefectorFitness'])
 
     def update(self, time):
         fits = self.metapopulation.max_fitnesses()
-        self.writer.writerow([time, self.metapopulation.size(),
+        self.writer.writerow([time, self.metapopulation.num_births,
+                              self.metapopulation.size(),
                               self.metapopulation.prop_producers(),
                               max(fits[0]), max(fits[1])])
 

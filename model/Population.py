@@ -154,6 +154,8 @@ class Population(object):
             norm_grow_probs = grow_probs/nsum(grow_probs)
             self.abundances = multinomial(final_size, norm_grow_probs, 1)[0]
 
+        self.metapopulation.num_births += self.size()
+
 
     def mutate(self):
         """Mutate a Population

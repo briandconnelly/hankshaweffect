@@ -21,6 +21,7 @@ class Metapopulation(object):
         """Initialize a Metapopulation object"""
         self.config = config
         self.time = 0
+        self.num_births = 0
 
         self.migration_rate = self.config.getfloat(section='Metapopulation',
                                                    option='migration_rate')
