@@ -13,6 +13,7 @@ from DemographicsOutput import DemographicsOutput
 from MetapopulationOutput import MetapopulationOutput
 from GenotypesOutput import GenotypesOutput
 from FitnessOutput import FitnessOutput
+from EnvChangeOutput import EnvChangeOutput
 
 
 class Metapopulation(object):
@@ -184,6 +185,8 @@ class Metapopulation(object):
         self.env_change_frequency = self.config.getint(section='Metapopulation',
                                                        option='env_change_frequency')
         assert self.env_change_frequency >= 0
+        #self.env_change_cycles = np.arange(start=0, stop=Z, step=self.env_change_frequency)
+        self.next_env_change_cycle = np.round(np.random.exponential(scale=self.env_change_frequency, size=1)[0]).astype(int)
 
 
         data_dir = self.config.get(section='Simulation', option='data_dir')
@@ -195,6 +198,8 @@ class Metapopulation(object):
                                                     option='log_genotypes')
         self.log_fitness = self.config.getboolean(section='Simulation',
                                                   option='log_fitness')
+        self.log_envchange = self.config.getboolean(section='Simulation',
+                                                    option='log_envchange')
 
         # log_objects is a list of any logging objects used by this simulation
         self.log_objects = []
@@ -218,6 +223,11 @@ class Metapopulation(object):
             out_fitness = FitnessOutput(metapopulation=self,
                                         filename=os.path.join(data_dir, 'fitness.csv.bz2'))
             self.log_objects.append(out_fitness)
+
+        if self.log_envchange:
+            out_envchange = EnvChangeOutput(metapopulation=self,
+                                            filename=os.path.join(data_dir, 'environmental_change.csv.bz2'))
+            self.log_objects.append(out_envchange)
 
 
     def __repr__(self):
@@ -432,10 +442,13 @@ class Metapopulation(object):
                 (self.time % self.mix_frequency == 0):
             self.mix()
 
-        if self.env_change_frequency > 0 and self.time > 0 and \
-                (self.time % self.env_change_frequency == 0):
+        #if self.env_change_frequency > 0 and self.time > 0 and \
+        #        (self.time % self.env_change_frequency == 0):
+        if self.time == self.next_env_change_cycle:
             self.change_environment()
             self.environment_changed = True
+            #self.next_env_change_cycle = self.time + self.env_change_frequency
+            self.next_env_change_cycle = self.time + np.round(np.random.exponential(scale=self.env_change_frequency, size=1)[0]).astype(int)
         else:
             self.dilute(stochastic=self.dilution_stochastic)
             self.environment_changed = False
