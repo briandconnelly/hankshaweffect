@@ -32,8 +32,6 @@ class Metapopulation(object):
                                                     option='migration_p_far')
         self.topology_type = self.config.get(section='Metapopulation',
                                              option='topology')
-        self.log_frequency = self.config.getint(section='Simulation',
-                                                option='log_frequency')
 
 
         assert self.migration_rate >= 0 and self.migration_rate <= 1
@@ -42,7 +40,6 @@ class Metapopulation(object):
         assert self.topology_type is not None, 'Topology must be specified'
         assert self.topology_type in ['moore', 'vonneumann', 'smallworld',
                                       'complete', 'regular']
-        assert self.log_frequency > 0
 
         if self.topology_type.lower() == 'moore':
             width = self.config.getint(section='MooreTopology',
@@ -189,44 +186,50 @@ class Metapopulation(object):
 
 
         data_dir = self.config.get(section='Simulation', option='data_dir')
-        self.log_metapopulation = self.config.getboolean(section='Simulation',
-                                                         option='log_metapopulation')
-        self.log_demographics = self.config.getboolean(section='Simulation',
-                                                       option='log_demographics')
-        self.log_genotypes = self.config.getboolean(section='Simulation',
-                                                    option='log_genotypes')
-        self.log_fitness = self.config.getboolean(section='Simulation',
-                                                  option='log_fitness')
-        self.log_envchange = self.config.getboolean(section='Simulation',
-                                                    option='log_envchange')
+        self.log_metapopulation = self.config.getboolean(section='MetapopulationLog',
+                                                         option='enabled')
+        self.log_population = self.config.getboolean(section='PopulationLog',
+                                                     option='enabled')
+        self.log_genotypes = self.config.getboolean(section='GenotypeLog',
+                                                    option='enabled')
+        self.log_fitness = self.config.getboolean(section='FitnessLog',
+                                                  option='enabled')
+        self.log_envchange = self.config.getboolean(section='EnvChangeLog',
+                                                    option='enabled')
 
         # log_objects is a list of any logging objects used by this simulation
         self.log_objects = []
 
 
         if self.log_metapopulation:
-            self.log_objects.append(MetapopulationOutput(metapopulation=self,
-                                                         filename=os.path.join(data_dir, 'metapopulation.csv.bz2')))
+            fname = self.config.get(section='MetapopulationLog', option='filename')
+            freq = self.config.getint(section='MetapopulationLog', option='frequency')
+            self.log_objects.append((freq, MetapopulationOutput(metapopulation=self,
+                                                                filename=os.path.join(data_dir, fname))))
 
-        if self.log_demographics:
-            out_demographics = DemographicsOutput(metapopulation=self,
-                                                  filename=os.path.join(data_dir, 'demographics.csv.bz2'))
-            self.log_objects.append(out_demographics)
+        if self.log_population:
+            fname = self.config.get(section='PopulationLog', option='filename')
+            freq = self.config.getint(section='PopulationLog', option='frequency')
+            self.log_objects.append((freq, DemographicsOutput(metapopulation=self,
+                                                              filename=os.path.join(data_dir, fname))))
 
         if self.log_genotypes:
-            out_genotypes = GenotypesOutput(metapopulation=self,
-                                            filename=os.path.join(data_dir, 'genotypes.csv.bz2'))
-            self.log_objects.append(out_genotypes)
+            fname = self.config.get(section='GenotypeLog', option='filename')
+            freq = self.config.getint(section='GenotypeLog', option='frequency')
+            self.log_objects.append((freq, GenotypesOutput(metapopulation=self,
+                                                           filename=os.path.join(data_dir, fname))))
 
         if self.log_fitness:
-            out_fitness = FitnessOutput(metapopulation=self,
-                                        filename=os.path.join(data_dir, 'fitness.csv.bz2'))
-            self.log_objects.append(out_fitness)
+            fname = self.config.get(section='FitnessLog', option='filename')
+            freq = self.config.getint(section='FitnessLog', option='frequency')
+            self.log_objects.append((freq, FitnessOutput(metapopulation=self,
+                                                         filename=os.path.join(data_dir, fname))))
 
         if self.log_envchange:
-            out_envchange = EnvChangeOutput(metapopulation=self,
-                                            filename=os.path.join(data_dir, 'environmental_change.csv.bz2'))
-            self.log_objects.append(out_envchange)
+            fname = self.config.get(section='EnvChangeLog', option='filename')
+            freq = self.config.getint(section='EnvChangeLog', option='frequency')
+            self.log_objects.append((freq, EnvChangeOutput(metapopulation=self,
+                                                           filename=os.path.join(data_dir, fname))))
 
 
     def __repr__(self):
@@ -513,11 +516,11 @@ class Metapopulation(object):
     def write_logfiles(self):
         """Write any log files"""
 
-        if self.time % self.log_frequency == 0:
-            for l in self.log_objects:
+        for (freq, l) in self.log_objects:
+            if self.time % freq == 0:
                 l.update(time=self.time)
 
     def cleanup(self):
-        for l in self.log_objects:
+        for (freq, l) in self.log_objects:
             l.close()
 
