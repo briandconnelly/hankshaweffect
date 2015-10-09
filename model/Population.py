@@ -102,14 +102,11 @@ class Population(object):
                                                     size=2**(self.genome_length+1))
 
 
-    def dilute(self, stochastic=True):
+    def dilute(self):
         """Dilute a population
         
         dilute dilutes the population by the dilution factor, which is specified
-        in the Population section of the configuration as dilution_factor. If
-        the stochastic parameter is True (default), dilution will be done
-        randomly. Otherwise, the abundances of each genotype will be multiplied
-        by the dilution factor and rounded down.
+        in the Population section of the configuration as dilution_factor.
 
         """
         if self.is_empty():
@@ -118,11 +115,8 @@ class Population(object):
         prob_dilute = self.dilution_prob_min + (1.0 - self.dilution_prob_min) * self.prop_producers()
 
         if prob_dilute == 1 or binomial(n=1, p=prob_dilute, size=1)[0]:
+            self.abundances = binomial(self.abundances, self.dilution_factor)
             self.diluted = True
-            if stochastic:
-                self.abundances = binomial(self.abundances, self.dilution_factor)
-            else:
-                self.abundances = np.floor(self.abundances * self.dilution_factor).astype(np.uint32)
         else:
             self.diluted = False
 
@@ -194,9 +188,8 @@ class Population(object):
 
         assert migration_rate >= 0 and migration_rate <= 1
 
-        migrants = binomial(self.abundances, migration_rate)
+        return binomial(self.abundances, migration_rate)
 
-        return migrants
 
     def remove_emigrants(self, emigrants):
         """Remove emigrants from the population
@@ -208,6 +201,7 @@ class Population(object):
         """
         self.delta -= emigrants
 
+
     def add_immigrants(self, immigrants):
         """Add immigrants to the population
                                     
@@ -217,6 +211,7 @@ class Population(object):
 
         """
         self.delta += immigrants
+
 
     def census(self):
         """Update the population's abundances after migration
@@ -229,6 +224,7 @@ class Population(object):
 
         self.abundances += self.delta
         self.delta = zeros(self.abundances.size, dtype=np.int32)
+
 
     def reset_loci(self):
         """Reset the loci of the population to all zeros
@@ -258,24 +254,30 @@ class Population(object):
 
         self.abundances = binomial(self.abundances, survival_rate)
 
+
     def size(self):
         """Get the size of the population"""
         return self.abundances.sum()
 
+
     def __len__(self):
         return self.abundances.sum()
+
 
     def is_empty(self):
         """Return whether or not the population is empty"""
         return self.abundances.sum() == 0
 
+
     def num_producers(self):
         """Get the number of producers"""
         return self.abundances[2**self.genome_length:].sum()
 
+
     def num_nonproducers(self):
         """Get the number of non-producers"""
         return self.abundances[:2**self.genome_length].sum()
+
 
     def prop_producers(self):
         """Get the proportion of producers"""
@@ -285,6 +287,7 @@ class Population(object):
             return 'NA'
         else:
             return 1.0 * self.num_producers() / popsize
+
 
     def average_fitness(self):
         """Get the average fitness in the population"""
@@ -296,6 +299,7 @@ class Population(object):
             return 'NA'
         else:
             return np.sum(self.abundances * landscape)/popsize
+
 
     def max_fitnesses(self):
         """Get the maximum fitness among producers and non-producers"""
