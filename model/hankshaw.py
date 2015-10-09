@@ -140,6 +140,7 @@ def main():
         if config.getboolean(section='Simulation', option='stop_when_empty') == True and m.size() == 0:
             break
 
+    m.write_logfiles()
     m.cleanup()
 
 

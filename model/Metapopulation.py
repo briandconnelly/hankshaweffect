@@ -186,7 +186,8 @@ class Metapopulation(object):
                                                        option='env_change_frequency')
         assert self.env_change_frequency >= 0
         #self.env_change_cycles = np.arange(start=0, stop=Z, step=self.env_change_frequency)
-        self.next_env_change_cycle = np.round(np.random.exponential(scale=self.env_change_frequency, size=1)[0]).astype(int)
+        if self.env_change_frequency > 0:
+            self.next_env_change_cycle = np.round(np.random.exponential(scale=self.env_change_frequency, size=1)[0]).astype(int)
 
 
         data_dir = self.config.get(section='Simulation', option='data_dir')
@@ -431,12 +432,12 @@ class Metapopulation(object):
         population, and then migrating among populations.
 
         """
+        self.write_logfiles()
+
         self.grow()
         self.mutate()
         self.migrate()
         self.census()
-
-        self.write_logfiles()
 
         if self.mix_frequency > 0 and self.time > 0 and \
                 (self.time % self.mix_frequency == 0):
@@ -444,7 +445,7 @@ class Metapopulation(object):
 
         #if self.env_change_frequency > 0 and self.time > 0 and \
         #        (self.time % self.env_change_frequency == 0):
-        if self.time == self.next_env_change_cycle:
+        if self.env_change_frequency > 0 and self.time == self.next_env_change_cycle:
             self.change_environment()
             self.environment_changed = True
             #self.next_env_change_cycle = self.time + self.env_change_frequency
