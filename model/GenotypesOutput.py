@@ -17,8 +17,7 @@ class GenotypesOutput(OutputWriter):
                                               filename=filename,
                                               delimiter=delimiter)
 
-        self.genome_length = self.metapopulation.config.getint(section='Population',
-                                           option='genome_length')
+        self.genome_length = self.metapopulation.config['Population']['genome_length']
 
         self.writer.writerow(['Time', 'Genotype', 'AvgAbundance', 'IsProducer'])
 

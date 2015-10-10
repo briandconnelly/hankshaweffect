@@ -6,12 +6,13 @@ import csv
 from OutputWriter import OutputWriter
 
 
-class DemographicsOutput(OutputWriter):
+class PopulationOutput(OutputWriter):
 
-    def __init__(self, metapopulation, filename='demographics.csv.bz2', delimiter=','):
-        super(DemographicsOutput, self).__init__(metapopulation=metapopulation,
-                                                 filename=filename,
-                                                 delimiter=delimiter)
+    def __init__(self, metapopulation, filename='population.csv.bz2',
+                 delimiter=','):
+        super(PopulationOutput, self).__init__(metapopulation=metapopulation,
+                                               filename=filename,
+                                               delimiter=delimiter)
 
         self.writer.writerow(['Time', 'Population', 'Size', 'Producers',
                               'PropProducers', 'NonProducers',

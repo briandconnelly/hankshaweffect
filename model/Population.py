@@ -42,39 +42,17 @@ class Population(object):
         self.metapopulation = metapopulation
         self.config = config
 
-        self.genome_length = config.getint(section='Population',
-                                           option='genome_length')
-        self.mutation_rate_tolerance = config.getfloat(section='Population',
-                                                       option='mutation_rate_tolerance')
-        self.mutation_rate_social = config.getfloat(section='Population',
-                                                    option='mutation_rate_social')
-        self.mutation_rate_adaptation = config.getfloat(section='Population',
-                                                        option='mutation_rate_adaptation')
-        self.dilution_factor = config.getfloat(section='Population',
-                                               option='dilution_factor')
-        self.dilution_prob_min = config.getfloat(section='Population',
-                                                 option='dilution_prob_min')
-        self.capacity_min = config.getint(section='Population',
-                                          option='capacity_min')
-        self.capacity_max = config.getint(section='Population',
-                                          option='capacity_max')
-        self.capacity_shape = config.getfloat(section='Population',
-                                              option='capacity_shape')
-        self.production_cost = config.getfloat(section='Population',
-                                          option='production_cost')
-        self.initialize = config.get(section='Population',
-                                     option='initialize')
-
-        assert self.genome_length >= 0, 'genome_length must be non-negative'
-        assert self.mutation_rate_tolerance >= 0 and self.mutation_rate_tolerance <= 1
-        assert self.mutation_rate_social >= 0 and self.mutation_rate_social <= 1
-        assert self.mutation_rate_adaptation >= 0 and self.mutation_rate_adaptation <= 1
-        assert self.dilution_factor >=0 and self.dilution_factor <= 1, 'dilution_factor must be between 0 and 1'
-        assert self.dilution_prob_min >=0 and self.dilution_prob_min <= 1, 'dilution_prob_min must be between 0 and 1'
-        assert self.capacity_min >= 0
-        assert self.capacity_max >= 0 and self.capacity_max >= self.capacity_min
-        assert self.capacity_shape >= 0
-        assert self.initialize.lower() in ['empty', 'random'], "initialize must be one of 'empty', 'random'"
+        self.genome_length = config['Population']['genome_length']
+        self.mutation_rate_tolerance = config['Population']['mutation_rate_tolerance']
+        self.mutation_rate_social = config['Population']['mutation_rate_social']
+        self.mutation_rate_adaptation = config['Population']['mutation_rate_adaptation']
+        self.dilution_factor = config['Population']['dilution_factor']
+        self.dilution_prob_min = config['Population']['dilution_prob_min']
+        self.capacity_min = config['Population']['capacity_min']
+        self.capacity_max = config['Population']['capacity_max']
+        self.capacity_shape = config['Population']['capacity_shape']
+        self.production_cost = config['Population']['production_cost']
+        self.initialize = config['Population']['initialize']
 
         # Create an empty population
         if self.initialize.lower() == 'empty':
@@ -85,15 +63,18 @@ class Population(object):
         self.delta = zeros(self.abundances.size, dtype=np.int32)
         self.diluted = True
 
+
     def __repr__(self):
         """Return a string representation of a Population object"""
         res = "Population: Size {s}, {p:.1%} producers".format(s=self.size(),
                                                                p=self.prop_producers())
         return res
 
+
     def empty(self):
         """Empty a population"""
         self.abundances = zeros(2**(self.genome_length + 1), dtype=np.uint32)
+
 
     def randomize(self):
         """Create a random population"""

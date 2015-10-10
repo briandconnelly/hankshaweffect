@@ -9,7 +9,7 @@ from numpy.random import binomial, choice as nchoice, random_integers
 import genome
 from Population import Population
 import topology
-from DemographicsOutput import DemographicsOutput
+from PopulationOutput import PopulationOutput
 from MetapopulationOutput import MetapopulationOutput
 from GenotypesOutput import GenotypesOutput
 from FitnessOutput import FitnessOutput
@@ -24,108 +24,66 @@ class Metapopulation(object):
         self.time = 0
         self.num_births = 0
 
-        self.migration_rate = self.config.getfloat(section='Metapopulation',
-                                                   option='migration_rate')
-        self.migration_dest = self.config.get(section='Metapopulation',
-                                              option='migration_dest')
-        self.migration_p_far = self.config.getfloat(section='Metapopulation',
-                                                    option='migration_p_far')
-        self.topology_type = self.config.get(section='Metapopulation',
-                                             option='topology')
-
-
-        assert self.migration_rate >= 0 and self.migration_rate <= 1
-        assert self.migration_dest in ['single', 'neighbors']
-        assert 0 <= self.migration_p_far <= 1
-        assert self.topology_type is not None, 'Topology must be specified'
-        assert self.topology_type in ['moore', 'vonneumann', 'smallworld',
-                                      'complete', 'regular']
+        self.migration_rate = self.config['Metapopulation']['migration_rate']
+        self.migration_dest = self.config['Metapopulation']['migration_dest']
+        self.migration_p_far = self.config['Metapopulation']['migration_p_far']
+        self.topology_type = self.config['Metapopulation']['topology']
 
         if self.topology_type.lower() == 'moore':
-            width = self.config.getint(section='MooreTopology',
-                                       option='width')
-            height = self.config.getint(section='MooreTopology',
-                                        option='height')
-            periodic = self.config.getboolean(section='MooreTopology',
-                                              option='periodic')
-            radius = self.config.getint(section='MooreTopology',
-                                        option='radius')
-
-            assert width > 0
-            assert height > 0
-            assert radius > 0
+            width = self.config['MooreTopology']['width']
+            height = self.config['MooreTopology']['height']
+            periodic = self.config['MooreTopology']['periodic']
+            radius = self.config['MooreTopology']['radius']
 
             self.topology = topology.moore_lattice(rows=height, columns=width,
                                                    radius=radius,
                                                    periodic=periodic)
 
         elif self.topology_type.lower() == 'vonneumann':
-            width = self.config.getint(section='VonNeumannTopology',
-                                       option='width')
-            height = self.config.getint(section='VonNeumannTopology',
-                                        option='height')
-            periodic = self.config.getboolean(section='VonNeumannTopology',
-                                              option='periodic')
-
-            assert width > 0
-            assert height > 0
+            width = self.config['VonNeumannTopology']['width']
+            height = self.config['VonNeumannTopology']['height']
+            periodic = self.config['VonNeumannTopology']['periodic']
 
             self.topology = topology.vonneumann_lattice(rows=height,
                                                         columns=width,
                                                         periodic=periodic)
 
         elif self.topology_type.lower() == 'smallworld':
-            size = self.config.getint(section='SmallWorldTopology',
-                                      option='size')
-            neighbors = self.config.getint(section='SmallWorldTopology',
-                                           option='neighbors')
-            edgeprob = self.config.getfloat(section='SmallWorldTopology',
-                                            option='edgeprob')
+            size = self.config['SmallWorldTopology']['size']
+            neighbors = self.config['SmallWorldTopology']['neighbors']
+            edgeprob = self.config['SmallWorldTopology']['edgeprob']
 
-            if config.has_option(section='SmallWorldTopology', option='seed') is not True:
-                config.set(section='SmallWorldTopology', option='seed', value=self.config.get(section='Simulation', option='seed'))
+            if self.config['SmallWorldTopology']['seed'] is None:
+                self.config['SmallWorldTopology']['seed'] = self.config['Simulation']['seed']
 
-            seed = self.config.getint(section='SmallWorldTopology', option='seed')
-
-            assert size > 0
-            assert neighbors >= 0
-            assert edgeprob >= 0 and edgeprob <= 1
+            seed = self.config['SmallWorldTopology']['seed']
 
             self.topology = topology.smallworld(size=size, neighbors=neighbors,
                                                 edgeprob=edgeprob, seed=seed)
 
+
         elif self.topology_type.lower() == 'complete':
-            size = self.config.getint(section='CompleteTopology',
-                                      option='size')
+            self.topology = nx.complete_graph(n=self.config['CompleteTopology']['size'])
 
-            assert size > 0
-
-            self.topology = nx.complete_graph(n=size)
 
         elif self.topology_type.lower() == 'regular':
-            size = self.config.getint(section='RegularTopology',
-                                      option='size')
-            degree = self.config.getint(section='RegularTopology',
-                                        option='degree')
+            size = self.config['RegularTopology']['size']
+            degree = self.config['RegularTopology']['degree']
 
-            if config.has_option(section='RegularTopology', option='seed') is not True:
-                config.set(section='RegularTopology', option='seed', value=self.config.get(section='Simulation', option='seed'))
+            if self.config['RegularTopology']['seed'] is None:
+                self.config['RegularTopology']['seed'] = self.config['Simulation']['seed']
 
-            seed = self.config.getint(section='RegularTopology', option='seed')
+            seed = self.config['RegularTopology']['seed']
 
             self.topology = topology.regular(size=size, degree=degree,
                                              seed=seed)
 
 
-        export_topology = self.config.getboolean(section='Simulation',
-                                                 option='export_topology')
-
         # Export the structure of the topology, allowing the topology to be
         # re-created. This is especially useful for randomly-generated
         # topologies.
-        if export_topology:
-            data_dir = self.config.get(section='Simulation', option='data_dir')
-            nx.write_gml(self.topology, os.path.join(data_dir, 'topology.gml'))
+        if self.config['Metapopulation']['export_topology']:
+            nx.write_gml(self.topology, os.path.join(self.config['Simulation']['data_dir'], 'topology.gml'))
 
 
         # Store the probabilities of mutations between all pairs of genotypes
@@ -134,16 +92,12 @@ class Metapopulation(object):
         # Create the fitness landscape
         self.fitness_landscape = self.build_fitness_landscape()
 
-        initial_state = self.config.get(section='Metapopulation',
-                                        option='initial_state')
-        genome_length = self.config.getint(section='Population',
-                                           option='genome_length')
-        max_cap = self.config.getint(section='Population', option='capacity_max')
-        min_cap = self.config.getint(section='Population', option='capacity_min')
-        initial_producer_proportion = self.config.getfloat(section='Population',
-                                                           option='initial_producer_proportion')
-        mutation_rate_tolerance = self.config.getfloat(section='Population',
-                                                       option='mutation_rate_tolerance')
+        initial_state = self.config['Metapopulation']['initial_state']
+        genome_length = self.config['Population']['genome_length']
+        max_cap = self.config['Population']['capacity_max']
+        min_cap = self.config['Population']['capacity_min']
+        initial_producer_proportion = self.config['Population']['initial_producer_proportion']
+        mutation_rate_tolerance = self.config['Population']['mutation_rate_tolerance']
 
 
         # Create each of the populations
@@ -170,64 +124,49 @@ class Metapopulation(object):
                 d['population'].bottleneck(survival_rate=mutation_rate_tolerance)
 
         # How frequently should the metapopulation be mixed?
-        self.mix_frequency = self.config.getint(section='Metapopulation',
-                                                option='mix_frequency')
-        assert self.mix_frequency >= 0
+        self.mix_frequency = self.config['Metapopulation']['mix_frequency']
 
 
         # How frequently should the environment be changed?
         self.environment_changed = False
-        self.env_change_frequency = self.config.getint(section='Metapopulation',
-                                                       option='env_change_frequency')
-        assert self.env_change_frequency >= 0
-        #self.env_change_cycles = np.arange(start=0, stop=Z, step=self.env_change_frequency)
+        self.env_change_frequency = self.config['Metapopulation']['env_change_frequency']
+
         if self.env_change_frequency > 0:
             self.next_env_change_cycle = np.round(np.random.exponential(scale=self.env_change_frequency, size=1)[0]).astype(int)
 
 
-        data_dir = self.config.get(section='Simulation', option='data_dir')
-        self.log_metapopulation = self.config.getboolean(section='MetapopulationLog',
-                                                         option='enabled')
-        self.log_population = self.config.getboolean(section='PopulationLog',
-                                                     option='enabled')
-        self.log_genotypes = self.config.getboolean(section='GenotypeLog',
-                                                    option='enabled')
-        self.log_fitness = self.config.getboolean(section='FitnessLog',
-                                                  option='enabled')
-        self.log_envchange = self.config.getboolean(section='EnvChangeLog',
-                                                    option='enabled')
+        data_dir = self.config['Simulation']['data_dir']
 
         # log_objects is a list of any logging objects used by this simulation
         self.log_objects = []
 
-
-        if self.log_metapopulation:
-            fname = self.config.get(section='MetapopulationLog', option='filename')
-            freq = self.config.getint(section='MetapopulationLog', option='frequency')
+        if self.config['MetapopulationLog']['enabled']:
+            fname = self.config['MetapopulationLog']['filename']
+            freq = self.config['MetapopulationLog']['frequency']
             self.log_objects.append((freq, MetapopulationOutput(metapopulation=self,
                                                                 filename=os.path.join(data_dir, fname))))
 
-        if self.log_population:
-            fname = self.config.get(section='PopulationLog', option='filename')
-            freq = self.config.getint(section='PopulationLog', option='frequency')
-            self.log_objects.append((freq, DemographicsOutput(metapopulation=self,
-                                                              filename=os.path.join(data_dir, fname))))
+        if self.config['PopulationLog']['enabled']:
+            fname = self.config['PopulationLog']['filename']
+            freq = self.config['PopulationLog']['frequency']
+            self.log_objects.append((freq, PopulationOutput(metapopulation=self,
+                                                            filename=os.path.join(data_dir, fname))))
 
-        if self.log_genotypes:
-            fname = self.config.get(section='GenotypeLog', option='filename')
-            freq = self.config.getint(section='GenotypeLog', option='frequency')
+        if self.config['GenotypeLog']['enabled']:
+            fname = self.config['GenotypeLog']['filename']
+            freq = self.config['GenotypeLog']['frequency']
             self.log_objects.append((freq, GenotypesOutput(metapopulation=self,
                                                            filename=os.path.join(data_dir, fname))))
 
-        if self.log_fitness:
-            fname = self.config.get(section='FitnessLog', option='filename')
-            freq = self.config.getint(section='FitnessLog', option='frequency')
+        if self.config['FitnessLog']['enabled'] :
+            fname = self.config['FitnessLog']['filename']
+            freq = self.config['FitnessLog']['frequency']
             self.log_objects.append((freq, FitnessOutput(metapopulation=self,
                                                          filename=os.path.join(data_dir, fname))))
 
-        if self.log_envchange:
-            fname = self.config.get(section='EnvChangeLog', option='filename')
-            freq = self.config.getint(section='EnvChangeLog', option='frequency')
+        if self.config['EnvChangeLog']['enabled']:
+            fname = self.config['EnvChangeLog']['filename']
+            freq = self.config['EnvChangeLog']['frequency']
             self.log_objects.append((freq, EnvChangeOutput(metapopulation=self,
                                                            filename=os.path.join(data_dir, fname))))
 
@@ -258,22 +197,16 @@ class Metapopulation(object):
 
         return res
 
+
     def build_fitness_landscape(self):
         """Build a fitness landscape
 
         """
 
-        genome_length = self.config.getint(section='Population',
-                                           option='genome_length')
-        base_fitness = self.config.getfloat(section='Population',
-                                            option='base_fitness')
-        production_cost = self.config.getfloat(section='Population',
-                                               option='production_cost')
-        benefit_nonzero = self.config.getfloat(section='Population',
-                                               option='benefit_nonzero')
-
-        assert genome_length >= 0
-        assert base_fitness >= 0
+        genome_length = self.config['Population']['genome_length']
+        base_fitness = self.config['Population']['base_fitness']
+        production_cost = self.config['Population']['production_cost']
+        benefit_nonzero = self.config['Population']['benefit_nonzero']
 
         effects = np.append(-1.0*production_cost,
                             np.repeat(benefit_nonzero, genome_length))
@@ -303,12 +236,9 @@ class Metapopulation(object):
         
         """
 
-        genome_length = self.config.getint(section='Population',
-                                           option='genome_length')
-        mutation_rate_social = self.config.getfloat(section='Population',
-                                                    option='mutation_rate_social')
-        mutation_rate_adaptation = self.config.getfloat(section='Population',
-                                                        option='mutation_rate_adaptation')
+        genome_length = self.config['Population']['genome_length']
+        mutation_rate_social = self.config['Population']['mutation_rate_social']
+        mutation_rate_adaptation = self.config['Population']['mutation_rate_adaptation']
 
         S = np.vstack((np.array([[0]*2**genome_length + [1]*2**genome_length]).repeat(repeats=2**genome_length, axis=0),
                        np.array([[1]*2**genome_length + [0]*2**genome_length]).repeat(repeats=2**genome_length, axis=0)))
@@ -338,6 +268,7 @@ class Metapopulation(object):
                 npower(mutation_rate_social, S)
 
         return mr
+
 
     def dilute(self):
         """Dilute the metapopulation
@@ -372,10 +303,12 @@ class Metapopulation(object):
         for n, d in self.topology.nodes_iter(data=True):
             d['population'].grow()
 
+
     def mutate(self):
         """Mutate the metapopulation ...."""
         for n, d in self.topology.nodes_iter(data=True):
             d['population'].mutate()
+
 
     def migrate(self, single_dest=True):
         """Migrate individuals among the populations
@@ -421,6 +354,7 @@ class Metapopulation(object):
         for n, d in self.topology.nodes_iter(data=True):
             d['population'].census()
 
+
     def cycle(self):
         """Cycle the metapopulation
 
@@ -453,6 +387,7 @@ class Metapopulation(object):
 
         self.time += 1
 
+
     def change_environment(self):
         """Change the environment
 
@@ -467,12 +402,12 @@ class Metapopulation(object):
 
         self.fitness_landscape = self.build_fitness_landscape()
 
-        mutation_rate_tolerance = self.config.getfloat(section='Population',
-                                                       option='mutation_rate_tolerance')
+        mutation_rate_tolerance = self.config['Population']['mutation_rate_tolerance']
 
         for n, d in self.topology.nodes_iter(data=True):
             d['population'].bottleneck(survival_rate=mutation_rate_tolerance)
             d['population'].reset_loci()
+
 
     def size(self):
         """Return the size of the metapopulation
@@ -481,6 +416,7 @@ class Metapopulation(object):
         subpopulations
         """
         return sum(len(d['population']) for n, d in self.topology.nodes_iter(data=True))
+
 
     def __len__(self):
         """Return the length of a Metapopulation
@@ -491,9 +427,11 @@ class Metapopulation(object):
         """
         return self.size()
 
+
     def num_producers(self):
         """Return the number of producers in the metapopulation"""
         return sum(d['population'].num_producers() for n, d in self.topology.nodes_iter(data=True))
+
 
     def prop_producers(self):
         """Get the proportion of producers in the metapopulation"""
@@ -513,12 +451,14 @@ class Metapopulation(object):
 
         return (prod_max, nonprod_max)
 
+
     def write_logfiles(self):
         """Write any log files"""
 
         for (freq, l) in self.log_objects:
             if self.time % freq == 0:
                 l.update(time=self.time)
+
 
     def cleanup(self):
         for (freq, l) in self.log_objects:

@@ -8,17 +8,18 @@ import os
 import shutil
 import signal
 import sys
-import warnings
+from time import time
+from uuid import uuid4
+from warnings import warn
 
-try:
-    from ConfigParser import SafeConfigParser
-except ImportError:
-    from configparser import SafeConfigParser
+from configobj import ConfigObj, ConfigObjError, flatten_errors
+from validate import Validator
 
 import networkx as nx
 import numpy as np
 
 from Metapopulation import Metapopulation
+from misc import write_run_information, append_run_information
 
 __version__ = '1.0.5'
 
@@ -29,7 +30,12 @@ def parse_arguments():
                                      description='Run a simluation')
     parser.add_argument('--config', '-c', metavar='FILE', help='Configuration '\
                         'file to use (default: run.cfg)', default='run.cfg',
-                        dest='configfile', type=argparse.FileType('r'))
+                        dest='configfile')
+    parser.add_argument('--checkconfig', '-C', action='store_true',
+                        default=False,
+                        help='Check the given configuration file and quit (note: includes parameters specified with --param')
+    parser.add_argument('--genconfig', '-G', metavar='FILE',
+                        help='Generate a configuration file with default values and quit (note: includes parameters specified with --param')
     parser.add_argument('--data_dir', '-d', metavar='DIR',
                         help='Directory to store data (default: data)')
     parser.add_argument('--param', '-p', nargs=3, metavar=('SECTION', 'NAME',
@@ -47,72 +53,96 @@ def parse_arguments():
 
 
 def main():
+    start_time = time()
+
     # Get the command line arguments
     args = parse_arguments()
 
+    if args.genconfig:
+        if os.path.exists(args.genconfig):
+            print("Error: File '{f}' already exists.".format(f=args.genconfig))
+            sys.exit(1)
+
+        config = ConfigObj(infile=args.genconfig, create_empty=True, configspec='configspec.ini')
+        config.validate(Validator(), copy=True)
+        config.write() 
+        print("Created configuration file '{f}'".format(f=args.genconfig))
+        sys.exit(0)
+
     # Read the configuration file
-    config = SafeConfigParser()
-    config.readfp(args.configfile)
-    args.configfile.close()
+    try:
+        config = ConfigObj(infile=args.configfile, configspec='configspec.ini',
+                           file_error=True)
+    except (ConfigObjError, OSError) as e:
+        print("Error: {e}".format(e=e))
+        sys.exit(1)
+
 
     # Add any parameters specified on the command line to the configuration
     if args.param:
         for p in args.param:
-            config.set(section=p[0], option=p[1], value=p[2])
+            config[p[0]][p[1]] = p[2]
+
+    # Validate the configuration
+    validation = config.validate(Validator(), copy=True)
+
+    if validation != True:
+        errors = flatten_errors(config, validation)
+        print("Found {n} error(s) in configuration:".format(n=len(errors)))
+        for (section_list, key, _) in errors:
+            if key is not None:
+                print("\t* Invalid value for '{k}' in Section '{s}'".format(k=key, s=section_list[0]))
+            else:
+                print("\t* Missing required section '{s}'".format(s=section_list[0]))
+
+        sys.exit(2)
+
+    if args.checkconfig:
+        print("No errors found in configuration file {f}".format(f=args.configfile))
+        sys.exit(0)
 
     # If the random number generator seed specified, add it to the config,
     # overwriting any previous value. Otherwise, if it wasn't in the
     # supplied configuration file, create one.
     if args.seed:
-        config.set(section='Simulation', option='seed', value=str(args.seed))
-    elif config.has_option(section='Simulation', option='seed') is not True:
+        config['Simulation']['seed'] = args.seed
+    elif config['Simulation']['seed'] is None:
         seed = np.random.randint(low=0, high=np.iinfo(np.uint32).max)
-        config.set(section='Simulation', option='seed', value=str(seed))
+        config['Simulation']['seed'] = seed
 
-    # Set the seed for the pseudorandom number generator
-    if config.has_option(section='Simulation', option='seed'):
-        np.random.seed(seed=config.getint(section='Simulation', option='seed'))
+    np.random.seed(seed=config['Simulation']['seed'])
+
+    # Generate a universally unique identifier (UUID) for this run
+    config['Simulation']['UUID'] = str(uuid4())
 
 
     # If the data directory is specified, add it to the config, overwriting any
     # previous value
     if args.data_dir:
-        config.set(section='Simulation', option='data_dir', value=args.data_dir)
-
-    if config.has_option(section='Simulation', option='data_dir'):
-        data_dir = config.get(section='Simulation', option='data_dir')
-    else:
-        config.set(section='Simulation', option='data_dir', value='data')
-        data_dir = 'data'
+        config['Simulation']['data_dir'] = args.data_dir
 
 
     # If the data_dir already exists, append the current date and time to
     # data_dir, and use that. Afterwards, create the directory.
-    if os.path.exists(data_dir):
-        newname = '{o}-{d}'.format(o=data_dir,
+    if os.path.exists(config['Simulation']['data_dir']):
+        newname = '{o}-{d}'.format(o=config['Simulation']['data_dir'],
                                    d=datetime.datetime.now().strftime("%Y%m%d%H%M%S"))
-        msg = '{d} already exists. Using {new} instead.'.format(d=data_dir,
+        msg = '{d} already exists. Using {new} instead.'.format(d=config['Simulation']['data_dir'],
                                                                 new=newname)
-        warnings.warn(msg)
+        warn(msg)
+        config['Simulation']['data_dir'] = newname
 
-        data_dir = newname
-        config.set(section='Simulation', option='data_dir', value=data_dir)
+    os.mkdir(config['Simulation']['data_dir'])
 
-    os.mkdir(data_dir)
 
-    # Write the configuration file and some additional information
-    cfg_out = os.path.join(data_dir, 'configuration.cfg')
-    with open(cfg_out, 'w') as configfile:
-        configfile.write('# Hankshaw Effect Model Configuration\n')
-        configfile.write('# Generated: {when} by {who}\n'.format(when=datetime.datetime.now().isoformat(),
-                                                                 who=getpass.getuser()))
-        configfile.write('# hankshaw.py version: {v}\n'.format(v=__version__))
-        configfile.write('# Python version: {v}\n'.format(v= ".".join(map(str, sys.version_info[:3]))))
-        configfile.write('# NumPy version: {v}\n'.format(v=np.version.version))
-        configfile.write('# NetworkX version: {v}\n'.format(v=nx.__version__))
-        configfile.write('# Command: {cmd}\n'.format(cmd=' '.join(sys.argv)))
-        configfile.write('# {line}\n\n'.format(line='-'*77))
-        config.write(configfile)
+    # Write the configuration file                                              
+    config.filename = os.path.join(config['Simulation']['data_dir'], 'run.cfg')                         
+    config.write() 
+
+
+    # Write information about the run
+    infofile = os.path.join(config['Simulation']['data_dir'], 'run_info.txt')
+    write_run_information(filename=infofile, config=config)
 
 
     # Create and initialize the metapopulation
@@ -130,18 +160,21 @@ def main():
 
 
     # Run the simulation
-    for t in range(config.getint(section='Simulation', option='num_cycles')):
+    for t in range(config['Simulation']['num_cycles']):
         m.cycle()
 
         if not args.quiet:
             msg = "[{t}] {m}".format(t=t, m=m)
             print(msg)
 
-        if config.getboolean(section='Simulation', option='stop_when_empty') == True and m.size() == 0:
+        if config['Simulation']['stop_when_empty'] and m.size() == 0:
             break
 
     m.write_logfiles()
     m.cleanup()
+
+    rt_string = 'Run Time: {t}\n'.format(t=datetime.timedelta(seconds=time()-start_time))
+    append_run_information(filename=infofile, string=rt_string)
 
 
 if __name__ == "__main__":
