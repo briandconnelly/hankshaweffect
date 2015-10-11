@@ -93,13 +93,15 @@ class Population(object):
         if self.is_empty():
             return
 
-        prob_dilute = self.dilution_prob_min + (1.0 - self.dilution_prob_min) * self.prop_producers()
+        self.diluted = False
+        prob_dilute = 1
 
-        if prob_dilute == 1 or binomial(n=1, p=prob_dilute, size=1)[0]:
+        if self.dilution_prob_min < 1:
+            prob_dilute = self.dilution_prob_min + (1.0 - self.dilution_prob_min) * self.prop_producers()
+
+        if self.dilution_prob_min == 1 or binomial(n=1, p=prob_dilute, size=1)[0]:
             self.abundances = binomial(self.abundances, self.dilution_factor)
             self.diluted = True
-        else:
-            self.diluted = False
 
 
     def grow(self):
@@ -111,10 +113,7 @@ class Population(object):
         abundance times its fitness.
         """
 
-        if self.is_empty():
-            return
-
-        if not self.diluted:
+        if self.is_empty() or not self.diluted:
             return
 
         landscape = self.metapopulation.fitness_landscape
