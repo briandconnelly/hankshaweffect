@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 
-#import bz2
-#import csv
-
-import OutputWriter
-import Population
+from hankshaw.OutputWriter import OutputWriter
 
 
-class FitnessOutput(OutputWriter.OutputWriter):
+class FitnessOutput(OutputWriter):
 
     def __init__(self, metapopulation, filename='max_fitness.csv',
                  delimiter=',', compress=False):

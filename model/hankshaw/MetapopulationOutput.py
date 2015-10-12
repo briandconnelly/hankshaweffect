@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-#import bz2
-#import csv
-
-from OutputWriter import OutputWriter
+from hankshaw.OutputWriter import OutputWriter
 
 
 class MetapopulationOutput(OutputWriter):

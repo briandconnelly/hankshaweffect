@@ -6,7 +6,7 @@ from numpy import zeros as zeros
 from numpy.random import binomial
 from numpy.random import multinomial
 
-import genome
+from hankshaw import genome
 
 
 class Population(object):
@@ -151,9 +151,10 @@ class Population(object):
         mutated_population = zeros(self.abundances.size, dtype=np.uint32)
 
         for i in np.nonzero(self.abundances)[0]:
-            mutated_population += multinomial(self.abundances[i],
-                                              self.metapopulation.mutation_probs[i],
-                                              size=1)[0]
+            mutated_population = np.add(mutated_population,
+                                        multinomial(self.abundances[i],
+                                                    self.metapopulation.mutation_probs[i],
+                                                    size=1)[0])
 
         self.abundances = mutated_population
 
@@ -202,7 +203,7 @@ class Population(object):
                                     
         """
 
-        self.abundances += self.delta
+        self.abundances = np.add(self.abundances, self.delta)
         self.delta = zeros(self.abundances.size, dtype=np.int32)
 
 

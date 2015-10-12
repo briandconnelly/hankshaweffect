@@ -6,14 +6,14 @@ import networkx as nx
 import numpy as np
 from numpy.random import binomial, choice as nchoice, random_integers
 
-import genome
-from Population import Population
-import topology
-from PopulationOutput import PopulationOutput
-from MetapopulationOutput import MetapopulationOutput
-from GenotypesOutput import GenotypesOutput
-from FitnessOutput import FitnessOutput
-from EnvChangeOutput import EnvChangeOutput
+from hankshaw import genome
+from hankshaw.Population import Population
+import hankshaw.topology as topology
+from hankshaw.PopulationOutput import PopulationOutput
+from hankshaw.MetapopulationOutput import MetapopulationOutput
+from hankshaw.GenotypesOutput import GenotypesOutput
+from hankshaw.FitnessOutput import FitnessOutput
+from hankshaw.EnvChangeOutput import EnvChangeOutput
 
 
 class Metapopulation(object):
@@ -53,7 +53,7 @@ class Metapopulation(object):
             neighbors = self.config['SmallWorldTopology']['neighbors']
             edgeprob = self.config['SmallWorldTopology']['edgeprob']
 
-            if self.config['SmallWorldTopology']['seed'] is None:
+            if self.config['SmallWorldTopology']['seed'] == 0:
                 self.config['SmallWorldTopology']['seed'] = self.config['Simulation']['seed']
 
             seed = self.config['SmallWorldTopology']['seed']
@@ -70,7 +70,7 @@ class Metapopulation(object):
             size = self.config['RegularTopology']['size']
             degree = self.config['RegularTopology']['degree']
 
-            if self.config['RegularTopology']['seed'] is None:
+            if self.config['RegularTopology']['seed'] == 0:
                 self.config['RegularTopology']['seed'] = self.config['Simulation']['seed']
 
             seed = self.config['RegularTopology']['seed']

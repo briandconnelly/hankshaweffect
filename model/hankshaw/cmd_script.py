@@ -18,10 +18,11 @@ from validate import Validator
 import networkx as nx
 import numpy as np
 
-from Metapopulation import Metapopulation
-from misc import write_run_information, append_run_information
+import hankshaw
 
-__version__ = '1.0.5'
+from hankshaw.Metapopulation import Metapopulation
+from hankshaw.misc import write_run_information, append_run_information
+
 
 def parse_arguments():
     """Parse command line arguments"""
@@ -33,9 +34,9 @@ def parse_arguments():
                         dest='configfile')
     parser.add_argument('--checkconfig', '-C', action='store_true',
                         default=False,
-                        help='Check the given configuration file and quit (note: includes parameters specified with --param')
+                        help='Check the given configuration file and quit (note: includes parameters specified with --param)')
     parser.add_argument('--genconfig', '-G', metavar='FILE',
-                        help='Generate a configuration file with default values and quit (note: includes parameters specified with --param')
+                        help='Generate a configuration file with default values and quit (note: includes parameters specified with --param)')
     parser.add_argument('--data_dir', '-d', metavar='DIR',
                         help='Directory to store data (default: data)')
     parser.add_argument('--param', '-p', nargs=3, metavar=('SECTION', 'NAME',
@@ -45,7 +46,7 @@ def parse_arguments():
                         'pseudorandom number generator seed', type=int)
     parser.add_argument('--quiet', '-q', action='store_true', default=False,
                        help='Suppress output messages')
-    parser.add_argument('--version', action='version', version=__version__)
+    parser.add_argument('--version', action='version', version=hankshaw.__version__)
 
     args = parser.parse_args()
 
@@ -54,6 +55,9 @@ def parse_arguments():
 
 def main():
     start_time = time()
+
+    cfgspec = os.path.join(hankshaw.__path__[0], 'configspec-v1.ini')
+    print("CONFIG SPEC IS [{}]".format(cfgspec))
 
     # Get the command line arguments
     args = parse_arguments()
@@ -64,7 +68,7 @@ def main():
             sys.exit(1)
 
         config = ConfigObj(infile=args.genconfig, create_empty=True,
-                           configspec='configspec-v1.ini')
+                           configspec=cfgspec)
         config.validate(Validator(), copy=True)
         config.write() 
         print("Created configuration file '{f}'".format(f=args.genconfig))
@@ -73,7 +77,7 @@ def main():
     # Read the configuration file
     try:
         config = ConfigObj(infile=args.configfile,
-                           configspec='configspec-v1.ini',
+                           configspec=cfgspec,
                            file_error=True)
     except (ConfigObjError, OSError) as e:
         print("Error: {e}".format(e=e))
@@ -108,7 +112,7 @@ def main():
     # supplied configuration file, create one.
     if args.seed:
         config['Simulation']['seed'] = args.seed
-    elif config['Simulation']['seed'] is None:
+    elif config['Simulation']['seed'] == 0:
         seed = np.random.randint(low=0, high=np.iinfo(np.uint32).max)
         config['Simulation']['seed'] = seed
 
@@ -177,8 +181,4 @@ def main():
 
     rt_string = 'Run Time: {t}\n'.format(t=datetime.timedelta(seconds=time()-start_time))
     append_run_information(filename=infofile, string=rt_string)
-
-
-if __name__ == "__main__":
-    main()
 

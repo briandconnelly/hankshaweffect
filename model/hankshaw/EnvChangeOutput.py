@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from OutputWriter import OutputWriter
+from hankshaw.OutputWriter import OutputWriter
 
 
 class EnvChangeOutput(OutputWriter):

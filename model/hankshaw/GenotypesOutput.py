@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 
-#import bz2
-#import csv
-
 import numpy as np
 
-from OutputWriter import OutputWriter
-import genome
+from hankshaw.OutputWriter import OutputWriter
+import hankshaw.genome
 
 
 class GenotypesOutput(OutputWriter):
