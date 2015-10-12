@@ -72,7 +72,8 @@ def main():
 
     # Read the configuration file
     try:
-        config = ConfigObj(infile=args.configfile, configspec='configspec.ini',
+        config = ConfigObj(infile=args.configfile,
+                           configspec='configspec-v1.ini',
                            file_error=True)
     except (ConfigObjError, OSError) as e:
         print("Error: {e}".format(e=e))
