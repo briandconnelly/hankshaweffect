@@ -317,11 +317,14 @@ class Metapopulation(object):
             all neighbors. 
         
         """
-        if self.migration_rate == 0:
+        if self.migration_rate == 0 or self.topology.number_of_nodes() < 2:
             return
 
         for n, d in self.topology.nodes_iter(data=True):
             pop = d['population']
+
+            if self.topology.degree(n) == 0:
+                return
 
             # Migrate everything to one neighboring population
             if self.migration_dest.lower() == 'single':
@@ -373,12 +376,9 @@ class Metapopulation(object):
                 (self.time % self.mix_frequency == 0):
             self.mix()
 
-        #if self.env_change_frequency > 0 and self.time > 0 and \
-        #        (self.time % self.env_change_frequency == 0):
         if self.env_change_frequency > 0 and self.time == self.next_env_change_cycle:
             self.change_environment()
             self.environment_changed = True
-            #self.next_env_change_cycle = self.time + self.env_change_frequency
             self.next_env_change_cycle = self.time + np.round(np.random.exponential(scale=self.env_change_frequency, size=1)[0]).astype(int)
         else:
             self.dilute()
