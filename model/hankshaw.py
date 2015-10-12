@@ -63,7 +63,8 @@ def main():
             print("Error: File '{f}' already exists.".format(f=args.genconfig))
             sys.exit(1)
 
-        config = ConfigObj(infile=args.genconfig, create_empty=True, configspec='configspec.ini')
+        config = ConfigObj(infile=args.genconfig, create_empty=True,
+                           configspec='configspec-v1.ini')
         config.validate(Validator(), copy=True)
         config.write() 
         print("Created configuration file '{f}'".format(f=args.genconfig))
