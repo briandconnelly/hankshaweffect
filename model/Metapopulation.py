@@ -97,7 +97,6 @@ class Metapopulation(object):
         max_cap = self.config['Population']['capacity_max']
         min_cap = self.config['Population']['capacity_min']
         initial_producer_proportion = self.config['Population']['initial_producer_proportion']
-        mutation_rate_tolerance = self.config['Population']['mutation_rate_tolerance']
 
 
         # Create each of the populations
@@ -121,7 +120,7 @@ class Metapopulation(object):
 
                 d['population'].abundances[0] = num_nonproducers
                 d['population'].abundances[2**genome_length] = num_producers
-                d['population'].bottleneck(survival_rate=mutation_rate_tolerance)
+                d['population'].bottleneck(survival_rate=self.config['Population']['stress_survival_rate'])
 
         # How frequently should the metapopulation be mixed?
         self.mix_frequency = self.config['Metapopulation']['mix_frequency']
@@ -402,10 +401,8 @@ class Metapopulation(object):
 
         self.fitness_landscape = self.build_fitness_landscape()
 
-        mutation_rate_tolerance = self.config['Population']['mutation_rate_tolerance']
-
         for n, d in self.topology.nodes_iter(data=True):
-            d['population'].bottleneck(survival_rate=mutation_rate_tolerance)
+            d['population'].bottleneck(survival_rate=self.config['Population']['stress_survival_rate'])
             d['population'].reset_loci()
 
 

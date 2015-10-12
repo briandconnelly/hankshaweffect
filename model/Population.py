@@ -19,8 +19,8 @@ class Population(object):
 
     * genome_length: the length of the genome. The production allele is added to
         this, so the number of genotypes is 2^(genome_length+1)
-    * mutation_rate_tolerance: the probability of an individual acquiring a
-        mutation that allows it to survive a change of environment (stress)
+    * stress_survival_rate: the probability of an individual surviving a change
+        of environment (stress)
     * mutation_rate_social: the probability of a mutation (bit flip) occuring at
         the social locus
     * mutation_rate_adaptation: the probability of a mutation (bit flip) at a
@@ -43,7 +43,7 @@ class Population(object):
         self.config = config
 
         self.genome_length = config['Population']['genome_length']
-        self.mutation_rate_tolerance = config['Population']['mutation_rate_tolerance']
+        self.stress_survival_rate = config['Population']['stress_survival_rate']
         self.mutation_rate_social = config['Population']['mutation_rate_social']
         self.mutation_rate_adaptation = config['Population']['mutation_rate_adaptation']
         self.dilution_factor = config['Population']['dilution_factor']
