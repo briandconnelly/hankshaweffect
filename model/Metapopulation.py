@@ -142,32 +142,42 @@ class Metapopulation(object):
         if self.config['MetapopulationLog']['enabled']:
             fname = self.config['MetapopulationLog']['filename']
             freq = self.config['MetapopulationLog']['frequency']
+            compress = self.config['MetapopulationLog']['compress']
             self.log_objects.append((freq, MetapopulationOutput(metapopulation=self,
-                                                                filename=os.path.join(data_dir, fname))))
+                                                                filename=os.path.join(data_dir, fname),
+                                                                compress=compress)))
 
         if self.config['PopulationLog']['enabled']:
             fname = self.config['PopulationLog']['filename']
             freq = self.config['PopulationLog']['frequency']
+            compress = self.config['PopulationLog']['compress']
             self.log_objects.append((freq, PopulationOutput(metapopulation=self,
-                                                            filename=os.path.join(data_dir, fname))))
+                                                            filename=os.path.join(data_dir, fname),
+                                                            compress=compress)))
 
         if self.config['GenotypeLog']['enabled']:
             fname = self.config['GenotypeLog']['filename']
             freq = self.config['GenotypeLog']['frequency']
+            compress = self.config['GenotypeLog']['compress']
             self.log_objects.append((freq, GenotypesOutput(metapopulation=self,
-                                                           filename=os.path.join(data_dir, fname))))
+                                                           filename=os.path.join(data_dir, fname),
+                                                           compress=compress)))
 
         if self.config['FitnessLog']['enabled'] :
             fname = self.config['FitnessLog']['filename']
             freq = self.config['FitnessLog']['frequency']
+            compress = self.config['FitnessLog']['compress']
             self.log_objects.append((freq, FitnessOutput(metapopulation=self,
-                                                         filename=os.path.join(data_dir, fname))))
+                                                         filename=os.path.join(data_dir, fname),
+                                                           compress=compress)))
 
         if self.config['EnvChangeLog']['enabled']:
             fname = self.config['EnvChangeLog']['filename']
             freq = self.config['EnvChangeLog']['frequency']
+            compress = self.config['EnvChangeLog']['compress']
             self.log_objects.append((freq, EnvChangeOutput(metapopulation=self,
-                                                           filename=os.path.join(data_dir, fname))))
+                                                           filename=os.path.join(data_dir, fname),
+                                                           compress=compress)))
 
 
     def __repr__(self):

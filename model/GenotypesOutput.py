@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import bz2
-import csv
+#import bz2
+#import csv
 
 import numpy as np
 
@@ -11,11 +11,13 @@ import genome
 
 class GenotypesOutput(OutputWriter):
 
-    def __init__(self, metapopulation, filename='genotypes.csv.bz2', delimiter=','):
+    def __init__(self, metapopulation, filename='genotypes.csv', delimiter=',',
+                 compress=False):
 
         super(GenotypesOutput, self).__init__(metapopulation=metapopulation,
                                               filename=filename,
-                                              delimiter=delimiter)
+                                              delimiter=delimiter,
+                                              compress=compress)
 
         self.genome_length = self.metapopulation.config['Population']['genome_length']
 

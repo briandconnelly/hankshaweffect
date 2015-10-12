@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
 
-import bz2
-import csv
+#import bz2
+#import csv
 
 from OutputWriter import OutputWriter
 
 
 class PopulationOutput(OutputWriter):
 
-    def __init__(self, metapopulation, filename='population.csv.bz2',
-                 delimiter=','):
+    def __init__(self, metapopulation, filename='population.csv',
+                 delimiter=',', compress=False):
         super(PopulationOutput, self).__init__(metapopulation=metapopulation,
                                                filename=filename,
-                                               delimiter=delimiter)
+                                               delimiter=delimiter,
+                                               compress=compress)
 
         self.writer.writerow(['Time', 'Population', 'Size', 'Producers',
                               'PropProducers', 'NonProducers',

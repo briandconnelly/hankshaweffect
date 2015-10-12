@@ -5,14 +5,22 @@ import csv
 
 class OutputWriter(object):
 
-    def __init__(self, metapopulation, filename, delimiter=','):
+    def __init__(self, metapopulation, filename, delimiter=',', compress=False):
         self.metapopulation = metapopulation
         self.filename = filename
+        self.compress = compress
 
-        try:
-            self.outfile = bz2.open(filename=self.filename, mode='wt')
-        except AttributeError:
-            self.outfile = bz2.BZ2File(self.filename, 'w')
+        if compress:
+            self.filename += ".bz2"
+
+            try:
+                self.outfile = bz2.open(filename=self.filename, mode='wt',
+                                        newline='', encoding='UTF-8')
+            except AttributeError:
+                self.outfile = bz2.BZ2File(self.filename, 'w')
+
+        else:
+            self.outfile = open(self.filename, mode='wt')
 
         self.writer = csv.writer(self.outfile, delimiter=delimiter)
 

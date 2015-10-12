@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import bz2
-import csv
-
 from OutputWriter import OutputWriter
 
 
 class EnvChangeOutput(OutputWriter):
 
-    def __init__(self, metapopulation, filename='environmental_change.csv.bz2', delimiter=','):
+    def __init__(self, metapopulation, filename='environmental_change.csv',
+                 delimiter=',', compress=False):
         super(EnvChangeOutput, self).__init__(metapopulation=metapopulation,
                                               filename=filename,
-                                              delimiter=delimiter)
+                                              delimiter=delimiter,
+                                              compress=compress)
 
         self.writer.writerow(['Time', 'EnvironmentChanged'])
 

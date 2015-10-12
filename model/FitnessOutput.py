@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import bz2
-import csv
+#import bz2
+#import csv
 
 import OutputWriter
 import Population
@@ -9,10 +9,12 @@ import Population
 
 class FitnessOutput(OutputWriter.OutputWriter):
 
-    def __init__(self, metapopulation, filename='max_fitness.csv.bz2', delimiter=','):
+    def __init__(self, metapopulation, filename='max_fitness.csv',
+                 delimiter=',', compress=False):
         super(FitnessOutput, self).__init__(metapopulation=metapopulation,
                                             filename=filename,
-                                            delimiter=delimiter)
+                                            delimiter=delimiter,
+                                            compress=compress)
 
         self.writer.writerow(['Time', 'Producers', 'Nonproducers'])
 
