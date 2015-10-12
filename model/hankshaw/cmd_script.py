@@ -30,8 +30,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(prog='hankshaw.py',
                                      description='Run a simluation')
     parser.add_argument('--config', '-c', metavar='FILE', help='Configuration '\
-                        'file to use (default: run.cfg)', default='run.cfg',
-                        dest='configfile')
+                        'file to use', dest='configfile', default=None)
     parser.add_argument('--checkconfig', '-C', action='store_true',
                         default=False,
                         help='Check the given configuration file and quit (note: includes parameters specified with --param)')
@@ -57,7 +56,6 @@ def main():
     start_time = time()
 
     cfgspec = os.path.join(hankshaw.__path__[0], 'configspec-v1.ini')
-    print("CONFIG SPEC IS [{}]".format(cfgspec))
 
     # Get the command line arguments
     args = parse_arguments()
@@ -70,18 +68,22 @@ def main():
         config = ConfigObj(infile=args.genconfig, create_empty=True,
                            configspec=cfgspec)
         config.validate(Validator(), copy=True)
-        config.write() 
+        config.write()
         print("Created configuration file '{f}'".format(f=args.genconfig))
         sys.exit(0)
 
     # Read the configuration file
     try:
+        require_config = args.configfile is not None or args.checkconfig
         config = ConfigObj(infile=args.configfile,
                            configspec=cfgspec,
-                           file_error=True)
+                           file_error=require_config)
     except (ConfigObjError, OSError) as e:
         print("Error: {e}".format(e=e))
         sys.exit(1)
+
+    # Validate the configuration (this time, just copy in any missing values)
+    validation = config.validate(Validator(), copy=True)
 
 
     # Add any parameters specified on the command line to the configuration
@@ -89,7 +91,7 @@ def main():
         for p in args.param:
             config[p[0]][p[1]] = p[2]
 
-    # Validate the configuration
+    # Validate the modified configuration
     validation = config.validate(Validator(), copy=True)
 
     if validation != True:
@@ -104,7 +106,7 @@ def main():
         sys.exit(2)
 
     if args.checkconfig:
-        print("No errors found in configuration file {f}".format(f=args.configfile))
+        print("No errors found in configuration file '{f}'".format(f=args.configfile))
         sys.exit(0)
 
     # If the random number generator seed specified, add it to the config,
@@ -141,9 +143,9 @@ def main():
     os.mkdir(config['Simulation']['data_dir'])
 
 
-    # Write the configuration file                                              
-    config.filename = os.path.join(config['Simulation']['data_dir'], 'run.cfg')                         
-    config.write() 
+    # Write the configuration file
+    config.filename = os.path.join(config['Simulation']['data_dir'], 'run.cfg')
+    config.write()
 
 
     # Write information about the run
@@ -181,4 +183,8 @@ def main():
 
     rt_string = 'Run Time: {t}\n'.format(t=datetime.timedelta(seconds=time()-start_time))
     append_run_information(filename=infofile, string=rt_string)
+
+
+if __name__ == "__main__":
+    main()
 
