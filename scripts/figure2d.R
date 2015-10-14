@@ -10,22 +10,22 @@ source('formatting.R')
 source('figsummary.R')
 
 # How often data were logged
-data_interval <- 10
+data_interval <- 1
 
-data_fig2d <- read.csv('../data/figure2d.csv')
+data_fig2d <- read.csv('../data/csweep.csv.bz2') %>% filter(CooperationCost <= 0.5)
 data_fig2d$Replicate <- as.factor(data_fig2d$Replicate)
 
 data_fig2d_integral <- data_fig2d %>%
-    group_by(ProductionCost, Source, Replicate) %>%
-    summarise(Integral=data_interval * sum(MeanProducerProportion)/(max(Time)-min(Time)))
+    group_by(CooperationCost, Replicate) %>%
+    summarise(Integral=data_interval * sum(CooperatorProportion)/(max(Time)-min(Time)))
 
-fig2d <- ggplot(data_fig2d_integral, aes(x=ProductionCost, y=Integral)) +
+fig2d <- ggplot(data_fig2d_integral, aes(x=CooperationCost, y=Integral)) +
     #geom_point(shape=1, alpha=replicate_alpha) +
     stat_summary(fun.data='figsummary', size=point_size) +
-    scale_x_continuous(breaks=unique(data_fig2d_integral$ProductionCost), labels=cost_labels) +
+    scale_x_continuous(breaks=as.numeric(names(cost_labels)), labels=cost_labels) +
     scale_y_continuous(limits=c(0, 1)) +
     labs(x=label_cost, y=label_producer_presence) +
-    theme_hankshaw(base_size=17)
+    theme_hankshaw(base_size=fig2_base_size)
 fig2d <- rescale_golden(plot=fig2d)
 
 g <- ggplotGrob(fig2d)
@@ -37,4 +37,4 @@ png('../figures/Figure2d.png', width=6, height=3.708204, units='in',
     res=figure_dpi)
 grid.draw(g)
 dev.off()
-
+#trim_file("../figures/Figure2d.png")

@@ -8,17 +8,18 @@ library(gtable)
 
 source('formatting.R')
 
-data_fig2a <- read.csv('../data/figure2a.csv') %>%
-    filter(Time <= max_time)
-data_fig2a$Replicate <- as.factor(data_fig2a$Replicate)
+data_fig2a <- read.csv('../data/lsweep.csv.bz2') %>%
+    filter(Structured == TRUE) %>%
+    filter(GenomeLength %in% c(0,8))
 
+data_fig2a$Replicate <- as.factor(data_fig2a$Replicate)
 
 fig2afacets <- function(variable, value)
 {
     return(sprintf('%d Adaptive Loci', value))
 }
 
-fig2a <- ggplot(data_fig2a, aes(x=Time, y=MeanProducerProportion,
+fig2a <- ggplot(data_fig2a, aes(x=Time, y=CooperatorProportion,
                                 color=as.factor(GenomeLength),
                                 fill=as.factor(GenomeLength))) +
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70',
@@ -30,7 +31,7 @@ fig2a <- ggplot(data_fig2a, aes(x=Time, y=MeanProducerProportion,
     scale_fill_manual(values=c('8'=color_L08, '0'=color_L00), guide=FALSE) +
     scale_y_continuous(limits=c(0,1)) +
     labs(x=label_time, y=label_producer_proportion) +
-    theme_hankshaw(base_size=17)
+    theme_hankshaw(base_size=fig2_base_size)
 fig2a <- rescale_plot(plot=fig2a, ratio=(1 + sqrt(5)))
 
 g <- ggplotGrob(fig2a)
@@ -42,4 +43,4 @@ png('../figures/Figure2a.png', width=6, height=3.708204, units='in',
     res=figure_dpi)
 grid.draw(g)
 dev.off()
-
+#trim_file("../figures/Figure2a.png")

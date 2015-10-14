@@ -31,9 +31,9 @@ here = path.abspath(path.dirname(__file__))
 
 setup(
     name='hankshaw',
-    version='1.1.0',
-    description='TODO',
-    long_description='TODO',
+    version='1.1.2',
+    description='Model for The Evolution of Cooperation by the Hankshaw Effect',
+    long_description='Simulation model described and used in The Evolution of Cooperation by the Hankshaw Effect. In each simulation, a metapopulation of populations grow and evolve.',
     url='https://github.com/briandconnelly/hankshaweffect',
     author='Brian D. Connelly',
     author_email='bdc@bconnelly.net',

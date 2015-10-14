@@ -10,13 +10,14 @@ source('formatting.R')
 source('figsummary.R')
 
 # How often data were logged
-data_interval <- 10
+data_interval <- 1
 
-data_fig2b <- read.csv('../data/figure2b.csv') %>% filter(Time <= max_time)
+data_fig2b <- read.csv('../data/lsweep.csv.bz2') %>%
+    filter(Structured == TRUE)
 
 data_fig2b_integral <- data_fig2b %>%
-    group_by(GenomeLength, Source, Replicate) %>%
-    summarise(Integral=data_interval * sum(MeanProducerProportion)/(max(Time)-min(Time)))
+    group_by(GenomeLength, Replicate) %>%
+    summarise(Integral=data_interval * sum(CooperatorProportion)/(max(Time)-min(Time)))
 
 data_fig2b_integral$GenomeLength <- as.factor(data_fig2b_integral$GenomeLength)
 
@@ -33,7 +34,7 @@ fig2b <- ggplot(data_fig2b_integral, aes(x=GenomeLength, y=Integral,
                      labels=label_genomelengths) +
     scale_y_continuous(limits=c(0, 1)) +
     labs(x=label_genome_length, y=label_producer_presence) +
-    theme_hankshaw(base_size=17)
+    theme_hankshaw(base_size=fig2_base_size)
 fig2b <- rescale_golden(plot=fig2b)
 
 g <- ggplotGrob(fig2b)
@@ -45,4 +46,4 @@ png('../figures/Figure2b.png', width=6, height=3.708204, units='in',
     res=figure_dpi)
 grid.draw(g)
 dev.off()
-
+#trim_file("../figures/Figure2b.png")
