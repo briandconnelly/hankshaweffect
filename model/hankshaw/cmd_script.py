@@ -149,7 +149,7 @@ def main():
 
 
     # Write information about the run
-    infofile = os.path.join(config['Simulation']['data_dir'], 'run_info.txt')
+    infofile = os.path.join(config['Simulation']['data_dir'], 'info.txt')
     write_run_information(filename=infofile, config=config)
 
 
