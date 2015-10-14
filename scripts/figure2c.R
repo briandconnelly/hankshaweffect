@@ -39,4 +39,4 @@ png('../figures/Figure2c.png', width=6, height=3.708204, units='in',
     res=figure_dpi)
 grid.draw(g)
 dev.off()
-#trim_file("../figures/Figure2c.png")
+trim_file("../figures/Figure2c.png")

@@ -34,7 +34,8 @@ label_structure <- c('lattice, 25x25'=expression(bold('Structured')), 'well-mixe
 label_producer_proportion_sd <- expression(bold(paste(sigma, '(Proportion of Cooperators Surviving)')))
 
 
-label_benefits <- c('0', '200', '400', '600', '800', '1000', expression(bold('1200')), '1400', '1600', '1800', '2000')
+##label_benefits <- c('0', '200', '400', '600', '800', '1000', expression(bold('1200')), '1400', '1600', '1800', '2000')
+label_benefits <- c('0', '150', '300', '450', '600', '750', '900', '1050',  expression(bold('1200')), '1350', '1500', '1650')
 
 cost_labels <- c('0.0'='0.0', '0.1'=expression(bold('0.1')), '0.2'='0.2',
                  '0.3'='0.3', '0.4'='0.4', '0.5'='0.5')
