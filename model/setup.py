@@ -31,7 +31,7 @@ here = path.abspath(path.dirname(__file__))
 
 setup(
     name='hankshaw',
-    version='1.1.2',
+    version='1.1.3',
     description='Model for The Evolution of Cooperation by the Hankshaw Effect',
     long_description='Simulation model described and used in The Evolution of Cooperation by the Hankshaw Effect. In each simulation, a metapopulation of populations grow and evolve.',
     url='https://github.com/briandconnelly/hankshaweffect',

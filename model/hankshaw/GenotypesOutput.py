@@ -3,22 +3,24 @@
 import numpy as np
 
 from hankshaw.OutputWriter import OutputWriter
-import hankshaw.genome
+import hankshaw.genome as genome
 
 
 class GenotypesOutput(OutputWriter):
 
-    def __init__(self, metapopulation, filename='genotypes.csv', delimiter=',',
-                 compress=False):
+    def __init__(self, metapopulation, filename='genotypes.csv', header=True,
+                 include_uuid=False, compress=False):
 
+        fieldnames = ['Time', 'Genotype', 'AvgAbundance', 'IsProducer']
         super(GenotypesOutput, self).__init__(metapopulation=metapopulation,
                                               filename=filename,
-                                              delimiter=delimiter,
+                                              fieldnames=fieldnames,
+                                              header=header,
+                                              include_uuid=include_uuid,
                                               compress=compress)
 
         self.genome_length = self.metapopulation.config['Population']['genome_length']
 
-        self.writer.writerow(['Time', 'Genotype', 'AvgAbundance', 'IsProducer'])
 
     def update(self, time):
         abundances = []
@@ -28,5 +30,9 @@ class GenotypesOutput(OutputWriter):
         for i in range(2**(self.genome_length+1)):
             isprod = genome.is_producer(i, self.genome_length)
             genotype = i & 2**(self.genome_length)-1
-            self.writer.writerow([time, genotype, av[i], isprod])
+            record = {'Time': time,
+                      'Genotype': genotype,
+                      'AvgAbundance': av[i],
+                      'IsProducer': isprod}
+            self.writerow(record)
 

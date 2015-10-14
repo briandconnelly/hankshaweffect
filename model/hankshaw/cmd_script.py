@@ -78,7 +78,7 @@ def main():
         config = ConfigObj(infile=args.configfile,
                            configspec=cfgspec,
                            file_error=require_config)
-    except (ConfigObjError, OSError) as e:
+    except (ConfigObjError, OSError, IOError) as e:
         print("Error: {e}".format(e=e))
         sys.exit(1)
 
@@ -168,7 +168,7 @@ def main():
 
 
     # Run the simulation
-    for t in range(config['Simulation']['num_cycles']):
+    for t in range(config['Simulation']['cycles']):
         m.cycle()
 
         if not args.quiet:

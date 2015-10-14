@@ -6,14 +6,19 @@ from hankshaw.OutputWriter import OutputWriter
 class FitnessOutput(OutputWriter):
 
     def __init__(self, metapopulation, filename='max_fitness.csv',
-                 delimiter=',', compress=False):
+                 header=True, include_uuid=False, compress=False):
+        fieldnames = ['Time', 'Producers', 'Nonproducers']
         super(FitnessOutput, self).__init__(metapopulation=metapopulation,
                                             filename=filename,
-                                            delimiter=delimiter,
+                                            fieldnames=fieldnames,
+                                            header=header,
+                                            include_uuid=include_uuid,
                                             compress=compress)
-
-        self.writer.writerow(['Time', 'Producers', 'Nonproducers'])
 
     def update(self, time):
         maxfit = self.metapopulation.max_fitnesses()
-        self.writer.writerow([time, max(maxfit[0]), max(maxfit[1])])
+        record = {'Time': time,
+                  'Producers': max(maxfit[0]),
+                  'Nonproducers': max(maxfit[1])}
+        self.writerow(record)
+

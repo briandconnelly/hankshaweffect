@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-VERSION = (1, 1, 2)
+VERSION = (1, 1, 3)
 __version__ = ".".join(map(str, VERSION[0:3])) + "".join(VERSION[3:])
 __license__ = "BSD"
 

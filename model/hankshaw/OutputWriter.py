@@ -5,9 +5,12 @@ import csv
 
 class OutputWriter(object):
 
-    def __init__(self, metapopulation, filename, delimiter=',', compress=False):
+    def __init__(self, metapopulation, filename, fieldnames, header=True,
+                 include_uuid=False, compress=False):
         self.metapopulation = metapopulation
         self.filename = filename
+        self.fieldnames = fieldnames
+        self.include_uuid = include_uuid
         self.compress = compress
 
         if compress:
@@ -22,10 +25,22 @@ class OutputWriter(object):
         else:
             self.outfile = open(self.filename, mode='wt')
 
-        self.writer = csv.writer(self.outfile, delimiter=delimiter)
+        if self.include_uuid:
+            self.fieldnames.insert(0, 'UUID')
+
+        self.writer = csv.DictWriter(self.outfile, fieldnames=self.fieldnames)
+
+        if header:
+            self.writer.writeheader()
 
     def update(self, time):
         pass
+
+    def writerow(self, record):
+        if self.include_uuid:
+            record['UUID'] = self.metapopulation.config['Simulation']['UUID']
+
+        self.writer.writerow(record)
 
     def close(self):
         self.outfile.close()

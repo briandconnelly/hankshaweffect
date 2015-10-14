@@ -6,15 +6,16 @@ from hankshaw.OutputWriter import OutputWriter
 class PopulationOutput(OutputWriter):
 
     def __init__(self, metapopulation, filename='population.csv',
-                 delimiter=',', compress=False):
+                 header=True, include_uuid=False, compress=False):
+        fieldnames = ['Time', 'Population', 'Size', 'Producers',
+                      'PropProducers', 'NonProducers', 'PropNonProducers',
+                      'AvgFitness']
         super(PopulationOutput, self).__init__(metapopulation=metapopulation,
                                                filename=filename,
-                                               delimiter=delimiter,
+                                               fieldnames=fieldnames,
+                                               header=header,
+                                               include_uuid=include_uuid,
                                                compress=compress)
-
-        self.writer.writerow(['Time', 'Population', 'Size', 'Producers',
-                              'PropProducers', 'NonProducers',
-                              'PropNonProducers', 'AvgFitness'])
 
     def update(self, time):
         for n, d in self.metapopulation.topology.nodes_iter(data=True):
@@ -33,7 +34,13 @@ class PopulationOutput(OutputWriter):
                 prop_nonproducers = 1.0*num_nonproducers/size
                 average_fitness = d['population'].average_fitness()
 
-            self.writer.writerow([time, n, size, num_producers, prop_producers,
-                                  num_nonproducers, prop_nonproducers,
-                                  average_fitness])
+            record = {'Time': time,
+                      'Population': n,
+                      'Size': size, 
+                      'Producers': num_producers,
+                      'PropProducers': prop_producers,
+                      'NonProducers': num_nonproducers,
+                      'PropNonProducers': prop_nonproducers,
+                      'AvgFitness': average_fitness}
+            self.writerow(record)
 

@@ -4,7 +4,7 @@ import os
 
 import networkx as nx
 import numpy as np
-from numpy.random import binomial, choice as nchoice, random_integers
+from numpy.random import binomial, choice as nchoice, exponential, random_integers
 
 from hankshaw import genome
 from hankshaw.Population import Population
@@ -27,9 +27,9 @@ class Metapopulation(object):
         self.migration_rate = self.config['Metapopulation']['migration_rate']
         self.migration_dest = self.config['Metapopulation']['migration_dest']
         self.migration_p_far = self.config['Metapopulation']['migration_p_far']
-        self.topology_type = self.config['Metapopulation']['topology']
+        topology_type = self.config['Metapopulation']['topology']
 
-        if self.topology_type.lower() == 'moore':
+        if topology_type.lower() == 'moore':
             width = self.config['MooreTopology']['width']
             height = self.config['MooreTopology']['height']
             periodic = self.config['MooreTopology']['periodic']
@@ -39,7 +39,7 @@ class Metapopulation(object):
                                                    radius=radius,
                                                    periodic=periodic)
 
-        elif self.topology_type.lower() == 'vonneumann':
+        elif topology_type.lower() == 'vonneumann':
             width = self.config['VonNeumannTopology']['width']
             height = self.config['VonNeumannTopology']['height']
             periodic = self.config['VonNeumannTopology']['periodic']
@@ -48,7 +48,7 @@ class Metapopulation(object):
                                                         columns=width,
                                                         periodic=periodic)
 
-        elif self.topology_type.lower() == 'smallworld':
+        elif topology_type.lower() == 'smallworld':
             size = self.config['SmallWorldTopology']['size']
             neighbors = self.config['SmallWorldTopology']['neighbors']
             edgeprob = self.config['SmallWorldTopology']['edgeprob']
@@ -62,11 +62,11 @@ class Metapopulation(object):
                                                 edgeprob=edgeprob, seed=seed)
 
 
-        elif self.topology_type.lower() == 'complete':
+        elif topology_type.lower() == 'complete':
             self.topology = nx.complete_graph(n=self.config['CompleteTopology']['size'])
 
 
-        elif self.topology_type.lower() == 'regular':
+        elif topology_type.lower() == 'regular':
             size = self.config['RegularTopology']['size']
             degree = self.config['RegularTopology']['degree']
 
@@ -122,16 +122,19 @@ class Metapopulation(object):
                 d['population'].abundances[2**genome_length] = num_producers
                 d['population'].bottleneck(survival_rate=self.config['Population']['stress_survival_rate'])
 
+
         # How frequently should the metapopulation be mixed?
-        self.mix_frequency = self.config['Metapopulation']['mix_frequency']
+        self.metapopulation_mixing = self.config['MetapopulationMixing']['enabled']
+        self.mix_frequency = self.config['MetapopulationMixing']['frequency']
 
 
-        # How frequently should the environment be changed?
+        # Does the environment change? If so, how...
+        self.environment_changes = self.config['EnvironmentalChange']['enabled']
+        self.env_change_frequency = self.config['EnvironmentalChange']['frequency']
         self.environment_changed = False
-        self.env_change_frequency = self.config['Metapopulation']['env_change_frequency']
 
-        if self.env_change_frequency > 0:
-            self.next_env_change_cycle = np.round(np.random.exponential(scale=self.env_change_frequency, size=1)[0]).astype(int)
+        if self.environment_changes:
+            self.set_next_environment_change()
 
 
         data_dir = self.config['Simulation']['data_dir']
@@ -145,6 +148,8 @@ class Metapopulation(object):
             compress = self.config['MetapopulationLog']['compress']
             self.log_objects.append((freq, MetapopulationOutput(metapopulation=self,
                                                                 filename=os.path.join(data_dir, fname),
+                                                                header=True,
+                                                                include_uuid=self.config['MetapopulationLog']['include_uuid'],
                                                                 compress=compress)))
 
         if self.config['PopulationLog']['enabled']:
@@ -153,6 +158,8 @@ class Metapopulation(object):
             compress = self.config['PopulationLog']['compress']
             self.log_objects.append((freq, PopulationOutput(metapopulation=self,
                                                             filename=os.path.join(data_dir, fname),
+                                                            header=True,
+                                                            include_uuid=self.config['PopulationLog']['include_uuid'],
                                                             compress=compress)))
 
         if self.config['GenotypeLog']['enabled']:
@@ -161,6 +168,8 @@ class Metapopulation(object):
             compress = self.config['GenotypeLog']['compress']
             self.log_objects.append((freq, GenotypesOutput(metapopulation=self,
                                                            filename=os.path.join(data_dir, fname),
+                                                           header=True,
+                                                           include_uuid=self.config['GenotypeLog']['include_uuid'],
                                                            compress=compress)))
 
         if self.config['FitnessLog']['enabled'] :
@@ -169,7 +178,9 @@ class Metapopulation(object):
             compress = self.config['FitnessLog']['compress']
             self.log_objects.append((freq, FitnessOutput(metapopulation=self,
                                                          filename=os.path.join(data_dir, fname),
-                                                           compress=compress)))
+                                                         header=True,
+                                                         include_uuid=self.config['FitnessLog']['include_uuid'],
+                                                         compress=compress)))
 
         if self.config['EnvChangeLog']['enabled']:
             fname = self.config['EnvChangeLog']['filename']
@@ -177,6 +188,8 @@ class Metapopulation(object):
             compress = self.config['EnvChangeLog']['compress']
             self.log_objects.append((freq, EnvChangeOutput(metapopulation=self,
                                                            filename=os.path.join(data_dir, fname),
+                                                           header=True,
+                                                           include_uuid=self.config['EnvChangeLog']['include_uuid'],
                                                            compress=compress)))
 
 
@@ -382,14 +395,14 @@ class Metapopulation(object):
         self.migrate()
         self.census()
 
-        if self.mix_frequency > 0 and self.time > 0 and \
+        if self.metapopulation_mixing and self.time > 0 and \
                 (self.time % self.mix_frequency == 0):
             self.mix()
 
-        if self.env_change_frequency > 0 and self.time == self.next_env_change_cycle:
+        if self.environment_changes and self.time == self.next_env_change_cycle:
             self.change_environment()
             self.environment_changed = True
-            self.next_env_change_cycle = self.time + np.round(np.random.exponential(scale=self.env_change_frequency, size=1)[0]).astype(int)
+            self.set_next_environment_change()
         else:
             self.dilute()
             self.environment_changed = False
@@ -414,6 +427,15 @@ class Metapopulation(object):
         for n, d in self.topology.nodes_iter(data=True):
             d['population'].bottleneck(survival_rate=self.config['Population']['stress_survival_rate'])
             d['population'].reset_loci()
+
+
+    def set_next_environment_change(self):
+        """Set the cycle at which the next environmental change will occur
+        """
+        if self.config['EnvironmentalChange']['type'] == 'regular':
+            self.next_env_change_cycle = self.time + self.env_change_frequency
+        elif self.config['EnvironmentalChange']['type'] == 'exponential':
+            self.next_env_change_cycle = self.time + np.round(exponential(scale=self.env_change_frequency, size=1)[0]).astype(int)
 
 
     def size(self):
