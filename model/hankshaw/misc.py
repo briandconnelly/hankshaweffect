@@ -22,7 +22,7 @@ def write_run_information(filename, config):
                                         whom=getpass.getuser()))
         infofile.write('Host: {p}\n'.format(p=platform.node()))
         infofile.write('Platform: {p}\n'.format(p=platform.platform()))
-        infofile.write('Hankshaw Model Version: {v}\n'.format(v=hankshaw.__version__))
+        infofile.write('Hankshaw Version: {v}\n'.format(v=hankshaw.__version__))
         infofile.write('Python Version: {v}\n'.format(v=".".join([str(n) for n in sys.version_info[:3]])))
         infofile.write('NumPy Version: {v}\n'.format(v=np.version.version))
         infofile.write('NetworkX Version: {v}\n'.format(v=nx.__version__))

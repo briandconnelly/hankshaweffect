@@ -207,19 +207,34 @@ class Population(object):
         self.delta = zeros(self.abundances.size, dtype=np.int32)
 
 
-    def reset_loci(self):
+    def reset_loci(self, num_loci):
         """Reset the loci of the population to all zeros
 
         When an environment changes, the population is not yet adapted to it.
-        This function captures this change by resetting all fitness-encoding
+        This function captures this change by resetting num_loci fitness-encoding
         loci to zero.
         """
-        num_producers = self.num_producers()                                    
-        num_nonproducers = self.num_nonproducers()                              
+        assert num_loci <= self.genome_length
 
-        self.abundances = zeros(self.abundances.size, dtype=np.int)      
-        self.abundances[0] = num_nonproducers                                   
-        self.abundances[2**self.genome_length] = num_producers              
+        if self.is_empty():
+            return
+
+        new_abundances = zeros(self.abundances.size, dtype=np.int)
+        gs = np.right_shift(np.arange(start=0, stop=2**self.genome_length), num_loci)
+        genotypes_shifted = np.append(gs, gs + (2**self.genome_length))
+
+        for i in range(2**(self.genome_length+1)):
+            new_abundances[genotypes_shifted[i]] += self.abundances[i]
+
+        self.abundances = new_abundances
+
+        # OLD WAY OF DOING THIS FOR ALL LOCI -------------------------------
+        #num_producers = self.num_producers()
+        #num_nonproducers = self.num_nonproducers()
+
+        #self.abundances = zeros(self.abundances.size, dtype=np.int)
+        #self.abundances[0] = num_nonproducers
+        #self.abundances[2**self.genome_length] = num_producers
 
 
     def bottleneck(self, survival_rate):

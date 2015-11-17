@@ -229,19 +229,15 @@ class Metapopulation(object):
         base_fitness = self.config['Population']['base_fitness']
         production_cost = self.config['Population']['production_cost']
         benefit_nonzero = self.config['Population']['benefit_nonzero']
+        fitness_shape = self.config['Population']['fitness_shape']
 
-        effects = np.append(-1.0*production_cost,
-                            np.repeat(benefit_nonzero, genome_length))
+        landscape = np.zeros(2**(genome_length))
 
-        landscape = np.zeros(2**(genome_length + 1))
+        for i in range(2**(genome_length)):
+            num_ones = sum(genome.base10_as_bitarray(i))
+            landscape[i] = base_fitness + (benefit_nonzero * (num_ones**fitness_shape))
 
-        for i in range(2**(genome_length + 1)):
-            genotype = genome.base10_as_bitarray(i)
-            genotype = np.append(np.zeros(len(effects) - len(genotype)),
-                                 genotype)
-            landscape[i] = sum(genotype * effects) + (base_fitness + production_cost)
-
-        return landscape
+        return np.append(landscape, landscape - production_cost)
 
 
     def get_mutation_probabilities(self):
@@ -426,7 +422,7 @@ class Metapopulation(object):
 
         for n, d in self.topology.nodes_iter(data=True):
             d['population'].bottleneck(survival_rate=self.config['Population']['stress_survival_rate'])
-            d['population'].reset_loci()
+            d['population'].reset_loci(num_loci=self.config['EnvironmentalChange']['affected_loci'])
 
 
     def set_next_environment_change(self):
