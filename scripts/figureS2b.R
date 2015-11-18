@@ -10,15 +10,15 @@ source('formatting.R')
 source('figsummary.R')
 
 # How often data were logged
-data_interval <- 10
+data_interval <- 1
 
-data_figs2b <- read.csv('../data/figureS2bc.csv') %>%
+data_figs2b <- read.csv('../data/figureS2b.csv.bz2') %>%
     filter(Time <= max_time)
 data_figs2b$Replicate <- as.factor(data_figs2b$Replicate)
 
 data_figs2b_integral <- data_figs2b %>%
     group_by(MutationRateSocial, Replicate) %>%
-    summarise(Integral=data_interval * sum(ProducerProportion)/(max(Time)-min(Time)))
+    summarise(Integral=data_interval * sum(CooperatorProportion)/(max(Time)-min(Time)))
 
 mutation_labels_log <- c(expression(10^{-7}),
                          expression(10^{-6}),

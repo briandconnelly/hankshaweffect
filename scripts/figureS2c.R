@@ -9,14 +9,14 @@ library(gtable)
 source('formatting.R')
 source('figsummary.R')
 
-data_figs2bc <- read.csv('../data/figureS2bc.csv') %>%
+data_figs2bc <- read.csv('../data/figureS2b.csv.bz2') %>%
     filter(Time <= max_time)
 data_figs2bc$Replicate <- as.factor(data_figs2bc$Replicate)
 
 data_figs2c <- data_figs2bc %>%
     filter(MutationRateSocial == max(data_figs2bc$MutationRateSocial))
 
-figS2C <- ggplot(data_figs2c, aes(x=Time, y=ProducerProportion)) +
+figS2C <- ggplot(data_figs2c, aes(x=Time, y=CooperatorProportion)) +
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70',
                size=0.1) +
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) +
