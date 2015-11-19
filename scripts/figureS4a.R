@@ -10,37 +10,35 @@ library(scales)
 source('formatting.R')
 source('figsummary.R')
 
-data_s4a <- read.csv('../data/figureS4.csv') %>%
-    filter(Time <= max_time) %>%
-    filter(GenomeLength==8)
+data_s4a <- read.csv('../data/thinnothin.csv.bz2') %>%
+    filter(GenomeLength == 8)
 
-data_s4a$Replicate <- as.factor(data_s4a$Replicate)                                       
-data_s4a$MutationRateTolerance <- as.factor(data_s4a$MutationRateTolerance)
+data_s4a$Replicate <- as.factor(data_s4a$Replicate)
 
-figs4a <- ggplot(data_s4a, aes(x=Time, y=ProducerProportion,
-                               color=MutationRateTolerance,
-                               fill=MutationRateTolerance,
-                               linetype=MutationRateTolerance)) +
+figs4a <- ggplot(data_s4a, aes(x=Time, y=CooperatorProportion,
+                               color=InitialThinning,
+                               fill=InitialThinning,
+                               linetype=InitialThinning)) +
     geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) + 
     stat_summary(fun.y='mean', geom='line') +
     scale_y_continuous(limits=c(0,1)) +
-    scale_linetype_manual(values=c('1'='solid', '1e-05'='dashed'),
-                          labels=c('1'=label_without_stress,
-                                   '1e-05'=label_with_stress),
+    scale_linetype_manual(values=c('FALSE'='solid', 'TRUE'='dashed'),
+                          labels=c('FALSE'=label_without_stress,
+                                   'TRUE'=label_with_stress),
                           name='') +
-    scale_color_manual(values=c('1'='grey70', '1e-05'='grey20'),
-                       labels=c('1'=label_without_stress,
-                                '1e-05'=label_with_stress),
+    scale_color_manual(values=c('FALSE'='grey70', 'TRUE'='grey20'),
+                       labels=c('FALSE'=label_without_stress,
+                                'TRUE'=label_with_stress),
                        name='') +
-    scale_fill_manual(values=c('1'='grey70', '1e-05'='grey20'),
-                      labels=c('1'=label_without_stress,
-                               '1e-05'=label_with_stress),
+    scale_fill_manual(values=c('FALSE'='grey70', 'TRUE'='grey20'),
+                      labels=c('FALSE'=label_without_stress,
+                               'TRUE'=label_with_stress),
                       name='', guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
     theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5)) +
     theme_hankshaw(base_size=17) +
-    theme(legend.text = element_text(size=rel(0.5), , colour="grey40"))
+    theme(legend.text = element_text(size=rel(0.5), colour="grey40"))
 figs4a <- rescale_golden(plot=figs4a)
 
 g <- ggplotGrob(figs4a)
