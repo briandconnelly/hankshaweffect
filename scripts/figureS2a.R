@@ -12,8 +12,7 @@ source('figsummary.R')
 # How often data were logged
 data_interval <- 1
 
-data_figs2a <- read.csv('../data/figureS2a.csv.bz2') %>%
-    filter(Time <= max_time)
+data_figs2a <- read.csv('../data/figureS2a.csv.bz2')
 data_figs2a$Replicate <- as.factor(data_figs2a$Replicate)
 
 data_figs2a_integral <- data_figs2a %>%

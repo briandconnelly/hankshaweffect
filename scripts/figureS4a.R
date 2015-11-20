@@ -19,7 +19,7 @@ figs4a <- ggplot(data_s4a, aes(x=Time, y=CooperatorProportion,
                                color=InitialThinning,
                                fill=InitialThinning,
                                linetype=InitialThinning)) +
-    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70') +
+    draw_50line() +
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) + 
     stat_summary(fun.y='mean', geom='line') +
     scale_y_continuous(limits=c(0,1)) +

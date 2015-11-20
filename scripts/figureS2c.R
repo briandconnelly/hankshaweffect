@@ -9,8 +9,7 @@ library(gtable)
 source('formatting.R')
 source('figsummary.R')
 
-data_figs2bc <- read.csv('../data/figureS2b.csv.bz2') %>%
-    filter(Time <= max_time)
+data_figs2bc <- read.csv('../data/figureS2b.csv.bz2')
 data_figs2bc$Replicate <- as.factor(data_figs2bc$Replicate)
 
 data_figs2c <- data_figs2bc %>%
