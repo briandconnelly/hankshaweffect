@@ -52,3 +52,16 @@ figX <- ggplot(presence, aes(x=1/EnvChangeFrequency, y=Integral)) +
     theme_hankshaw(base_size=17)
 figX <- rescale_golden(plot=figX)
 ggsave_golden(filename = '../figures/envchange-regular-integral.png', plot = figX)
+
+
+# All trajectories -------------------------------------------------------------
+pall <- ggplot(data=d, aes(x=Time, y=CooperatorProportion, color=Replicate)) +
+    facet_grid(EnvChangeFrequency ~ .) +
+    draw_50line() +
+    geom_line() +
+    scale_y_continuous(breaks=c(0, 0.5, 1)) +
+    scale_color_grey(guide=FALSE) +
+    labs(x=label_time, y=label_producer_proportion) +
+    theme_hankshaw()
+ggsave_golden(filename = '../figures/envchange-regular-all.png', plot = pall)
+
