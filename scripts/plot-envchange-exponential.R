@@ -40,6 +40,6 @@ pall <- ggplot(data=d, aes(x=Time, y=CooperatorProportion, color=Replicate)) +
     scale_y_continuous(breaks=c(0, 0.5, 1)) +
     scale_color_grey(guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
-    theme_hankshaw()
+    theme_hankshaw(base_size = 17)
 ggsave_golden(filename = '../figures/envchange-exponential-all.png',
               plot = pall)
