@@ -15,27 +15,26 @@ d$Replicate <- as.factor(d$Replicate)
 
 # Fitness Curves ----------------------------------------------------------
 
-# TODO
+base_fitness <- 1.0
+benefit_nonzero <- 0.3
+production_cost <- 0.1
 
-S <- 2000
-s <- 800     
+fdata <- expand.grid(NumOnes=seq(0, 8), Coop=c(FALSE), Shape=unique(d$Shape))
+fdata$Fitness <- base_fitness - (fdata$Coop * production_cost) + (benefit_nonzero * (fdata$NumOnes ^ fdata$Shape))
 
-pdata <- expand.grid(Time=1:1000/1000, Gamma=unique(d$Gamma))
-pdata$PSize <- s + ((pdata$Time^pdata$Gamma) * (S-s))  
-
-p_gamma <- ggplot(pdata, aes(x=Time, y=PSize, color=as.factor(Gamma))) +        
-    geom_hline(yintercept=s, linetype='dotted', size=0.5, color='grey70', size=0.1) +
-    geom_hline(yintercept=S, linetype='dotted', size=0.5, color='grey70', size=0.1) +
-    geom_line() +                                                               
-    scale_color_hue(name=label_gamma) +                                   
-    scale_y_continuous(limits=c(0,S), breaks=c(0,s,S),                       
-                       labels=c('0',expression(S['min']),expression(S['max']))) +
-    labs(x=label_producer_proportion, y=label_carrying_capacity) +       
+pshape <- ggplot(data=fdata, aes(x=NumOnes, y=Fitness, color=as.factor(Shape))) +
+    geom_line() +
+    scale_color_hue(name=label_gamma) +
+    #scale_y_log10() +
+    labs(x=label_numones, y=label_fitness) +
     theme_hankshaw(base_size = 17) +
-    theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5))   
-p_gamma <- rescale_golden(plot=p_gamma)
-ggsave_golden(filename='../figures/fitnessgamma-gamma.png', plot=p_gamma)
+    theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5)) 
+pshape <- rescale_golden(plot = pshape)
+ggsave_golden(filename='../figures/fitnessgamma-gamma.png', plot=pshape)
+#trim_file(f='../figures/fitnessgamma-gamma.png')
 
+ggsave_golden(filename='../figures/fitnessgamma-gamma-log.png',
+              plot=rescale_golden(plot = pshape + scale_y_log10()))
 
 # Individual Trajectories -------------------------------------------------
 
