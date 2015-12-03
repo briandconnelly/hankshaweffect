@@ -5,6 +5,7 @@ library(dplyr)
 library(ggplot2)
 library(ggplot2bdc)
 library(scales)
+library(gtable)
 
 source('figsummary.R')
 source('formatting.R')
@@ -26,7 +27,17 @@ prep <- ggplot(data=data_rep, aes(x=Time, y=CooperatorProportion)) +
     labs(x=label_time, y=label_producer_proportion) +
     theme_hankshaw(base_size=17)
 prep <- rescale_golden(plot = prep)
-ggsave_golden(filename = '../figures/envchange-regular-rep.png', plot = prep)
+
+g <- ggplotGrob(prep)
+g <- gtable_add_grob(g, textGrob(expression(bold("A")),
+                                 gp=gpar(col='black', fontsize=20),
+                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
+
+png('../figures/envchange-regular-rep.png', width=6, height=3.708204, units='in',
+    res=figure_dpi)
+grid.draw(g)
+dev.off()
+trim_file('../figures/envchange-regular-rep.png')
 
 # Integral for different env change rates --------------------------------------
 
@@ -55,13 +66,41 @@ ggsave_golden(filename = '../figures/envchange-regular-integral.png', plot = fig
 
 
 # All trajectories -------------------------------------------------------------
-pall <- ggplot(data=d, aes(x=Time, y=CooperatorProportion, color=Replicate)) +
+dsub <- filter(d, EnvChangeFrequency >= 250 & EnvChangeFrequency < 5000)
+
+changemarkers <- data.frame()                                                   
+
+for (r in unique(dsub$EnvChangeFrequency))                              
+{                                                                               
+    changemarkers <- rbind(changemarkers,                                       
+                           expand.grid(EnvChangeFrequency=r,                    
+                                       ChangeTime=seq(from=min(dsub$Time),
+                                                      to=max(dsub$Time),
+                                                      by=r)))                   
+}
+
+
+pall <- ggplot(data=dsub, aes(x=Time, y=CooperatorProportion, color=Replicate)) +
     facet_grid(EnvChangeFrequency ~ .) +
     draw_50line() +
-    geom_line() +
+    geom_vline(data=changemarkers, aes(xintercept=ChangeTime), color='grey70',  
+               size=0.1, linetype='solid') +
+    geom_line(size=0.2) +
     scale_y_continuous(breaks=c(0, 0.5, 1)) +
     scale_color_grey(guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
-    theme_hankshaw()
-ggsave_golden(filename = '../figures/envchange-regular-all.png', plot = pall)
+    theme_hankshaw(base_size = 17) +
+    theme(strip.text = element_text(size=rel(0.66), vjust=0.2, face='bold')) +
+    theme(axis.text.y = element_text(size=rel(0.66), hjust=1))
+#ggsave_golden(filename = '../figures/envchange-regular-all.png', plot = pall)
 
+g <- ggplotGrob(pall)
+g <- gtable_add_grob(g, textGrob(expression(bold("B")),
+                                 gp=gpar(col='black', fontsize=20),
+                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
+
+png('../figures/envchange-regular-all.png', width=6, height=3.708204, units='in',
+    res=figure_dpi)
+grid.draw(g)
+dev.off()
+trim_file('../figures/envchange-regular-all.png')
