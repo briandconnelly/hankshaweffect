@@ -20,7 +20,7 @@ data_fig2d_integral <- data_fig2d %>%
     summarise(Integral=data_interval * sum(CooperatorProportion)/(max(Time)-min(Time)))
 
 fig2d <- ggplot(data_fig2d_integral, aes(x=CooperationCost, y=Integral)) +
-    #geom_point(shape=1, alpha=replicate_alpha) +
+    draw_replicates() +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_x_continuous(breaks=as.numeric(names(cost_labels)), labels=cost_labels) +
     scale_y_continuous(limits=c(0, 1)) +
@@ -37,4 +37,4 @@ png('../figures/Figure2d.png', width=6, height=3.708204, units='in',
     res=figure_dpi)
 grid.draw(g)
 dev.off()
-#trim_file("../figures/Figure2d.png")
+trim_file("../figures/Figure2d.png")

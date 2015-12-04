@@ -42,7 +42,6 @@ devtools::install_github('briandconnelly/ggplot2bdc')
 | [figureS3-trajectories.R](figureS3-trajectories.R) | Plot the trajectories for data shown in [Figure S3](../figures/FigureS3.png) |
 | [figureS4a.R](figureS4a.R) | Create [Figure S4a](../figures/FigureS4a.png) |
 | [figureS4b.R](figureS4b.R) | Create [Figure S4b](../figures/FigureS4b.png) |
-| [figureS5.R](figureS4.R) | Create [Figure S5](../figures/FigureS5.png) |
 | [figureS6a.R](figureS6a.R) | Create [Figure S6a](../figures/FigureS6a.png) |
 | [formatting.R](formatting.R) | Define variables for formatting figures |
 | [theme_hankshaw.R](theme_hankshaw.R) | Theme for creating plots        |

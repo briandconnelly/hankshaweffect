@@ -22,8 +22,7 @@ fig2afacets <- function(variable, value)
 fig2a <- ggplot(data_fig2a, aes(x=Time, y=CooperatorProportion,
                                 color=as.factor(GenomeLength),
                                 fill=as.factor(GenomeLength))) +
-    geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70',
-               size=0.1) +
+    draw_50line() +
     stat_summary(fun.ymax='mean', geom='ribbon', ymin=0, alpha=1, color=NA) +
     stat_summary(fun.y='mean', geom='line', color='black') +
     facet_grid(GenomeLength ~ ., labeller=fig2afacets) +
@@ -43,4 +42,4 @@ png('../figures/Figure2a.png', width=6, height=3.708204, units='in',
     res=figure_dpi)
 grid.draw(g)
 dev.off()
-#trim_file("../figures/Figure2a.png")
+trim_file("../figures/Figure2a.png")

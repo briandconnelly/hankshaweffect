@@ -23,7 +23,7 @@ data_fig2b_integral$GenomeLength <- as.factor(data_fig2b_integral$GenomeLength)
 
 fig2b <- ggplot(data_fig2b_integral, aes(x=GenomeLength, y=Integral,
                                          color=GenomeLength)) +
-    #geom_point(shape=1, alpha=replicate_alpha, color='black') +
+    draw_replicates() +
     stat_summary(fun.data='figsummary', size=point_size, color='black') +
     stat_summary(fun.y='mean', geom='point', size=3.3) +
     scale_color_manual(values=c('0'=color_L00, '1'='black', '2'='black',
@@ -46,4 +46,4 @@ png('../figures/Figure2b.png', width=6, height=3.708204, units='in',
     res=figure_dpi)
 grid.draw(g)
 dev.off()
-#trim_file("../figures/Figure2b.png")
+trim_file("../figures/Figure2b.png")

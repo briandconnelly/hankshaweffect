@@ -1,5 +1,7 @@
 source('theme_hankshaw.R')
 ggplot2::theme_set(theme_hankshaw())
+#draw_replicates <- function() ggplot2::geom_point(shape=1, alpha=replicate_alpha, color='black')
+draw_replicates <- function() NULL
 #draw_50line <- function() ggplot2::geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70', size=0.1)
 draw_50line <- function() NULL
 

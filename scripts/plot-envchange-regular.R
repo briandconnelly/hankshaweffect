@@ -48,7 +48,7 @@ presence <- d %>%
     group_by(EnvChangeFrequency, Replicate) %>%
     summarise(Integral=data_interval*sum(CooperatorProportion)/(max(Time)-min(Time)))
 
-breakpoints <- c(100,5000,1000,500, 250, 2000)
+breakpoints <- c(50,100,5000,1000,500, 250, 2000)
 breaks <- 1/sort(breakpoints, decreasing = TRUE)
 label_breaks <- sprintf('1/%d', sort(breakpoints, decreasing = TRUE))
 
@@ -67,7 +67,6 @@ ggsave_golden(filename = '../figures/envchange-regular-integral.png', plot = fig
 
 # All trajectories -------------------------------------------------------------
 dsub <- filter(d, EnvChangeFrequency >= 250 & EnvChangeFrequency < 5000)
-
 changemarkers <- data.frame()                                                   
 
 for (r in unique(dsub$EnvChangeFrequency))                              

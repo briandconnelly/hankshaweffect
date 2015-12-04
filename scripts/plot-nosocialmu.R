@@ -1,12 +1,6 @@
 #!/usr/bin/env Rscript
 
-library(dplyr)
-library(magrittr)
-library(ggplot2)
-library(ggplot2bdc)
-
-source('formatting.R')
-source('figXsummary.R')
+source('hankshaw.R')
 
 d <- read.csv('../data/nosocialmu.csv.bz2')
 
@@ -39,6 +33,7 @@ figX <- ggplot(d, aes(x=Time, y=CooperatorProportion)) +
     labs(x=label_time, y=label_producer_proportion)
 figX <- rescale_square(plot=figX)
 ggsave(plot=figX, '../figures/nosocialmu.png', width=6, height=6, dpi=figure_dpi)
+trim_file("../figures/nosocialmu.png")
 
 
 # Plot trajectories of replicate populations in structured, L=8 ----------------
@@ -51,3 +46,5 @@ figY <- ggplot(data=tdata, aes(x=Time, y=CooperatorProportion, color=Replicate))
     labs(x=label_time, y=label_producer_proportion)
 figY <- rescale_golden(plot=figY)
 ggsave_golden(plot=figY, '../figures/nosocialmu-trajectories.png', dpi=figure_dpi)
+trim_file("../figures/nosocialmu-trajectories.png")
+

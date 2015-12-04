@@ -28,7 +28,7 @@ migration_labels_log <- c(expression(paste(5, 'x', 10^{-7})),
                           expression(paste(5, 'x', 10^{-1})))
 
 fig2e <- ggplot(data_fig2e_integral, aes(x=MigrationRate, y=Integral)) +
-    #geom_point(shape=1, alpha=replicate_alpha) +
+    draw_replicates() +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_x_log10(breaks=unique(data_fig2e_integral$MigrationRate),
                   labels=migration_labels_log) +
@@ -46,4 +46,4 @@ png('../figures/Figure2e.png', width=6, height=3.708204, units='in',
     res=figure_dpi)
 grid.draw(g)
 dev.off()
-#trim_file("../figures/Figure2e.png")
+trim_file("../figures/Figure2e.png")

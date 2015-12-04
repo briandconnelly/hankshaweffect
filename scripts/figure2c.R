@@ -20,7 +20,7 @@ data_fig2c_integral <- data_fig2c %>%
     summarise(Integral=data_interval * sum(CooperatorProportion)/(max(Time)-min(Time)))
 
 fig2c <- ggplot(data_fig2c_integral, aes(x=as.factor(CooperationBenefit), y=Integral)) +
-    #geom_point(shape=1, alpha=replicate_alpha) +
+    draw_replicates() +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_x_discrete(breaks=unique(data_fig2c_integral$CooperationBenefit),
                      labels=label_benefits) +
