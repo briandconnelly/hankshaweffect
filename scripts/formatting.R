@@ -10,6 +10,7 @@ point_size <- 0.8
 max_time <- 2000
 
 fig2_base_size <- 14
+figS2_base_size <- 17
 
 label_time <- 'Time'
 label_producer_proportion <- 'Cooperator Proportion'
@@ -31,7 +32,7 @@ label_with_stress <- 'With Stress Induced Thinning'
 label_without_stress <- 'Without Stress Induced Thinning'
 label_stress_strength <- 'Adaptive Loci Affected by Environmental Change'
 label_gamma <- 'Shape Parameter Value'
-label_carrying_capacity <- 'Population Carrying Capacity'
+label_carrying_capacity <- 'Subpopulation Size'
 label_numones <- 'Number of Adaptations Gained'
 label_fitness <- 'Fitness'
 
@@ -59,7 +60,4 @@ replicate_alpha <- 0.1
 
 color_L00 <- '#777777'
 color_L08 <- '#BBBBBB'
-
-trim_file <- function(f) system(sprintf("convert -trim '%s' '%s'", f, f))
-trim_pdf <- function(f) system(sprintf("pdfcrop '%s' '%s'", f, f))
 

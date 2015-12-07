@@ -1,13 +1,6 @@
 #!/usr/bin/env Rscript
 
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-library(ggplot2bdc)
-library(scales)
-
-source('figsummary.R')
-source('formatting.R')
+source('hankshaw.R')
 
 d <- read.csv('../data/spite-envchange.csv.bz2')
 d$Replicate <- as.factor(d$Replicate)
@@ -24,9 +17,20 @@ prep <- ggplot(data=data_rep, aes(x=Time, y=CooperatorProportion)) +
     geom_line(size=0.8) +
     scale_y_continuous(limits=c(0,1)) +
     labs(x=label_time, y=label_spite_proportion) +
-    theme_hankshaw(base_size=17)
+    theme_hankshaw(base_size = figS2_base_size)
 prep <- rescale_golden(plot = prep)
-ggsave_golden(filename = '../figures/spite-envchange-sample.png', plot = prep)
+#ggsave_golden(filename = '../figures/spite-envchange-sample.png', plot = prep)
+
+g <- ggplotGrob(prep)                                                         
+g <- gtable_add_grob(g, textGrob(expression(bold("C")),                         
+                                 gp=gpar(col='black', fontsize=20),             
+                                 x=0, hjust=0, vjust=0.5), t=1, l=2)            
+
+png('../figures/spite-envchange-sample.png', width=6, height=6, units='in',                  
+    res=figure_dpi)                                                             
+grid.draw(g)                                                                    
+dev.off()                                                                       
+trim_file("../figures/spite-envchange-sample.png")
 
 
 # All trajectories -------------------------------------------------------------

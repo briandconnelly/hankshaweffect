@@ -1,12 +1,6 @@
 #!/usr/bin/env Rscript
 
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-library(ggplot2bdc)
-
-source('figsummary.R')
-source('formatting.R')
+source('hankshaw.R')
 
 dcoop <- read.csv('../data/envchange-exponential-strength-cooppct.csv.bz2')
 dcoop$Replicate <- as.factor(dcoop$Replicate)
@@ -33,11 +27,19 @@ presence <- dcoop %>%
     summarise(Integral=data_interval * sum(CooperatorProportion)/(max(Time)-min(Time)))
 
 pint <- ggplot(data=presence, aes(x=EnvChangeStrength, y=Integral)) +
+    draw_replicates() +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_x_continuous(breaks=seq(1, 8)) +
     labs(x=label_stress_strength, y=label_producer_presence) +
-    theme_hankshaw(base_size=17)
+    theme_hankshaw(base_size = fig2_base_size)
 pint <- rescale_golden(plot=pint)
-ggsave_golden(filename='../figures/envchange-exponential-strength-integral.png',
-              plot=pint)
+#ggsave_golden(filename='../figures/envchange-exponential-strength-integral.png',
+#              plot=pint)
+
+g <- ggplotGrob(pint)
+png('../figures/envchange-exponential-strength-integral.png',
+    width=6, height=6, units='in', res=figure_dpi)
+grid.draw(g)
+dev.off()
+trim_file("../figures/envchange-exponential-strength-integral.png")
 

@@ -1,13 +1,6 @@
 #!/usr/bin/env Rscript
 
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-library(ggplot2bdc)
-library(gtable)
-
-source('formatting.R')
-source('figsummary.R')
+source('hankshaw.R')
 
 # How often data were logged
 data_interval <- 1
@@ -35,7 +28,7 @@ figS2A <- ggplot(data_figs2a_integral, aes(x=MutationRateAdaptation,
     scale_x_log10(breaks=unique(data_figs2a_integral$MutationRateAdaptation),
                   labels=mutation_labels_log) +
     labs(x=label_stressmu, y=label_producer_presence) +
-    theme_hankshaw(base_size=17)
+    theme_hankshaw(base_size = figS2_base_size)
 figS2A <- rescale_golden(plot=figS2A)
 
 g <- ggplotGrob(figS2A)
@@ -43,8 +36,8 @@ g <- gtable_add_grob(g, textGrob(expression(bold("A")),
                                  gp=gpar(col='black', fontsize=20),
                                  x=0, hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/FigureS2a.png', width=6, height=3.708204, units='in',
+png('../figures/FigureS2a.png', width=6, height=6, units='in',
     res=figure_dpi)
 grid.draw(g)
 dev.off()
-
+trim_file("../figures/FigureS2a.png")

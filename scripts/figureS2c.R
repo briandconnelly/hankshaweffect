@@ -1,13 +1,6 @@
 #!/usr/bin/env Rscript
 
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-library(ggplot2bdc)
-library(gtable)
-
-source('formatting.R')
-source('figsummary.R')
+source('hankshaw.R')
 
 data_figs2bc <- read.csv('../data/figureS2b.csv.bz2')
 data_figs2bc$Replicate <- as.factor(data_figs2bc$Replicate)
@@ -22,7 +15,7 @@ figS2C <- ggplot(data_figs2c, aes(x=Time, y=CooperatorProportion)) +
     stat_summary(fun.y='mean', geom='line', color='black', size=point_size) +
     scale_y_continuous(limits=c(0,1)) +
     labs(x=label_time, y=label_producer_proportion) +
-    theme_hankshaw(base_size=17)
+    theme_hankshaw(base_size = figS2_base_size)
 figS2C <- rescale_golden(plot=figS2C)
 
 g <- ggplotGrob(figS2C)
@@ -30,8 +23,9 @@ g <- gtable_add_grob(g, textGrob(expression(bold("C")),
                                  gp=gpar(col='black', fontsize=20),
                                  x=0, hjust=0, vjust=0.5), t=1, l=2)
 
-png('../figures/FigureS2c.png', width=6, height=3.708204, units='in',
+png('../figures/FigureS2c.png', width=6, height=6, units='in',
     res=figure_dpi)
 grid.draw(g)
 dev.off()
+trim_file("../figures/FigureS2c.png")
 

@@ -1,18 +1,9 @@
 #!/usr/bin/env Rscript
 
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-library(ggplot2bdc)
-library(gtable)
-library(scales)
-
-source('formatting.R')
-source('figsummary.R')
+source('hankshaw.R')
 
 data_s4a <- read.csv('../data/thinnothin.csv.bz2') %>%
     filter(GenomeLength == 8)
-
 data_s4a$Replicate <- as.factor(data_s4a$Replicate)
 
 figs4a <- ggplot(data_s4a, aes(x=Time, y=CooperatorProportion,
@@ -36,18 +27,19 @@ figs4a <- ggplot(data_s4a, aes(x=Time, y=CooperatorProportion,
                                'TRUE'=label_with_stress),
                       name='', guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
+    theme_hankshaw(base_size = fig2_base_size) +
     theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5)) +
-    theme_hankshaw(base_size=17) +
-    theme(legend.text = element_text(size=rel(0.5), colour="grey40"))
+    theme(legend.text = element_text(size=rel(0.66), colour="grey40"))
 figs4a <- rescale_golden(plot=figs4a)
+
+#save_figure_png(filename = "../figures/FigureS4a.png", plot = figs4a, label='A')
+#Not working for some reason: save_figure_png(filename = "~/ZUZZ.png", plot = figs4a, label='F')
 
 g <- ggplotGrob(figs4a)
 g <- gtable_add_grob(g, textGrob(expression(bold("A")),
                                  gp=gpar(col='black', fontsize=20),
                                  x=0, hjust=0, vjust=0.5), t=1, l=2)
-
-png('../figures/FigureS4a.png', width=6, height=3.708204, units='in',
-    res=figure_dpi)
+png('../figures/FigureS4a.png', width=6, height=6, units='in', res=figure_dpi)
 grid.draw(g)
 dev.off()
-
+trim_file("../figures/FigureS4a.png")
