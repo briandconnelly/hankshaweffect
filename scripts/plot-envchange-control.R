@@ -1,13 +1,6 @@
 #!/usr/bin/env Rscript
 
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-library(ggplot2bdc)
-library(gtable)
-
-source('figsummary.R')
-source('formatting.R')
+source('hankshaw.R')
 
 echctrl <- read.csv('../data/envchange-control.csv.bz2')
 echctrl$Replicate <- as.factor(echctrl$Replicate)

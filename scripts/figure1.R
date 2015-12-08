@@ -1,11 +1,6 @@
 #!/usr/bin/env Rscript
 
-library(dplyr)
-library(ggplot2)
-library(ggplot2bdc)
-
-source('formatting.R')
-source('figsummary.R')
+source('hankshaw.R')
 
 fig1data <- read.csv('../data/lsweep.csv.bz2') %>%
     filter(GenomeLength %in% c(0, 8))
@@ -31,8 +26,6 @@ facet_labels <- data.frame(Time=0, CooperatorProportion=1,
 
 fig1 <- ggplot(fig1data, aes(x=Time, y=CooperatorProportion)) +
     facet_grid(Structured ~ GenomeLength) +
-    #geom_hline(yintercept=0.5, linetype='dotted', size=0.5, color='grey70',
-    #           size=0.1) +
     draw_50line() +
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) + 
     stat_summary(fun.y='mean', geom='line') +

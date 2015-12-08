@@ -1,13 +1,6 @@
 #!/usr/bin/env Rscript
 
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-library(ggplot2bdc)
-library(gtable)
-
-source('formatting.R')
-source('figsummary.R')
+source('hankshaw.R')
 
 # How often data were logged
 data_interval <- 1

@@ -1,12 +1,6 @@
 #!/usr/bin/env Rscript
 
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-library(ggplot2bdc)
-library(gtable)
-
-source('formatting.R')
+source('hankshaw.R')
 
 data_fig2a <- read.csv('../data/lsweep.csv.bz2') %>%
     filter(Structured == TRUE) %>%

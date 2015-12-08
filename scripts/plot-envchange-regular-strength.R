@@ -1,13 +1,6 @@
 #!/usr/bin/env Rscript
 
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-library(ggplot2bdc)
-library(scales)
-
-source('figsummary.R')
-source('formatting.R')
+source('hankshaw.R')
 
 d <- read.csv('../data/envchange-regular-strength.csv.bz2')
 d$Replicate <- as.factor(d$Replicate)

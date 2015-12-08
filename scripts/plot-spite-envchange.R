@@ -6,9 +6,12 @@ d <- read.csv('../data/spite-envchange.csv.bz2')
 d$Replicate <- as.factor(d$Replicate)
 
 # Trajectory for single replicate ----------------------------------------------
+# Note: There's some invasion in replicate 5
 
-data_rep <- d %>% filter(EnvChangeFrequency == 500) %>% filter(Replicate == 13)
-changepoints <- expand.grid(EnvChangeFrequency=500, ChangeTime=seq(from=min(d$Time), to=max(d$Time), by=500))
+data_rep <- d %>% filter(Replicate == 8)
+changepoints <- expand.grid(EnvChangeFrequency=1000,
+                            ChangeTime=seq(from=min(data_rep$Time),
+                                           to=max(data_rep$Time), by=1000))
 
 prep <- ggplot(data=data_rep, aes(x=Time, y=CooperatorProportion)) +
     draw_50line() +
@@ -19,6 +22,7 @@ prep <- ggplot(data=data_rep, aes(x=Time, y=CooperatorProportion)) +
     labs(x=label_time, y=label_spite_proportion) +
     theme_hankshaw(base_size = figS2_base_size)
 prep <- rescale_golden(plot = prep)
+prep
 #ggsave_golden(filename = '../figures/spite-envchange-sample.png', plot = prep)
 
 g <- ggplotGrob(prep)                                                         
@@ -31,15 +35,3 @@ png('../figures/spite-envchange-sample.png', width=6, height=6, units='in',
 grid.draw(g)                                                                    
 dev.off()                                                                       
 trim_file("../figures/spite-envchange-sample.png")
-
-
-# All trajectories -------------------------------------------------------------
-pall <- ggplot(data=d, aes(x=Time, y=CooperatorProportion)) +
-    facet_grid(Replicate ~ .) +
-    draw_50line() +
-    geom_line() +
-    scale_y_continuous(breaks=c(0, 0.5, 1)) +
-    labs(x=label_time, y=label_spite_proportion) +
-    theme_hankshaw()
-ggsave_golden(filename = '../figures/spite-envchange-all.png', plot = pall)
-

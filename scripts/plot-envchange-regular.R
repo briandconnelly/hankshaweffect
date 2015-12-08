@@ -1,14 +1,6 @@
 #!/usr/bin/env Rscript
 
-library(magrittr)
-library(dplyr)
-library(ggplot2)
-library(ggplot2bdc)
-library(scales)
-library(gtable)
-
-source('figsummary.R')
-source('formatting.R')
+source('hankshaw.R')
 
 d <- read.csv('../data/envchange-regular.csv.bz2')
 d$Replicate <- as.factor(d$Replicate)
@@ -25,7 +17,7 @@ prep <- ggplot(data=data_rep, aes(x=Time, y=CooperatorProportion)) +
     geom_line() +
     scale_y_continuous(limits=c(0,1)) +
     labs(x=label_time, y=label_producer_proportion) +
-    theme_hankshaw(base_size=17)
+    theme_hankshaw(base_size=fig2_base_size)
 prep <- rescale_golden(plot = prep)
 
 g <- ggplotGrob(prep)
@@ -60,7 +52,7 @@ figX <- ggplot(presence, aes(x=1/EnvChangeFrequency, y=Integral)) +
 #                        breaks=breaks,
 #                        labels=label_breaks) +
     labs(x=label_envchange_freq, y=label_producer_presence) +
-    theme_hankshaw(base_size=17)
+    theme_hankshaw(base_size=fig2_base_size)
 figX <- rescale_golden(plot=figX)
 ggsave_golden(filename = '../figures/envchange-regular-integral.png', plot = figX)
 
@@ -88,7 +80,7 @@ pall <- ggplot(data=dsub, aes(x=Time, y=CooperatorProportion, color=Replicate)) 
     scale_y_continuous(breaks=c(0, 0.5, 1)) +
     scale_color_grey(guide=FALSE) +
     labs(x=label_time, y=label_producer_proportion) +
-    theme_hankshaw(base_size = 17) +
+    theme_hankshaw(base_size = fig2_base_size) +
     theme(strip.text = element_text(size=rel(0.66), vjust=0.2, face='bold')) +
     theme(axis.text.y = element_text(size=rel(0.66), hjust=1))
 #ggsave_golden(filename = '../figures/envchange-regular-all.png', plot = pall)
