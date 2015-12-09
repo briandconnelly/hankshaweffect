@@ -5,10 +5,10 @@ source('hankshaw.R')
 # How often data were logged
 data_interval <- 1
 
-data_figs2a <- read.csv('../data/figureS2a.csv.bz2')
-data_figs2a$Replicate <- as.factor(data_figs2a$Replicate)
+d <- read.csv('../data/mutationsweep-adaptive.csv.bz2')
+d$Replicate <- as.factor(d$Replicate)
 
-data_figs2a_integral <- data_figs2a %>%
+presence <- d %>%
     group_by(MutationRateAdaptation, Replicate) %>%
     summarise(Integral=data_interval * sum(CooperatorProportion)/(max(Time)-min(Time)))
 
@@ -20,24 +20,16 @@ mutation_labels_log <- c(expression(10^{-7}),
                          expression(10^{-2}),
                          expression(10^{-1}))
 
-figS2A <- ggplot(data_figs2a_integral, aes(x=MutationRateAdaptation,
-                                           y=Integral)) +
-    #geom_point(shape=1, alpha=replicate_alpha) +
+pint <- ggplot(data=presence, aes(x=MutationRateAdaptation, y=Integral)) +
+    draw_replicates() +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_y_continuous(limits=c(0,1)) +
-    scale_x_log10(breaks=unique(data_figs2a_integral$MutationRateAdaptation),
+    scale_x_log10(breaks=unique(presence$MutationRateAdaptation),
                   labels=mutation_labels_log) +
     labs(x=figlabels['stressmu'], y=figlabels['producer_presence']) +
     theme_hankshaw(base_size = textbase_3wide)
-figS2A <- rescale_golden(plot=figS2A)
+pint <- rescale_golden(plot = pint)
 
-g <- ggplotGrob(figS2A)
-g <- gtable_add_grob(g, textGrob(expression(bold("A")),
-                                 gp=gpar(col='black', fontsize=20),
-                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
+save_figure(filename = "../figures/mutationsweep-adaptive.png", plot = pint,
+            label='A', trim=TRUE)
 
-png('../figures/FigureS2a.png', width=6, height=6, units='in',
-    res=figure_dpi)
-grid.draw(g)
-dev.off()
-trim_file("../figures/FigureS2a.png")
