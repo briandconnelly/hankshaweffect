@@ -36,8 +36,8 @@ These subdirectories may contain additional information
 | [S3](figures/nosocialmu.png) | [nosocialmu.csv.bz2](data/nosocialmu.csv.bz2) | [plot-nosocialmu.R](scripts/plot-nosocialmu.R) | [TODO](configuration/TODO) |
 | [S4](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
 | [S5](figures/envchange-exponential-strength-integral.png) | [envchange-exponential-strength-cooppct.csv.bz2](data/envchange-exponential-strength-cooppct.csv.bz2) | [plot-envchange-exponential-strength.R](scripts/plot-envchange-exponential-strength.R) | [TODO](configuration/TODO) |
-| [S6A](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
-| [S6B](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
+| [S6A](figures/thinnothin.png) | [thinnothin.csv.bz2](data/thinnothin.csv.bz2) | [plot-thinnothin.R](scripts/plot-thinnothin.R) | [TODO](configuration/TODO) |
+| [S6B](figures/thinnothin-integral.png) | [thinnothin.csv.bz2](data/thinnothin.csv.bz2) | [plot-thinnothin.R](scripts/plot-thinnothin.R) | [TODO](configuration/TODO) |
 | [S7](figures/migration-topology.png) | [migration-topology.csv.bz2](data/migration-topology.csv.bz2) | [plot-migration-topology.R](scripts/plot-migration-topology.R) | [TODO](configuration/TODO) |
 | [S8](figures/viability-selection.png) | [viability-selection.csv.bz2](data/viability-selection.csv.bz2) | [plot-viability-selection.R](scripts/plot-viability-selection.R) | [TODO](configuration/TODO) |
 | [S9A](figures/benefitgamma-gamma.png) | [benefitgamma.csv.bz2](data/benefitgamma.csv.bz2) | [TODO](scripts/plot-benefitgamma.R) | [TODO](configuration/TODO) |
