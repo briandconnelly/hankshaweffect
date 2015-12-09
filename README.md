@@ -31,7 +31,7 @@ These subdirectories may contain additional information
 | [S1E](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
 | [S1F](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
 | [S2A](figures/mutationsweep-adaptive.png) | [mutationsweep-adaptive.csv.bz2](data/mutationsweep-adaptive.csv.bz2) | [plot-mutationsweep-adaptive.R](scripts/plot-mutationsweep-adaptive.R) | [TODO](configuration/TODO) |
-| [S2B](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
+| [S2B](figures/mutationsweep-cooperation.png) | [mutationsweep-cooperation.csv.bz2](data/mutationsweep-cooperation.csv.bz2) | [plot-mutationsweep-cooperation.R](scripts/plot-mutationsweep-cooperation.R) | [TODO](configuration/TODO) |
 | [S2C](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
 | [S3](figures/nosocialmu.png) | [nosocialmu.csv.bz2](data/nosocialmu.csv.bz2) | [plot-nosocialmu.R](scripts/plot-nosocialmu.R) | [TODO](configuration/TODO) |
 | [S4](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
