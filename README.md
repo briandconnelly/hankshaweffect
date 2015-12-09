@@ -40,8 +40,8 @@ These subdirectories may contain additional information
 | [S6B](figures/thinnothin-integral.png) | [thinnothin.csv.bz2](data/thinnothin.csv.bz2) | [plot-thinnothin.R](scripts/plot-thinnothin.R) | [TODO](configuration/TODO) |
 | [S7](figures/migration-topology.png) | [migration-topology.csv.bz2](data/migration-topology.csv.bz2) | [plot-migration-topology.R](scripts/plot-migration-topology.R) | [TODO](configuration/TODO) |
 | [S8](figures/viability-selection.png) | [viability-selection.csv.bz2](data/viability-selection.csv.bz2) | [plot-viability-selection.R](scripts/plot-viability-selection.R) | [TODO](configuration/TODO) |
-| [S9A](figures/benefitgamma-gamma.png) | [benefitgamma.csv.bz2](data/benefitgamma.csv.bz2) | [TODO](scripts/plot-benefitgamma.R) | [TODO](configuration/TODO) |
-| [S9B](figures/benefitgamma-gamma.png) | [benefitgamma.csv.bz2](data/benefitgamma.csv.bz2) | [TODO](scripts/plot-benefitgamma.R) | [TODO](configuration/TODO) |
+| [S9A](figures/benefitgamma-gamma.png) | [benefitgamma.csv.bz2](data/benefitgamma.csv.bz2) | [plot-benefitgamma.R](scripts/plot-benefitgamma.R) | [TODO](configuration/TODO) |
+| [S9B](figures/benefitgamma-gamma.png) | [benefitgamma.csv.bz2](data/benefitgamma.csv.bz2) | [plot-benefitgamma.R](scripts/plot-benefitgamma.R) | [TODO](configuration/TODO) |
 | [S10A](figures/fitnessgamma-integral.png) | [fitnessgamma.csv.bz2](data/fitnessgamma.csv.bz2) | [plot-fitnessgamma.R](scripts/plot-fitnessgamma.R) | [TODO](configuration/TODO) |
 | [S10B](figures/fitnessgamma-integral.png) | [fitnessgamma.csv.bz2](data/fitnessgamma.csv.bz2) | [plot-fitnessgamma.R](scripts/plot-fitnessgamma.R) | [TODO](configuration/TODO) |
 | [S11](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
@@ -49,8 +49,6 @@ These subdirectories may contain additional information
 | [S12B](figures/spite-dilution.png) | [spite-dilution.csv.bz2](data/spite-dilution.csv.bz2) | [plot-spite-dilution.R](scripts/plot-spite-dilution.R) | [TODO](configuration/TODO) |
 | [S12C](figures/spite-envchange-sample.png) | [spite-envchange.csv.bz2](data/spite-envchange.csv.bz2) | [plot-spite-envchange.R](scripts/plot-spite-envchange.R) | [TODO](configuration/TODO) |
 
-
-|:-----------|:-----------------------------------------------|:--------------|:-----------------|
 
 
 ## License
