@@ -26,17 +26,9 @@ fig2b <- ggplot(data_fig2b_integral, aes(x=GenomeLength, y=Integral,
     scale_x_discrete(breaks=unique(data_fig2b_integral$GenomeLength),
                      labels=label_genomelengths) +
     scale_y_continuous(limits=c(0, 1)) +
-    labs(x=label_genome_length, y=label_producer_presence) +
-    theme_hankshaw(base_size=fig2_base_size)
+    labs(x=figlabels['genome_length'], y=figlabels['producer_presence']) +
+    theme_hankshaw(base_size=textbase_2wide)
 fig2b <- rescale_golden(plot=fig2b)
 
-g <- ggplotGrob(fig2b)
-g <- gtable_add_grob(g, textGrob(expression(bold("B")),
-                                 gp=gpar(col='black', fontsize=20),
-                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
-
-png('../figures/Figure2b.png', width=6, height=3.708204, units='in',
-    res=figure_dpi)
-grid.draw(g)
-dev.off()
-trim_file("../figures/Figure2b.png")
+save_figure(filename='../figures/Figure2b.png', plot=fig2b, label='B',
+            trim=TRUE)

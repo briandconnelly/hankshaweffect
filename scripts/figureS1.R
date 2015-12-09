@@ -18,7 +18,7 @@ figS1 <- ggplot(data_figs1, aes(x=Time, y=MeanProducerProportion)) +
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) + 
     stat_summary(fun.y='mean', geom='line') +
     scale_y_continuous(limits=c(0,1)) +
-    labs(x=label_time, y=label_producer_proportion) +
+    labs(x=figlabels['time'], y=figlabels['producer_proportion']) +
     theme_hankshaw(base_size=17)
 figS1 <- rescale_golden(plot=figS1)
 

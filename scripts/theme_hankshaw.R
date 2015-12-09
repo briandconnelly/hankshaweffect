@@ -1,3 +1,5 @@
+# Theme for ggplot2
+
 theme_hankshaw <- function (base_size=12, base_family="", grid.x=FALSE,
                             grid.y=FALSE, ticks.x=TRUE, ticks.y=TRUE)
 {

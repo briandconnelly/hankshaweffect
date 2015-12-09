@@ -15,25 +15,25 @@ figs4a <- ggplot(data_s4a, aes(x=Time, y=CooperatorProportion,
     stat_summary(fun.y='mean', geom='line') +
     scale_y_continuous(limits=c(0,1)) +
     scale_linetype_manual(values=c('FALSE'='solid', 'TRUE'='dashed'),
-                          labels=c('FALSE'=label_without_stress,
-                                   'TRUE'=label_with_stress),
+                          labels=c('FALSE'=figlabels['without_stress'],
+                                   'TRUE'=figlabels['with_stress']),
                           name='') +
     scale_color_manual(values=c('FALSE'='grey70', 'TRUE'='grey20'),
-                       labels=c('FALSE'=label_without_stress,
-                                'TRUE'=label_with_stress),
+                       labels=c('FALSE'=figlabels['without_stress'],
+                                'TRUE'=figlabels['with_stress']),
                        name='') +
     scale_fill_manual(values=c('FALSE'='grey70', 'TRUE'='grey20'),
-                      labels=c('FALSE'=label_without_stress,
-                               'TRUE'=label_with_stress),
+                      labels=c('FALSE'=figlabels['without_stress'],
+                               'TRUE'=figlabels['with_stress']),
                       name='', guide=FALSE) +
-    labs(x=label_time, y=label_producer_proportion) +
-    theme_hankshaw(base_size = fig2_base_size) +
+    labs(x=figlabels['time'], y=figlabels['producer_proportion']) +
+    theme_hankshaw(base_size = textbase_2wide) +
     theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5)) +
     theme(legend.text = element_text(size=rel(0.66), colour="grey40"))
 figs4a <- rescale_golden(plot=figs4a)
 
-#save_figure_png(filename = "../figures/FigureS4a.png", plot = figs4a, label='A')
-#Not working for some reason: save_figure_png(filename = "~/ZUZZ.png", plot = figs4a, label='F')
+#save_figure(filename = "../figures/FigureS4a.png", plot = figs4a, label='A')
+#Not working for some reason: save_figure(filename = "~/ZUZZ.png", plot = figs4a, label='F')
 
 g <- ggplotGrob(figs4a)
 g <- gtable_add_grob(g, textGrob(expression(bold("A")),

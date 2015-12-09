@@ -31,7 +31,7 @@ figS3 <- ggplot(presence_change, aes(x=1/EnvChangeFreq, y=Integral)) +
     scale_x_continuous(trans=log2_trans(),
                        breaks=breaks,
                        labels=label_breaks) +
-    labs(x=label_envchange_freq, y=label_producer_presence) +
+    labs(x=figlabels['envchange_freq'], y=figlabels['producer_presence']) +
     theme_hankshaw(base_size=17)
 figS3 <- rescale_golden(plot=figS3)
 

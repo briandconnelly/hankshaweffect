@@ -7,31 +7,33 @@ fig1data <- read.csv('../data/lsweep.csv.bz2') %>%
 
 fig1data$Replicate <- as.factor(fig1data$Replicate)
 fig1data$Structured <- factor(fig1data$Structured, levels=c(FALSE, TRUE),
-                              labels=c("Unstructured Population",
-                                       "Structured Population"))
+                              labels=c(figlabels['pop_unstruct'],
+                                       figlabels['pop_struct']))
 fig1data$GenomeLength <- factor(fig1data$GenomeLength, levels=c(0, 8),
-                                labels=c("Without Stress Adaptation",
-                                         "With Stress Adaptation"))
+                                labels=c(figlabels['without_adapt'],
+                                         figlabels['with_adapt']))
 
 facet_labels <- data.frame(Time=0, CooperatorProportion=1,
-                           GenomeLength=c("Without Stress Adaptation",
-                                          "Without Stress Adaptation",
-                                          "With Stress Adaptation",
-                                          "With Stress Adaptation"),
-                           Structured=c("Unstructured Population",
-                                        "Structured Population",
-                                        "Unstructured Population",
-                                        "Structured Population"),
+                           GenomeLength=c(figlabels['without_adapt'],
+                                          figlabels['without_adapt'],
+                                          figlabels['with_adapt'],
+                                          figlabels['with_adapt']),
+                           Structured=c(figlabels['pop_unstruct'],
+                                        figlabels['pop_struct'],
+                                        figlabels['pop_unstruct'],
+                                        figlabels['pop_struct']),
                            Label=c('A','C','B','D'))
 
-fig1 <- ggplot(fig1data, aes(x=Time, y=CooperatorProportion)) +
+fig1 <- ggplot(data=fig1data, aes(x=Time, y=CooperatorProportion)) +
     facet_grid(Structured ~ GenomeLength) +
     draw_50line() +
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) + 
     stat_summary(fun.y='mean', geom='line') +
-    geom_text(data=facet_labels, aes(label=Label), vjust=1, hjust=0) +
+    geom_text(data=facet_labels, aes(label=Label), fontface='bold', vjust=1, hjust=0) +
     scale_y_continuous(limits=c(0,1)) +
-    labs(x=label_time, y=label_producer_proportion)
+    labs(x=figlabels['time'], y=figlabels['producer_proportion']) + 
+    theme_hankshaw(base_size=textbase_1wide)
 fig1 <- rescale_square(plot=fig1)
-ggsave(plot=fig1, '../figures/Figure1.png', width=6, height=6, dpi=figure_dpi)
-#system("convert -trim ../figures/Figure1.png ../figures/Figure1.png")
+
+save_figure(filename='../figures/Figure1.png', plot=fig1, trim=TRUE)
+

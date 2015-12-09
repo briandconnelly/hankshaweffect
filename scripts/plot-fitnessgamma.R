@@ -26,21 +26,15 @@ combined$Type <- factor(combined$Type, levels=c('sup', 'sub'), labels=c('Acceler
 pshape <- ggplot(data=combined, aes(x=NumOnes, y=Fitness, color=as.factor(Shape), linetype=Shape==1)) +
     facet_grid(Type ~ ., scales='free_y', margins=FALSE) +
     geom_line() +
-    scale_color_hue(name=label_gamma) +
-    scale_linetype_manual(name=label_gamma, values=c('TRUE'='dashed', 'FALSE'='solid'), guide=FALSE) +
+    scale_color_hue(name=figlabels['gamma']) +
+    scale_linetype_manual(name=figlabels['gamma'], values=c('TRUE'='dashed', 'FALSE'='solid'), guide=FALSE) +
     #scale_y_log10() +
-    labs(x=label_numones, y=label_fitness) +
-    theme_hankshaw(base_size = fig2_base_size) +
+    labs(x=figlabels["numones"], y=figlabels['fitness']) +
+    theme_hankshaw(base_size = textbase_2wide) +
     theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5))
 
-g <- ggplotGrob(pshape)
-g <- gtable_add_grob(g, textGrob(expression(bold("A")),
-                                 gp=gpar(col='black', fontsize=20),
-                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
-png('../figures/fitnessgamma-gamma.png', width=6, height=3.708204, units='in', res=figure_dpi)
-grid.draw(g)
-dev.off()
-trim_file("../figures/fitnessgamma-gamma.png")
+save_figure(filename='../figures/fitnessgamma-gamma.png', plot=pshape,
+            label='A', trim=TRUE, height=3.708204)
 
 
 # Individual Trajectories -------------------------------------------------
@@ -51,8 +45,8 @@ ptraj <- ggplot(data=d, aes(x=Time, y=CooperatorProportion, color=Replicate)) +
     geom_line() +
     scale_y_continuous(limits=c(0,1), breaks=c(0, 0.5, 1)) +
     scale_color_grey(guide=FALSE) +
-    labs(x=label_time, y=label_producer_proportion) +
-    theme_hankshaw(base_size=17)
+    labs(x=figlabels['time'], y=figlabels['producer_proportion']) +
+    theme_hankshaw(base_size=textbase_2wide)
 ggsave_golden(filename = '../figures/fitnessgamma-all.png', plot = ptraj)
 
 
@@ -67,16 +61,9 @@ presence <- d %>%
 pint <- ggplot(data=presence, aes(x=Shape, y=Integral)) +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_y_continuous(limits=c(0, 1)) +
-    labs(x=label_gamma, y=label_producer_presence) +
-    theme_hankshaw(base_size = fig2_base_size)
+    labs(x=figlabels['gamma'], y=figlabels['producer_presence']) +
+    theme_hankshaw(base_size = textbase_2wide)
 pint <- rescale_golden(plot=pint)
 
-g <- ggplotGrob(pint)
-g <- gtable_add_grob(g, textGrob(expression(bold("B")),
-                                 gp=gpar(col='black', fontsize=20),
-                                 x=0, hjust=0, vjust=0.5), t=1, l=2)
-png('../figures/fitnessgamma-integral.png', width=6, height=6, units='in', res=figure_dpi)
-grid.draw(g)
-dev.off()
-trim_file("../figures/fitnessgamma-integral.png")
-
+save_figure(filename='../figures/fitnessgamma-integral.png', plot=pint,
+            label='B', trim=TRUE)

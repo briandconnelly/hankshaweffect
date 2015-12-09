@@ -14,8 +14,8 @@ figS2C <- ggplot(data_figs2c, aes(x=Time, y=CooperatorProportion)) +
     stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) +
     stat_summary(fun.y='mean', geom='line', color='black', size=point_size) +
     scale_y_continuous(limits=c(0,1)) +
-    labs(x=label_time, y=label_producer_proportion) +
-    theme_hankshaw(base_size = figS2_base_size)
+    labs(x=figlabels['time'], y=figlabels['producer_proportion']) +
+    theme_hankshaw(base_size = textbase_3wide)
 figS2C <- rescale_golden(plot=figS2C)
 
 g <- ggplotGrob(figS2C)

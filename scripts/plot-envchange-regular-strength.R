@@ -14,7 +14,7 @@ figX <- ggplot(presence, aes(x=AllelesAffected, y=Integral)) +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_y_continuous(limits=c(0,1)) +
     scale_x_continuous(breaks=seq(1,8)) +
-    labs(x=label_stress_strength, y=label_producer_presence) +
+    labs(x=figlabels['stress_strength'], y=figlabels['producer_presence']) +
     theme_hankshaw(base_size=17)
 figX <- rescale_golden(plot=figX)
 ggsave_golden(filename = '../figures/envchange-regular-strength-integral.png', plot = figX)

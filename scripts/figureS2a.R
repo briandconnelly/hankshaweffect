@@ -27,8 +27,8 @@ figS2A <- ggplot(data_figs2a_integral, aes(x=MutationRateAdaptation,
     scale_y_continuous(limits=c(0,1)) +
     scale_x_log10(breaks=unique(data_figs2a_integral$MutationRateAdaptation),
                   labels=mutation_labels_log) +
-    labs(x=label_stressmu, y=label_producer_presence) +
-    theme_hankshaw(base_size = figS2_base_size)
+    labs(x=figlabels['stressmu'], y=figlabels['producer_presence']) +
+    theme_hankshaw(base_size = textbase_3wide)
 figS2A <- rescale_golden(plot=figS2A)
 
 g <- ggplotGrob(figS2A)

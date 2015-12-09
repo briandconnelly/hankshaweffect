@@ -14,8 +14,8 @@ pall <- ggplot(data=dcoop, aes(x=Time, y=CooperatorProportion, color=Replicate))
     geom_line() +
     scale_y_continuous(limits=c(0,1), breaks=c(0,0.5,1)) +
     scale_color_grey(guide = FALSE) +
-    labs(x=label_time, y=label_producer_proportion) +
-    theme_hankshaw()
+    labs(x=figlabels['time'], y=figlabels['producer_proportion']) +
+    theme_hankshaw(base_size = textbase_1wide)
 ggsave_golden(filename='../figures/envchange-exponential-strength-all.png', plot=pall)
 
 
@@ -30,16 +30,10 @@ pint <- ggplot(data=presence, aes(x=EnvChangeStrength, y=Integral)) +
     draw_replicates() +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_x_continuous(breaks=seq(1, 8)) +
-    labs(x=label_stress_strength, y=label_producer_presence) +
-    theme_hankshaw(base_size = fig2_base_size)
+    labs(x=figlabels['stress_strength'], y=figlabels['producer_presence']) +
+    theme_hankshaw(base_size = textbase_1wide)
 pint <- rescale_golden(plot=pint)
-#ggsave_golden(filename='../figures/envchange-exponential-strength-integral.png',
-#              plot=pint)
 
-g <- ggplotGrob(pint)
-png('../figures/envchange-exponential-strength-integral.png',
-    width=6, height=6, units='in', res=figure_dpi)
-grid.draw(g)
-dev.off()
-trim_file("../figures/envchange-exponential-strength-integral.png")
+save_figure(filename='../figures/envchange-exponential-strength-integral.png',
+            plot=pint, trim=TRUE)
 

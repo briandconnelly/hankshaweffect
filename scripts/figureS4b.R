@@ -21,14 +21,14 @@ figS4b <- ggplot(presence, aes(x=GenomeLength, y=Integral,
     scale_x_continuous(breaks=unique(presence$GenomeLength),
                        labels=label_genomelengths) +
     scale_color_manual(values=c('FALSE'='grey70', 'TRUE'='black'),
-                     labels=c('FALSE'=label_without_stress,
-                              'TRUE'=label_with_stress),
+                     labels=c('FALSE'=figlabels['without_stress'],
+                              'TRUE'=figlabels['with_stress']),
                      name='') +
     scale_shape_manual(values=c('FALSE'=15, 'TRUE'=16),
-                       labels=c('FALSE'=label_without_stress,
-                                'TRUE'=label_with_stress),
+                       labels=c('FALSE'=figlabels['without_stress'],
+                                'TRUE'=figlabels['with_stress']),
                        name='') +
-    labs(x=label_genome_length, y=label_producer_presence) +
+    labs(x=figlabels['genome_length'], y=figlabels['producer_presence']) +
     theme_hankshaw(base_size=17) +
     theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5)) +
     theme(legend.text = element_text(size=rel(0.66), colour="grey40"))

@@ -18,13 +18,9 @@ p <- ggplot(data=mintegral, aes(x=Topology, y=Integral)) +
     stat_summary(fun.data='figsummary', size=0.8) +                           
     scale_y_continuous(limits=c(0, 1)) +                                        
     scale_color_hue(name="", guide=FALSE) +                                     
-    labs(x=label_topology, y=label_producer_presence) +
-    theme_hankshaw(base_size=fig2_base_size)                                       
+    labs(x=figlabels['topology'], y=figlabels['producer_presence']) +
+    theme_hankshaw(base_size=textbase_1wide)                                       
 p <- rescale_golden(plot = p)  
 
-g <- ggplotGrob(p)
-png('../figures/migration-topology.png', width=6, height=6, units='in',
-    res=figure_dpi)
-grid.draw(g)
-dev.off()
-trim_file("../figures/migration-topology.png")
+save_figure(filename='../figures/migration-topology.png', plot=p, trim=TRUE)
+
