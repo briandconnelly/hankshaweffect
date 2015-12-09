@@ -33,3 +33,5 @@ pint <- rescale_golden(plot = pint)
 save_figure(filename = "../figures/mutationsweep-cooperation.png", plot = pint,
             label='B', trim=TRUE)
 
+
+# Plot the trajectory of cooperator proportion with frequent mutations ---------
