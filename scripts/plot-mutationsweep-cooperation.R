@@ -35,3 +35,17 @@ save_figure(filename = "../figures/mutationsweep-cooperation.png", plot = pint,
 
 
 # Plot the trajectory of cooperator proportion with frequent mutations ---------
+dmax <- d %>% filter(MutationRateSocial == max(MutationRateSocial))
+
+pmax <- ggplot(data=dmax, aes(x=Time, y=CooperatorProportion)) +
+    draw_50line() +
+    stat_summary(fun.data='figsummary', geom='ribbon', color=NA, alpha=0.2) +
+    stat_summary(fun.y='mean', geom='line', color='black', size=point_size) +
+    scale_y_continuous(limits=c(0,1)) +
+    labs(x=figlabels['time'], y=figlabels['producer_proportion']) +
+    theme_hankshaw(base_size = textbase_3wide)
+pmax <- rescale_golden(plot=pmax)
+
+save_figure(filename = "../figures/mutationsweep-cooperation-mumax.png",
+            plot = pmax, label='C', trim=TRUE)
+
