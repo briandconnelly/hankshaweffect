@@ -1,19 +1,35 @@
 #!/usr/bin/env Rscript
 
-source('hankshaw')
+source('hankshaw.R')
 
 # How often data were logged
 data_interval <- 1
 
 d <- read.csv('../data/lsweep.csv.bz2') %>%
     filter(Structured == TRUE)
+d$Replicate <- as.factor(d$Replicate)
 
 # Plot cooperator proportion over time for L=0 and L=8 -----------------------
 
-# TODO
+dx <- d %>% filter(GenomeLength %in% c(0,8))
 
-#save_figure(filename='../figures/genomelengthsweep-sample', plot=pX,
-#            label='A', trim=TRUE)
+figfacets <- function(variable, value) sprintf('%d Adaptive Loci', value)
+
+pX <- ggplot(data=dx, aes(x=Time, y=CooperatorProportion,
+                          color=as.factor(GenomeLength),
+                          fill=as.factor(GenomeLength))) +
+    draw_50line() +
+    stat_summary(fun.ymax='mean', geom='ribbon', ymin=0, alpha=1, color=NA) +
+    stat_summary(fun.y='mean', geom='line', color='black') +
+    facet_grid(GenomeLength ~ ., labeller=figfacets) +
+    scale_color_manual(values=c('8'=color_L08, '0'=color_L00), guide=FALSE) +
+    scale_fill_manual(values=c('8'=color_L08, '0'=color_L00), guide=FALSE) +
+    scale_y_continuous(limits=c(0,1)) +
+    labs(x=figlabels['time'], y=figlabels['producer_proportion']) +
+    theme_hankshaw(base_size=textbase_2wide)
+
+save_figure(filename='../figures/genomelengthsweep-sample.png', plot=pX,
+            label='A', trim=TRUE, height=3.708204)
 
 
 # Plot cooperator presence for different genome lengths ----------------------
