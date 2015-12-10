@@ -31,5 +31,6 @@ fig2f <- ggplot(data_fig2f_integral, aes(x=as.factor(MutationRate),
     theme_hankshaw(base_size = textbase_2wide)
 fig2f <- rescale_golden(plot=fig2f)
 
-save_figure(filename='../figures/Figure2f.png', plot=fig2f, label='F',
-            trim=TRUE)
+save_figure(filename='../figures/mutationsweep-integral.png', plot=fig2f,
+            label='F', trim=TRUE)
+
