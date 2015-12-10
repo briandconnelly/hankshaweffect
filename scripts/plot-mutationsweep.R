@@ -5,10 +5,10 @@ source('hankshaw.R')
 # How often data were logged
 data_interval <- 1
 
-data_fig2f <- read.csv('../data/mutationsweep.csv.bz2')
-data_fig2f$Replicate <- as.factor(data_fig2f$Replicate)
+d <- read.csv('../data/mutationsweep.csv.bz2')
+d$Replicate <- as.factor(d$Replicate)
 
-data_fig2f_integral <- data_fig2f %>%
+presence <- d %>%
     group_by(MutationRate, Replicate) %>%
     summarise(Integral=data_interval * sum(CooperatorProportion)/(max(Time)-min(Time)))
 
@@ -20,11 +20,11 @@ mutation_labels_log <- c(expression(10^{-7}),
                          expression(10^{-2}),
                          expression(10^{-1}))
 
-fig2f <- ggplot(data_fig2f_integral, aes(x=as.factor(MutationRate),
-                                         y=Integral)) +
+fig2f <- ggplot(data=presence, aes(x=as.factor(MutationRate),
+                                   y=Integral)) +
     draw_replicates() +
     stat_summary(fun.data='figsummary', size=point_size) +
-    scale_x_discrete(breaks=sort(unique(data_fig2f_integral$MutationRate)),
+    scale_x_discrete(breaks=sort(unique(presence$MutationRate)),
                      labels=mutation_labels_log) +
     scale_y_continuous(limits=c(0, 1)) +
     labs(x=figlabels['mu'], y=figlabels['producer_presence']) +
