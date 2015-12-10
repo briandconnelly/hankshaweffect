@@ -20,8 +20,7 @@ mutation_labels_log <- c(expression(10^{-7}),
                          expression(10^{-2}),
                          expression(10^{-1}))
 
-fig2f <- ggplot(data=presence, aes(x=as.factor(MutationRate),
-                                   y=Integral)) +
+pint <- ggplot(data=presence, aes(x=as.factor(MutationRate), y=Integral)) +
     draw_replicates() +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_x_discrete(breaks=sort(unique(presence$MutationRate)),
@@ -29,8 +28,8 @@ fig2f <- ggplot(data=presence, aes(x=as.factor(MutationRate),
     scale_y_continuous(limits=c(0, 1)) +
     labs(x=figlabels['mu'], y=figlabels['producer_presence']) +
     theme_hankshaw(base_size = textbase_2wide)
-fig2f <- rescale_golden(plot=fig2f)
+pint <- rescale_golden(plot=pint)
 
-save_figure(filename='../figures/mutationsweep-integral.png', plot=fig2f,
+save_figure(filename='../figures/mutationsweep-integral.png', plot=pint,
             label='F', trim=TRUE)
 

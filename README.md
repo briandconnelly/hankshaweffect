@@ -26,8 +26,8 @@ These subdirectories may contain additional information
 | [3C](figures/envchange-exponential-all.png) | [envchange-exponential-cooppct.csv.bz2](data/envchange-exponential-cooppct.csv.bz2) | [plot-envchange-exponential.R](scripts/plot-envchange-exponential.R) | [TODO](configuration/TODO) |
 | [S1A](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
 | [S1B](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
-| [S1C](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
-| [S1D](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
+| [S1C](figures/benefitsweep-integral.png) | [bsweep.csv.bz2](data/bsweep.csv.bz2) | [plot-benefitsweep.R](scripts/plot-benefitsweep.R) | [TODO](configuration/TODO) |
+| [S1D](figures/costsweep-integral.png) | [csweep.csv.bz2](data/csweep.csv.bz2) | [plot-costsweep-integral.R](scripts/plot-costsweep-integral.R) | [TODO](configuration/TODO) |
 | [S1E](figures/migrationsweep-integral.png) | [migrationsweep.csv.bz2](data/migrationsweep.csv.bz2) | [plot-migrationsweep.R](scripts/plot-migrationsweep.R) | [TODO](configuration/TODO) |
 | [S1F](figures/mutationsweep-integral.png) | [mutationsweep.csv.bz2](data/mutationsweep.csv.bz2) | [plot-mutationsweep.R](scripts/plot-mutationsweep.R) | [TODO](configuration/TODO) |
 | [S2A](figures/mutationsweep-adaptive.png) | [mutationsweep-adaptive.csv.bz2](data/mutationsweep-adaptive.csv.bz2) | [plot-mutationsweep-adaptive.R](scripts/plot-mutationsweep-adaptive.R) | [TODO](configuration/TODO) |

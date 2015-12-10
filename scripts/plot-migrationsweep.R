@@ -20,7 +20,7 @@ migration_labels_log <- c(expression(paste(5, 'x', 10^{-7})),
                           expression(bold(paste('5', 'x', '10'^{'-2'}))),
                           expression(paste(5, 'x', 10^{-1})))
 
-fig2e <- ggplot(data=presence, aes(x=MigrationRate, y=Integral)) +
+pint <- ggplot(data=presence, aes(x=MigrationRate, y=Integral)) +
     draw_replicates() +
     stat_summary(fun.data='figsummary', size=point_size) +
     scale_x_log10(breaks=unique(presence$MigrationRate),
@@ -28,7 +28,7 @@ fig2e <- ggplot(data=presence, aes(x=MigrationRate, y=Integral)) +
     scale_y_continuous(limits=c(0, 1)) +
     labs(x=figlabels['migration_rate'], y=figlabels['producer_presence']) +
     theme_hankshaw(base_size=textbase_2wide)
-fig2e <- rescale_golden(plot=fig2e)
+pint <- rescale_golden(plot=pint)
 
-save_figure(filename='../figures/migrationsweep-integral.png', plot=fig2e,
+save_figure(filename='../figures/migrationsweep-integral.png', plot=pint,
             label='E', trim=TRUE)
