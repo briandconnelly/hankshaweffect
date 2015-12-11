@@ -48,13 +48,13 @@ theme_hankshaw <- function (base_size=12, base_family="", grid.x=FALSE,
           legend.key.size = grid::unit(0.5, "lines"), 
           legend.key.height = grid::unit(0.5, "lines"),
           legend.key.width = grid::unit(1.0, "lines"),
-          legend.text = element_text(size=rel(0.6), colour="grey40"),
+          legend.text = element_text(size=rel(0.66), colour="grey40"),
           legend.text.align = 0.5,
           legend.title = element_text(size=rel(0.7)),
           legend.title.align = 0,
-          legend.position = "top",
+          legend.position = c(.5, 1.035),
           legend.direction = "horizontal",
-          legend.justification = "center",
+          legend.justification = c(0.5, 0.5),
           legend.box = "horizontal"
           )
 }

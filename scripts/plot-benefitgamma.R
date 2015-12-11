@@ -22,8 +22,7 @@ p_gamma <- ggplot(pdata, aes(x=Time, y=PSize, color=as.factor(Gamma))) +
     scale_y_continuous(limits=c(0,S), breaks=c(0,s,S),                       
                        labels=c('0',expression(S['min']),expression(S['max']))) +
     labs(x=figlabels['producer_proportion'], y=figlabels['carrying_capacity']) +       
-    theme_hankshaw(base_size = textbase_2wide) +
-    theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5))   
+    theme_hankshaw(base_size = textbase_2wide)
 p_gamma <- rescale_golden(plot=p_gamma)
 
 save_figure(filename='../figures/benefitgamma-gamma.png', plot=p_gamma,

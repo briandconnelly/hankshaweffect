@@ -30,8 +30,7 @@ pshape <- ggplot(data=combined, aes(x=NumOnes, y=Fitness, color=as.factor(Shape)
     scale_linetype_manual(name=figlabels['gamma'], values=c('TRUE'='dashed', 'FALSE'='solid'), guide=FALSE) +
     #scale_y_log10() +
     labs(x=figlabels["numones"], y=figlabels['fitness']) +
-    theme_hankshaw(base_size = textbase_2wide) +
-    theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5))
+    theme_hankshaw(base_size = textbase_2wide)
 
 save_figure(filename='../figures/fitnessgamma-gamma.png', plot=pshape,
             label='A', trim=TRUE, height=3.708204)

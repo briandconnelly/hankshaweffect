@@ -28,9 +28,7 @@ pX <- ggplot(data=d8, aes(x=Time, y=CooperatorProportion, color=InitialThinning,
                                'TRUE'=figlabels[['with_stress']]),
                       name='', guide=FALSE) +
     labs(x=figlabels['time'], y=figlabels['producer_proportion']) +
-    theme_hankshaw(base_size = textbase_2wide) +
-    theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5)) +
-    theme(legend.text = element_text(size=rel(0.66), colour="grey40"))
+    theme_hankshaw(base_size = textbase_2wide)
 pX <- rescale_golden(plot=pX)
 
 save_figure(filename = "../figures/thinnothin.png", plot = pX, label='A',
@@ -62,9 +60,7 @@ pint <- ggplot(data=presence, aes(x=GenomeLength, y=Integral,
                                 'TRUE'=figlabels[['with_stress']]),
                        name='') +
     labs(x=figlabels['genome_length'], y=figlabels['producer_presence']) +
-    theme_hankshaw(base_size=textbase_2wide) +
-    theme(legend.position=c(.5, 1.035), legend.justification=c(0.5, 0.5)) +
-    theme(legend.text = element_text(size=rel(0.66), colour="grey40"))
+    theme_hankshaw(base_size=textbase_2wide)
 pint <- rescale_golden(plot=pint)
 
 save_figure(filename = "../figures/thinnothin-integral.png", plot = pint,
