@@ -16,9 +16,6 @@ These subdirectories may contain additional information
 
 ## Contents by Figure
 
-[base.cfg](configuration/base.cfg)
-[wellmixed.cfg](configuration/wellmixed.cfg)
-[envchange-regular.cfg](configurations/envchange-regular.cfg)
 
 | Figure  | Related Files  | Configuration |
 |:--------|:---------------|:--------------|
