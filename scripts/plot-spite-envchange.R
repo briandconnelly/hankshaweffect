@@ -8,7 +8,7 @@ d$Replicate <- as.factor(d$Replicate)
 
 # Plot cooperator proportion for a single replicate ----------------------------
 
-data_rep <- d %>% filter(Replicate == 8)
+data_rep <- d %>% filter(Replicate == 11)
 changepoints <- expand.grid(EnvChangeFrequency=1000,
                             ChangeTime=seq(from=min(data_rep$Time),
                                            to=max(data_rep$Time), by=1000))
