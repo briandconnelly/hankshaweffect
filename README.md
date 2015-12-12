@@ -16,21 +16,20 @@ These subdirectories may contain additional information
 
 ## Contents by Figure
 
-
 | Figure  | Related Files  | Configuration |
 |:--------|:---------------|:--------------|
-| 1       | [data](data/lsweep.csv.bz2), [analysis](scripts/figure1.R), [figure](figures/Figure1.png) | **A:** [wellmixed.cfg](configuration/wellmixed.cfg), `Population:genome_length = 0` **B:** [wellmixed.cfg](configuration/wellmixed.cfg) **C:** [base.cfg](configuration/base.cfg), `Population:genome_length = 0`<br> **D:** [base.cfg](configuration/base.cfg) |
+| 1       | [data](data/lsweep.csv.bz2), [analysis](scripts/figure1.R), [figure](figures/Figure1.png) | **A:** [wellmixed.cfg](configuration/wellmixed.cfg), `Population:genome_length = 0`<br>**B:** [wellmixed.cfg](configuration/wellmixed.cfg)<br>**C:** [base.cfg](configuration/base.cfg), `Population:genome_length = 0`<br>**D:** [base.cfg](configuration/base.cfg) |
 | 2A      | [data](data/envchange-regular.csv.bz2), [analysis](scripts/plot-envchange-regular.R), [figure](figures/envchange-regular-rep.png) | [envchange-regular.cfg](configurations/envchange-regular.cfg) |
 | 2B      | [data](data/envchange-regular.csv.bz2), [analysis](scripts/plot-envchange-regular.R), [figure](figures/envchange-regular-all.png) | [envchange-regular.cfg](configurations/envchange-regular.cfg), `EnvironmentalChange:frequency` values 250, 500, 750, 1000, 1250, 2500 |
 | 3A      | [data](data/envchange-control.csv.bz2), [analysis](scripts/plot-envchange-control.R), [figure](figures/envchange-control.png) | TODO |
 | 3B      | [data](data/envchange-exponential-cooppct.csv.bz2), [analysis](scripts/plot-envchange-exponential.R), [figure](figures/envchange-exponential-sample.png) | TODO |
 | 3C      | [data](data/envchange-exponential-cooppct.csv.bz2), [analysis](scripts/plot-envchange-exponential.R), [figure](figures/envchange-exponential-all.png) | TODO | 
-| S1A    | [data](data/lsweep.csv.bz2), [analysis](scripts/plot-genomelengthsweep.R), [figure](figures/genomelengthsweep-sample.png) | TODO |
-| S1B    | [data](data/lsweep.csv.bz2), [analysis](scripts/plot-genomelengthsweep.R), [figure](figures/genomelengthsweep-integral.png) | TODO |
-| S1C    | [data](data/bsweep.csv.bz2), [analysis](scripts/scripts/plot-benefitsweep.R), [figure](figures/benefitsweep-integral.png) | TODO |
-| S1D    | [data](data/csweep.csv.bz2), [analysis](scripts/plot-costsweep-integral.R), [figure](figures/costsweep-integral.png) | TODO |
-| S1E    | [data](data/migrationsweep.csv.bz2), [analysis](scripts/plot-migrationsweep.R), [figure](figures/migrationsweep-integral.png) | TODO |
-| S1F    | [data](data/mutationsweep.csv.bz2), [analysis](scripts/plot-mutationsweep.R), [figure](figures/mutationsweep-integral.png) | TODO |
+| S1A    | [data](data/lsweep.csv.bz2), [analysis](scripts/plot-genomelengthsweep.R), [figure](figures/genomelengthsweep-sample.png) | [base.cfg](configuration/base.cfg), `Population:genome_length` = 0, 8 |
+| S1B    | [data](data/lsweep.csv.bz2), [analysis](scripts/plot-genomelengthsweep.R), [figure](figures/genomelengthsweep-integral.png) | [base.cfg](configuration/base.cfg), `Population:genome_length` = 0..10 |
+| S1C    | [data](data/bsweep.csv.bz2), [analysis](scripts/scripts/plot-benefitsweep.R), [figure](figures/benefitsweep-integral.png) | [base.cfg](configuration/base.cfg), `Population:capacity_max` = 800..2450 |
+| S1D    | [data](data/csweep.csv.bz2), [analysis](scripts/plot-costsweep-integral.R), [figure](figures/costsweep-integral.png) | [base.cfg](configuration/base.cfg), `Population:production_cost` = 0..0.5 |
+| S1E    | [data](data/migrationsweep.csv.bz2), [analysis](scripts/plot-migrationsweep.R), [figure](figures/migrationsweep-integral.png) | [base.cfg](configuration/base.cfg), `Metapopulation:migration_rate` = 5e-07, 5e-06, 5e-05, 5e-04, 5e-03, 5e-02, 5e-01 |
+| S1F    | [data](data/mutationsweep.csv.bz2), [analysis](scripts/plot-mutationsweep.R), [figure](figures/mutationsweep-integral.png) | [base.cfg](configuration/base.cfg), `Population:mutation_rate_social` and `Population:mutation_rate_adaptation` = 1e-07, 1e-06, 1e-05, 1e-04, 1e-03, 1e-02, 1e-01 |
 | S2A    | [data](data/mutationsweep-adaptive.csv.bz2), [analysis](scripts/plot-mutationsweep-adaptive.R), [figure](figures/mutationsweep-adaptive.png) | TODO |
 | S2B    | [data](data/mutationsweep-adaptive.csv.bz2), [analysis](scripts/plot-mutationsweep-cooperation.R), [figure](figures/mutationsweep-cooperation.png) | TODO |
 | S2C    | [data](data/mutationsweep-adaptive.csv.bz2), [analysis](scripts/plot-mutationsweep-cooperation.R), [figure](figures/mutationsweep-cooperation-mumax.png) | TODO |
