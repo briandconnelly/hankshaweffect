@@ -16,39 +16,45 @@ These subdirectories may contain additional information
 
 ## Contents by Figure
 
-| Figure  | Data  | Analysis/Plotting Script  | Configuration  |
-|:--------|:------|:--------------------------|:---------------|
-| [1](figures/Figure1.png) | [lsweep.csv.bz2](data/lsweep.csv.bz2) | [figure1.R](scripts/figure1.R) | [TODO](configuration/TODO) |
-| [2A](figures/envchange-regular-rep.png) | [envchange-regular.csv.bz2](data/envchange-regular.csv.bz2) | [plot-envchange-regular.R](scripts/plot-envchange-regular.R) | [TODO](configuration/TODO) |
-| [2B](figures/envchange-regular-all.png) | [envchange-regular.csv.bz2](data/envchange-regular.csv.bz2) | [plot-envchange-regular.R](scripts/plot-envchange-regular.R) | [TODO](configuration/TODO) |
-| [3A](figures/envchange-control.png) | [envchange-control.csv.bz2](data/envchange-control.csv.bz2) | [plot-envchange-control.R](scripts/plot-envchange-control.R) | [TODO](configuration/TODO) |
-| [3B](figures/envchange-exponential-sample.png) | [envchange-exponential-cooppct.csv.bz2](data/envchange-exponential-cooppct.csv.bz2) | [plot-envchange-exponential.R](scripts/plot-envchange-exponential.R) | [TODO](configuration/TODO) |
-| [3C](figures/envchange-exponential-all.png) | [envchange-exponential-cooppct.csv.bz2](data/envchange-exponential-cooppct.csv.bz2) | [plot-envchange-exponential.R](scripts/plot-envchange-exponential.R) | [TODO](configuration/TODO) |
-| [S1A](figures/genomelengthsweep-sample.png) | [lsweep.csv.bz2](data/lsweep.csv.bz2) | [plot-genomelengthsweep.R](scripts/plot-genomelengthsweep.R) | [TODO](configuration/TODO) |
-| [S1B](figures/genomelengthsweep-integral.png) | [lsweep.csv.bz2](data/lsweep.csv.bz2) | [plot-genomelengthsweep.R](scripts/plot-genomelengthsweep.R) | [TODO](configuration/TODO) |
-| [S1C](figures/benefitsweep-integral.png) | [bsweep.csv.bz2](data/bsweep.csv.bz2) | [plot-benefitsweep.R](scripts/plot-benefitsweep.R) | [TODO](configuration/TODO) |
-| [S1D](figures/costsweep-integral.png) | [csweep.csv.bz2](data/csweep.csv.bz2) | [plot-costsweep-integral.R](scripts/plot-costsweep-integral.R) | [TODO](configuration/TODO) |
-| [S1E](figures/migrationsweep-integral.png) | [migrationsweep.csv.bz2](data/migrationsweep.csv.bz2) | [plot-migrationsweep.R](scripts/plot-migrationsweep.R) | [TODO](configuration/TODO) |
-| [S1F](figures/mutationsweep-integral.png) | [mutationsweep.csv.bz2](data/mutationsweep.csv.bz2) | [plot-mutationsweep.R](scripts/plot-mutationsweep.R) | [TODO](configuration/TODO) |
-| [S2A](figures/mutationsweep-adaptive.png) | [mutationsweep-adaptive.csv.bz2](data/mutationsweep-adaptive.csv.bz2) | [plot-mutationsweep-adaptive.R](scripts/plot-mutationsweep-adaptive.R) | [TODO](configuration/TODO) |
-| [S2B](figures/mutationsweep-cooperation.png) | [mutationsweep-cooperation.csv.bz2](data/mutationsweep-cooperation.csv.bz2) | [plot-mutationsweep-cooperation.R](scripts/plot-mutationsweep-cooperation.R) | [TODO](configuration/TODO) |
-| [S2C](figures/mutationsweep-cooperation-mumax.png) | [mutationsweep-cooperation.csv.bz2](data/mutationsweep-cooperation.csv.bz2) | [plot-mutationsweep-cooperation.R](scripts/plot-mutationsweep-cooperation.R) | [TODO](configuration/TODO) |
-| [S3](figures/nosocialmu.png) | [nosocialmu.csv.bz2](data/nosocialmu.csv.bz2) | [plot-nosocialmu.R](scripts/plot-nosocialmu.R) | [TODO](configuration/TODO) |
-| [S4](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
-| [S5](figures/envchange-exponential-strength-integral.png) | [envchange-exponential-strength-cooppct.csv.bz2](data/envchange-exponential-strength-cooppct.csv.bz2) | [plot-envchange-exponential-strength.R](scripts/plot-envchange-exponential-strength.R) | [TODO](configuration/TODO) |
-| [S6A](figures/thinnothin.png) | [thinnothin.csv.bz2](data/thinnothin.csv.bz2) | [plot-thinnothin.R](scripts/plot-thinnothin.R) | [TODO](configuration/TODO) |
-| [S6B](figures/thinnothin-integral.png) | [thinnothin.csv.bz2](data/thinnothin.csv.bz2) | [plot-thinnothin.R](scripts/plot-thinnothin.R) | [TODO](configuration/TODO) |
-| [S7](figures/migration-topology.png) | [migration-topology.csv.bz2](data/migration-topology.csv.bz2) | [plot-migration-topology.R](scripts/plot-migration-topology.R) | [TODO](configuration/TODO) |
-| [S8](figures/viability-selection.png) | [viability-selection.csv.bz2](data/viability-selection.csv.bz2) | [plot-viability-selection.R](scripts/plot-viability-selection.R) | [TODO](configuration/TODO) |
-| [S9A](figures/benefitgamma-gamma.png) | [benefitgamma.csv.bz2](data/benefitgamma.csv.bz2) | [plot-benefitgamma.R](scripts/plot-benefitgamma.R) | [TODO](configuration/TODO) |
-| [S9B](figures/benefitgamma-gamma.png) | [benefitgamma.csv.bz2](data/benefitgamma.csv.bz2) | [plot-benefitgamma.R](scripts/plot-benefitgamma.R) | [TODO](configuration/TODO) |
-| [S10A](figures/fitnessgamma-integral.png) | [fitnessgamma.csv.bz2](data/fitnessgamma.csv.bz2) | [plot-fitnessgamma.R](scripts/plot-fitnessgamma.R) | [TODO](configuration/TODO) |
-| [S10B](figures/fitnessgamma-integral.png) | [fitnessgamma.csv.bz2](data/fitnessgamma.csv.bz2) | [plot-fitnessgamma.R](scripts/plot-fitnessgamma.R) | [TODO](configuration/TODO) |
-| [S11](figures/TODO) | [TODO](data/TODO) | [TODO](scripts/TODO) | [TODO](configuration/TODO) |
-| [S12A](figures/spite-avg-proportion.png) | [spite-dilution.csv.bz2](data/spite-dilution.csv.bz2) | [plot-spite-dilution.R](scripts/plot-spite-dilution.R) | [TODO](configuration/TODO) |
-| [S12B](figures/spite-dilution.png) | [spite-dilution.csv.bz2](data/spite-dilution.csv.bz2) | [plot-spite-dilution.R](scripts/plot-spite-dilution.R) | [TODO](configuration/TODO) |
-| [S12C](figures/spite-envchange-sample.png) | [spite-envchange.csv.bz2](data/spite-envchange.csv.bz2) | [plot-spite-envchange.R](scripts/plot-spite-envchange.R) | [TODO](configuration/TODO) |
+[base.cfg](configuration/base.cfg)
+[wellmixed.cfg](configuration/wellmixed.cfg)
+[envchange-regular.cfg](configurations/envchange-regular.cfg)
 
+| Figure  | Related Files  | Configuration |
+|:--------|:---------------|:--------------|
+| 1A      | [data](data/lsweep.csv.bz2), [analysis](scripts/figure1.R), [figure](figures/Figure1.png) | [wellmixed.cfg](configuration/wellmixed.cfg), `Population:genome_length = 0` |
+| 1B      | [data](data/lsweep.csv.bz2), [analysis](scripts/figure1.R), [figure](figures/Figure1.png) | [wellmixed.cfg](configuration/wellmixed.cfg) |
+| 1C      | [data](data/lsweep.csv.bz2), [analysis](scripts/figure1.R), [figure](figures/Figure1.png) | [base.cfg](configuration/base.cfg), `Population:genome_length = 0` |
+| 1D      | [data](data/lsweep.csv.bz2), [analysis](scripts/figure1.R), [figure](figures/Figure1.png) | [base.cfg](configuration/base.cfg) |
+| 2A      | [data](data/envchange-regular.csv.bz2), [analysis](scripts/plot-envchange-regular.R), [figure](figures/envchange-regular-rep.png) | [envchange-regular.cfg](configurations/envchange-regular.cfg) |
+| 2B      | [data](data/envchange-regular.csv.bz2), [analysis](scripts/plot-envchange-regular.R), [figure](figures/envchange-regular-all.png) | [envchange-regular.cfg](configurations/envchange-regular.cfg), `EnvironmentalChange:frequency` values 250, 500, 750, 1000, 1250, 2500 |
+| 3A      | [data](data/envchange-control.csv.bz2), [analysis](scripts/plot-envchange-control.R), [figure](figures/envchange-control.png) | TODO |
+| 3B      | [data](data/envchange-exponential-cooppct.csv.bz2), [analysis](scripts/plot-envchange-exponential.R), [figure](figures/envchange-exponential-sample.png) | TODO |
+| 3C      | [data](data/envchange-exponential-cooppct.csv.bz2), [analysis](scripts/plot-envchange-exponential.R), [figure](figures/envchange-exponential-all.png) | TODO | 
+| S1A    | [data](data/lsweep.csv.bz2), [analysis](scripts/plot-genomelengthsweep.R), [figure](figures/genomelengthsweep-sample.png) | TODO |
+| S1B    | [data](data/lsweep.csv.bz2), [analysis](scripts/plot-genomelengthsweep.R), [figure](figures/genomelengthsweep-integral.png) | TODO |
+| S1C    | [data](data/bsweep.csv.bz2), [analysis](scripts/scripts/plot-benefitsweep.R), [figure](figures/benefitsweep-integral.png) | TODO |
+| S1D    | [data](data/csweep.csv.bz2), [analysis](scripts/plot-costsweep-integral.R), [figure](figures/costsweep-integral.png) | TODO |
+| S1E    | [data](data/migrationsweep.csv.bz2), [analysis](scripts/plot-migrationsweep.R), [figure](figures/migrationsweep-integral.png) | TODO |
+| S1F    | [data](data/mutationsweep.csv.bz2), [analysis](scripts/plot-mutationsweep.R), [figure](figures/mutationsweep-integral.png) | TODO |
+| S2A    | [data](data/mutationsweep-adaptive.csv.bz2), [analysis](scripts/plot-mutationsweep-adaptive.R), [figure](figures/mutationsweep-adaptive.png) | TODO |
+| S2B    | [data](data/mutationsweep-adaptive.csv.bz2), [analysis](scripts/plot-mutationsweep-cooperation.R), [figure](figures/mutationsweep-cooperation.png) | TODO |
+| S2C    | [data](data/mutationsweep-adaptive.csv.bz2), [analysis](scripts/plot-mutationsweep-cooperation.R), [figure](figures/mutationsweep-cooperation-mumax.png) | TODO |
+| S3     | [data](data/nosocialmu.csv.bz2), [analysis](scripts/plot-nosocialmu.R), [figure](figures/nosocialmu.png) | TODO |
+| S4 TODO | [data](data/TODO), [analysis](scripts/TODO), [figure](figures/TODO)  - TODO | TODO |
+| S5     | [data](data/envchange-exponential-strength-cooppct.csv.bz2), [analysis](scripts/plot-envchange-exponential-strength.R), [figure](figures/envchange-exponential-strength-integral.png) | TODO |
+| S6A    | [data](data/thinnothin.csv.bz2), [analysis](scripts/plot-thinnothin.R), [figure](figures/thinnothin.png) | TODO |
+| S6B    | [data](data/thinnothin.csv.bz2), [analysis](scripts/plot-thinnothin.R), [figure](figures/thinnothin-integral.png) | TODO |
+| S7     | [data](data/migration-topology.csv.bz2), [analysis](scripts/plot-migration-topology.R), [figure](figures/migration-topology.png) | TODO |
+| S8     | [data](data/viability-selection.csv.bz2), [analysis](scripts/plot-viability-selection.R), [figure](figures/viability-selection.png) | TODO |
+| S9A    | [data](data/benefitgamma.csv.bz2), [analysis](scripts/plot-benefitgamma.R), [figure](figures/benefitgamma-gamma.png) | TODO |
+| S9B    | [data](data/benefitgamma.csv.bz2), [analysis](scripts/plot-benefitgamma.R), [figure](figures/benefitgamma-integral.png) | TODO |
+| S10A   | [data](data/fitnessgamma.csv.bz2), [analysis](scripts/plot-fitnessgamma.R), [figure](figures/fitnessgamma-gamma.png) | TODO |
+| S10B   | [data](data/fitnessgamma.csv.bz2), [analysis](scripts/plot-fitnessgamma.R), [figure](figures/fitnessgamma-integral.png) | TODO |
+| S11 TODO   | [data](data/TODO), [analysis](scripts/TODO), [figure](figures/TODO) | TODO |
+| S12A   | [data](data/spite-dilution.csv.bz2), [analysis](scripts/plot-spite-dilution.R]), [figure](figures/spite-avg-proportion.png) | TODO |
+| S12B   | [data](data/spite-dilution.csv.bz2), [analysis](scripts/plot-spite-dilution.R]), [figure](figures/spite-dilution.png) | TODO |
+| S12C   | [data](data/spite-envchange.csv.bz2), [analysis](scripts/plot-spite-envchange.R), [figure](figures/spite-envchange-sample.png) | TODO |
 
 
 ## License
