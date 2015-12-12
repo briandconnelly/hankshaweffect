@@ -19,10 +19,7 @@ These subdirectories may contain additional information
 
 | Figure  | Related Files  | Configuration |
 |:--------|:---------------|:--------------|
-| 1A      | [data](data/lsweep.csv.bz2), [analysis](scripts/figure1.R), [figure](figures/Figure1.png) | [wellmixed.cfg](configuration/wellmixed.cfg), `Population:genome_length = 0` |
-| 1B      | [data](data/lsweep.csv.bz2), [analysis](scripts/figure1.R), [figure](figures/Figure1.png) | [wellmixed.cfg](configuration/wellmixed.cfg) |
-| 1C      | [data](data/lsweep.csv.bz2), [analysis](scripts/figure1.R), [figure](figures/Figure1.png) | [base.cfg](configuration/base.cfg), `Population:genome_length = 0` |
-| 1D      | [data](data/lsweep.csv.bz2), [analysis](scripts/figure1.R), [figure](figures/Figure1.png) | [base.cfg](configuration/base.cfg) |
+| 1       | [data](data/lsweep.csv.bz2), [analysis](scripts/figure1.R), [figure](figures/Figure1.png) | **A:** [wellmixed.cfg](configuration/wellmixed.cfg), `Population:genome_length = 0` **B:** [wellmixed.cfg](configuration/wellmixed.cfg) **C:** [base.cfg](configuration/base.cfg), `Population:genome_length = 0`<br> **D:** [base.cfg](configuration/base.cfg) |
 | 2A      | [data](data/envchange-regular.csv.bz2), [analysis](scripts/plot-envchange-regular.R), [figure](figures/envchange-regular-rep.png) | [envchange-regular.cfg](configurations/envchange-regular.cfg) |
 | 2B      | [data](data/envchange-regular.csv.bz2), [analysis](scripts/plot-envchange-regular.R), [figure](figures/envchange-regular-all.png) | [envchange-regular.cfg](configurations/envchange-regular.cfg), `EnvironmentalChange:frequency` values 250, 500, 750, 1000, 1250, 2500 |
 | 3A      | [data](data/envchange-control.csv.bz2), [analysis](scripts/plot-envchange-control.R), [figure](figures/envchange-control.png) | TODO |
