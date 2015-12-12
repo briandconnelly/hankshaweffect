@@ -45,9 +45,9 @@ These subdirectories may contain additional information
 | S10A   | [data](data/fitnessgamma.csv.bz2), [analysis](scripts/plot-fitnessgamma.R), [figure](figures/fitnessgamma-gamma.png) | - |
 | S10B   | [data](data/fitnessgamma.csv.bz2), [analysis](scripts/plot-fitnessgamma.R), [figure](figures/fitnessgamma-integral.png) | [base.cfg](configuration/base.cfg), `Population:fitness_shape` = 0.3, 0.6, 0.9, 1.0, 1.5, 2.0 |
 | S11 TODO   | [data](data/TODO), [analysis](scripts/TODO), [figure](figures/TODO) | TODO |
-| S12A   | [data](data/spite-dilution.csv.bz2), [analysis](scripts/plot-spite-dilution.R]), [figure](figures/spite-avg-proportion.png) | TODO |
-| S12B   | [data](data/spite-dilution.csv.bz2), [analysis](scripts/plot-spite-dilution.R]), [figure](figures/spite-dilution.png) | TODO |
-| S12C   | [data](data/spite-envchange.csv.bz2), [analysis](scripts/plot-spite-envchange.R), [figure](figures/spite-envchange-sample.png) | TODO |
+| S12A   | [data](data/spite-dilution.csv.bz2), [analysis](scripts/plot-spite-dilution.R]), [figure](figures/spite-avg-proportion.png) | [spite.cfg](configuration/spite.cfg) |
+| S12B   | [data](data/spite-dilution.csv.bz2), [analysis](scripts/plot-spite-dilution.R]), [figure](figures/spite-dilution.png) | [spite.cfg](configuration/spite.cfg), `dilution_prob_min` = 0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 0.75, 1.0 |
+| S12C   | [data](data/spite-envchange.csv.bz2), [analysis](scripts/plot-spite-envchange.R), [figure](figures/spite-envchange-sample.png) | [spite-envchange-regular.cfg](configuration/spite-envchange-regular.cfg) |
 
 
 ## License
