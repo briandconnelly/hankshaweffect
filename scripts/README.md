@@ -13,7 +13,7 @@ Analysis and plotting scripts
 * [magrittr](http://cran.r-project.org/web/packages/magrittr/) (version 1.5 used)
 * [scales](http://cran.r-project.org/web/packages/scales/) (version 0.3.0 used)
 
-These packages can be installed in R using the following commands:
+These packages can be installed using the following commands in R:
 
 ```r
 install.packages(c('dplyr', 'ggplot2', 'gtable', 'magrittr', 'scales', 'devtools'))
