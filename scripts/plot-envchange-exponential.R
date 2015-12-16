@@ -8,7 +8,7 @@ d$Replicate <- as.factor(d$Replicate)
 
 # Sample trajectory ------------------------------------------------------------
 
-data_sample <- d %>% filter(EnvChangeFrequency == 500 & Replicate == 36)
+data_sample <- d %>% filter(EnvChangeFrequency == 500 & Replicate == 0)
 
 p_sample <- ggplot(data=data_sample, aes(x=Time, y=CooperatorProportion)) +
     draw_50line() +
@@ -24,8 +24,7 @@ save_figure(filename='../figures/envchange-exponential-sample.png',
 
 # All trajectories -------------------------------------------------------------
 
-pall <- ggplot(data=filter(d, EnvChangeFrequency > 100),
-               aes(x=Time, y=CooperatorProportion, color=Replicate)) +
+pall <- ggplot(data=d, aes(x=Time, y=CooperatorProportion, color=Replicate)) +
     facet_grid(EnvChangeFrequency ~ .) +
     draw_50line() +
     geom_line(size = 0.2) +

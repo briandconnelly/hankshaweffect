@@ -27,9 +27,9 @@ hankshaw --config base.cfg --param Population genome_length 0
 | 1       | [data](data/lsweep.csv.bz2), [analysis](scripts/figure1.R), [figure](figures/Figure1.png) | **A:** [wellmixed.cfg](configuration/wellmixed.cfg), `Population:genome_length` = 0<br>**B:** [wellmixed.cfg](configuration/wellmixed.cfg), `Population:genome_length` = 8 (default)<br>**C:** [base.cfg](configuration/base.cfg), `Population:genome_length` = 0<br>**D:** [base.cfg](configuration/base.cfg) |
 | 2A      | [data](data/envchange-regular.csv.bz2), [analysis](scripts/plot-envchange-regular.R), [figure](figures/envchange-regular-rep.png) | [envchange-regular.cfg](configurations/envchange-regular.cfg) |
 | 2B      | [data](data/envchange-regular.csv.bz2), [analysis](scripts/plot-envchange-regular.R), [figure](figures/envchange-regular-all.png) | [envchange-regular.cfg](configurations/envchange-regular.cfg), `EnvironmentalChange:frequency` values 250, 500, 750, 1000, 1250, 2500 |
-| 3A      | [data](data/envchange-control.csv.bz2), [analysis](scripts/plot-envchange-control.R), [figure](figures/envchange-control.png) | TODO |
-| 3B      | [data](data/envchange-exponential-cooppct.csv.bz2), [analysis](scripts/plot-envchange-exponential.R), [figure](figures/envchange-exponential-sample.png) | TODO |
-| 3C      | [data](data/envchange-exponential-cooppct.csv.bz2), [analysis](scripts/plot-envchange-exponential.R), [figure](figures/envchange-exponential-all.png) | TODO | 
+| 3A      | [data](data/envchange-control.csv.bz2), [analysis](scripts/plot-envchange-control.R), [figure](figures/envchange-control.png) | [base.cfg](configuration/base.cfg), `Population:initial_producer_proportion` = 0.0 |
+| 3B      | [data](data/envchange-exponential-cooppct.csv.bz2), [analysis](scripts/plot-envchange-exponential.R), [figure](figures/envchange-exponential-sample.png) | [envchange-exponential.cfg](configuration/envchange-exponential.cfg) |
+| 3C      | [data](data/envchange-exponential-cooppct.csv.bz2), [analysis](scripts/plot-envchange-exponential.R), [figure](figures/envchange-exponential-all.png) | [envchange-exponential.cfg](configuration/envchange-exponential.cfg), `EnvironmentalChange:frequency` values 500, 1000, 5000, 10000 | 
 
 ### Supporting Information
 
