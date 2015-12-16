@@ -24,6 +24,11 @@ These subdirectories may contain additional information
 | 3A      | [data](data/envchange-control.csv.bz2), [analysis](scripts/plot-envchange-control.R), [figure](figures/envchange-control.png) | TODO |
 | 3B      | [data](data/envchange-exponential-cooppct.csv.bz2), [analysis](scripts/plot-envchange-exponential.R), [figure](figures/envchange-exponential-sample.png) | TODO |
 | 3C      | [data](data/envchange-exponential-cooppct.csv.bz2), [analysis](scripts/plot-envchange-exponential.R), [figure](figures/envchange-exponential-all.png) | TODO | 
+
+### Supporting Information
+
+| Figure  | Related Files  | Configuration |
+|:--------|:---------------|:--------------|
 | S1A    | [data](data/lsweep.csv.bz2), [analysis](scripts/plot-genomelengthsweep.R), [figure](figures/genomelengthsweep-sample.png) | [base.cfg](configuration/base.cfg), `Population:genome_length` = 0, 8 |
 | S1B    | [data](data/lsweep.csv.bz2), [analysis](scripts/plot-genomelengthsweep.R), [figure](figures/genomelengthsweep-integral.png) | [base.cfg](configuration/base.cfg), `Population:genome_length` = 0..10 |
 | S1C    | [data](data/bsweep.csv.bz2), [analysis](scripts/scripts/plot-benefitsweep.R), [figure](figures/benefitsweep-integral.png) | [base.cfg](configuration/base.cfg), `Population:capacity_max` = 800..2450 |
@@ -48,6 +53,12 @@ These subdirectories may contain additional information
 | S12A   | [data](data/spite-dilution.csv.bz2), [analysis](scripts/plot-spite-dilution.R]), [figure](figures/spite-avg-proportion.png) | [spite.cfg](configuration/spite.cfg) |
 | S12B   | [data](data/spite-dilution.csv.bz2), [analysis](scripts/plot-spite-dilution.R]), [figure](figures/spite-dilution.png) | [spite.cfg](configuration/spite.cfg), `dilution_prob_min` = 0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 0.75, 1.0 |
 | S12C   | [data](data/spite-envchange.csv.bz2), [analysis](scripts/plot-spite-envchange.R), [figure](figures/spite-envchange-sample.png) | [spite-envchange-regular.cfg](configuration/spite-envchange-regular.cfg) |
+
+### Additional Materials
+
+| Figure  | Related Files  | Configuration |
+|:--------|:---------------|:--------------|
+| -       | [data](data/p0sweep.csv.bz2), [analysis](scripts/plot-p0sweep.R), [figure](figures/p0sweep-integral.png) | [base.cfg](configuration/base.cfg), `Population:initial_producer_proportion` = 0.01, 0.1, 0.5, 0.9, 0.99, 1.0 |
 
 
 ## License
