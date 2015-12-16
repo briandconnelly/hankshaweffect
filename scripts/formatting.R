@@ -17,6 +17,7 @@ textbase_3wide <- 17
 
 figlabels = c('time'='Time',
               'producer_proportion'='Cooperator Proportion',
+              'producer_proportion_thin'='Cooperator Proportion After Initial Thinning',
               'producer_presence'='Cooperator Presence',
               'spite_proportion'='Proportion of\nSpiteful Individuals',
               'spite_presence'='Presence of\nSpiteful Individuals',

@@ -38,15 +38,17 @@ save_figure(filename='../figures/nosocialmu.png', plot=figX, trim=TRUE)
 
 
 # Plot trajectories of replicate populations in structured, L=8 ----------------
-# CUT?
-# tdata <- d %>% filter(Structured == 'Structured Population' & GenomeLength == 'With Stress Adaptation')
-# figY <- ggplot(data=tdata, aes(x=Time, y=CooperatorProportion, color=Replicate)) +
-#     draw_50line() +
-#     geom_line() +
-#     scale_color_grey(guide=FALSE) +
-#     scale_y_continuous(limits=c(0,1)) +
-#     labs(x=figlabels['time'], y=figlabels['producer_proportion'])
-# figY <- rescale_golden(plot=figY)
-# ggsave_golden(plot=figY, '../figures/nosocialmu-trajectories.png', dpi=figure_dpi)
-# trim_file("../figures/nosocialmu-trajectories.png")
+
+tdata <- d %>% filter(Structured == 'Structured Population' & GenomeLength == 'With Stress Adaptation')
+figY <- ggplot(data=tdata, aes(x=Time, y=CooperatorProportion, color=Replicate)) +
+    draw_50line() +
+    geom_line() +
+    scale_color_grey(guide=FALSE) +
+    scale_y_continuous(limits=c(0,1)) +
+    labs(x=figlabels['time'], y=figlabels['producer_proportion']) +
+    theme_hankshaw(base_size=textbase_1wide)
+figY <- rescale_golden(plot=figY)
+
+save_figure(filename='../figures/nosocialmu-trajectories.png', plot=figY,
+            trim=TRUE)
 
