@@ -65,6 +65,7 @@ hankshaw --config base.cfg --param Population genome_length 0
 | Figure  | Related Files  | Configuration |
 |:--------|:---------------|:--------------|
 | -       | [data](data/p0sweep.csv.bz2), [analysis](scripts/plot-p0sweep.R), [figure](figures/p0sweep-integral.png) | [base.cfg](configuration/base.cfg), `Population:initial_producer_proportion` = 0.01, 0.1, 0.5, 0.9, 0.99, 1.0 |
+| -       | [data](data/wellmixed-histress.csv.bz2), [analysis](scripts/plot-wellmixed-histress.R), [figure](figures/wellmixed-histress.png) | [wellmixed-histress.cfg](configuration/wellmixed-histress.cfg) |
 
 
 ## License
