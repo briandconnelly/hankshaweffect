@@ -51,8 +51,8 @@ pip install hankshaw
 
 When installing `hankshaw` using `pip`, as described above, these dependencies are automatically installed if needed.
 
-Otherwise, dependencies can be installed using:       
-                                                                                
+Otherwise, dependencies can be installed using:
+
 ```sh
 pip install numpy networkx configobj
 ```
@@ -118,39 +118,16 @@ Output from simulations is placed in the `data` directory. This directory contai
 
 In addition, the `data` directory may contain the following result data files depending on the configuration:
 
-* `metapopulation.csv`: TODO (configured in the `TODO` section)
-* `population.csv`: TODO (configured in the `TODO` section)
-* `fitness.csv`: TODO (configured in the `TODO` section)
-* `genotypes.csv`: TODO (configured in the `TODO` section)
-* `environmental_change.csv`: TODO (configured in the `TODO` section)
-* `topology.gml`: TODO [Graph Modelling Language](https://en.wikipedia.org/wiki/Graph_Modelling_Language)
+* `metapopulation.csv`: Population-level information including cooperator proportion and fitness (configured in the `MetapopulationLog` section)
+* `population.csv`: Subpopulation-level information including cooperator proportion and fitness (configured in the `PopulationLog` section)
+* `fitness.csv`: Fitness values for cooperators and defectors (configured in the `FitnessLog` section)
+* `genotypes.csv`: Each genotype present in the population, its abundance, and whether or not individuals are cooperators (configured in the `GenotypeLog` section)
+* `environmental_change.csv`: Whether or not an environmental change event occurred at that time point (configured in the `EnvChangeLog` section)
+* `topology.gml`: The topology that determines migration among subpopulations in [Graph Modelling Language](https://en.wikipedia.org/wiki/Graph_Modelling_Language) format
 
 
 ### Compression
 
-TODO
-
-
-### Uncompressing the Data Files
-
-To save space, the resulting data files are compressed. To open these files in Python:
-
-```python
-import bz2
-import csv
-
-reader = csv.reader(bz2.BZ2File('demographics.csv.bz2', 'r'))
-for row in reader:
-    print(row)
-```
-
-The decompression is done transparently in R:
-
-```r
-mydata <- read.csv('demographics.csv.bz2')
-```
-
-Otherwise, they can be opened by double clicking on them in Finder (Mac),
-running `bunzip2 <filename>` (Mac/Linux), or opening with
-[7-Zip](http://www.7-zip.org/) (Windows).
+By default, output data are compressed with [bzip2](http://bzip.org) to reduce file size.
+This can be configured for each output file via the `compress` option.
 
