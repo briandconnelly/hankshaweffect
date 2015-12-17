@@ -42,7 +42,9 @@ figlabels = c('time'='Time',
               'pop_struct' = 'Structured Population',
               'pop_unstruct' = 'Unstructured Population',
               'with_adapt' = 'With Stress Adaptation',
-              'without_adapt' = 'Without Stress Adaptation')
+              'without_adapt' = 'Without Stress Adaptation',
+              'with_pool' = 'With Subpopulation Pooling',
+              'without_pool' = 'Without Subpopulation Pooling')
 
 
 label_genomelengths <- c('0', '1', '2', '3', '4', '5', '6', '7', expression(bold('8')), '9', '10')
