@@ -27,7 +27,7 @@ from hankshaw.misc import write_run_information, append_run_information
 def parse_arguments():
     """Parse command line arguments"""
 
-    parser = argparse.ArgumentParser(prog='hankshaw.py',
+    parser = argparse.ArgumentParser(prog='hankshaw',
                                      description='Run a simluation')
     parser.add_argument('--config', '-c', metavar='FILE', help='Configuration '\
                         'file to use', dest='configfile', default=None)
