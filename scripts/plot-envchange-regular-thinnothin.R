@@ -33,8 +33,8 @@ presence <- envchangereg %>%
 
 pX <- ggplot(data=presence, aes(x=EnvChangeFrequency, y=Integral)) +
     facet_grid(StressThinning ~ GenomeLength) +
+    stat_summary(fun.y='mean', geom='line', color='grey70', size=0.3) +
     stat_summary(fun.data='figsummary') +
-    stat_summary(fun.y='mean', geom='line') +
     geom_text(data=facet_labels, aes(label=Label), fontface='bold', vjust=1,
               hjust=0) +
     scale_y_continuous(limits=c(0, 1)) +
@@ -44,4 +44,6 @@ pX <- ggplot(data=presence, aes(x=EnvChangeFrequency, y=Integral)) +
     theme_hankshaw(base_size=textbase_1wide)
 pX <- rescale_square(plot = pX)
 
-save_figure(filename='../figures/envchange-thinnothin.png', plot=pX, trim=TRUE) 
+save_figure(filename='../figures/envchange-regular-thinnothin.png', plot=pX,
+            trim=TRUE) 
+
