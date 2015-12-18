@@ -66,7 +66,7 @@ hankshaw --config base.cfg --param Population genome_length 0
 | Figure  | Related Files  | Configuration |
 |:--------|:---------------|:--------------|
 | R1      | [data](data/poolingsweep.csv.bz2), [analysis](scripts/plot-pooling.R), [figure](figures/poolingnopooling.png) | [base.cfg](configuration/base.cfg), `MetapopulationMixing:enabled` = `True`, `MetapopulationMixing:frequency` = 1 |
-| R2      | [data](data/TODO), [analysis](scripts/TODO), [figure](figures/TODO) | TODO - Pooling and stress |
+| R2      | [data](data/envchange-regular-pooling.csv.bz2), [analysis](scripts/plot-envchange-regular-pooling.R), [figure](figures/envchange-regular-pooling.png) | [envchange-regular.cfg](configurations/envchange-regular.cfg), `EnvironmentalChange:frequency` = 5, `MetapopulationMixing:enabled` = `True`, `MetapopulationMixing:frequency` = 1 |
 | R3      | [data](data/wellmixed-histress.csv.bz2), [analysis](scripts/plot-wellmixed-histress.R), [figure](figures/wellmixed-histress.png) | [wellmixed-histress.cfg](configuration/wellmixed-histress.cfg) |
 | R4      | [data](data/nosocialmu.csv.bz2), [analysis](scripts/plot-nosocialmu.R), [figure](figures/nosocialmu-trajectories.png) | [base.cfg](configuration/base.cfg), `Population:mutation_rate_social` = 0 |
 
