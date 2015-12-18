@@ -46,7 +46,8 @@ ptraj <- ggplot(data=d, aes(x=Time, y=CooperatorProportion, color=Replicate)) +
     scale_color_grey(guide=FALSE) +
     labs(x=figlabels['time'], y=figlabels['producer_proportion']) +
     theme_hankshaw(base_size=textbase_2wide)
-ggsave_golden(filename = '../figures/fitnessgamma-all.png', plot = ptraj)
+save_figure(filename='../figures/fitnessgamma-all', plot=ptraj,
+            trim=TRUE)
 
 
 # Cooperator Presence -----------------------------------------------------
@@ -66,3 +67,4 @@ pint <- rescale_golden(plot=pint)
 
 save_figure(filename='../figures/fitnessgamma-integral.png', plot=pint,
             label='B', trim=TRUE)
+
