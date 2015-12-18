@@ -36,20 +36,6 @@ save_figure(filename='../figures/fitnessgamma-gamma.png', plot=pshape,
             label='A', trim=TRUE, height=3.708204)
 
 
-# Individual Trajectories -------------------------------------------------
-
-ptraj <- ggplot(data=d, aes(x=Time, y=CooperatorProportion, color=Replicate)) +
-    draw_50line() +
-    facet_grid(Shape ~ .) +
-    geom_line() +
-    scale_y_continuous(limits=c(0,1), breaks=c(0, 0.5, 1)) +
-    scale_color_grey(guide=FALSE) +
-    labs(x=figlabels['time'], y=figlabels['producer_proportion']) +
-    theme_hankshaw(base_size=textbase_2wide)
-save_figure(filename='../figures/fitnessgamma-all', plot=ptraj,
-            trim=TRUE)
-
-
 # Cooperator Presence -----------------------------------------------------
 
 data_interval <- 1
@@ -67,4 +53,19 @@ pint <- rescale_golden(plot=pint)
 
 save_figure(filename='../figures/fitnessgamma-integral.png', plot=pint,
             label='B', trim=TRUE)
+
+
+# Extra: Individual Trajectories ---------------------------------------------
+
+#ptraj <- ggplot(data=d, aes(x=Time, y=CooperatorProportion, color=Replicate)) +
+#    draw_50line() +
+#    facet_grid(Shape ~ .) +
+#    geom_line() +
+#    scale_y_continuous(limits=c(0,1), breaks=c(0, 0.5, 1)) +
+#    scale_color_grey(guide=FALSE) +
+#    labs(x=figlabels['time'], y=figlabels['producer_proportion']) +
+#    theme_hankshaw(base_size=textbase_2wide)
+#save_figure(filename='../figures/fitnessgamma-all.png', plot=ptraj,
+#            trim=TRUE)
+
 
