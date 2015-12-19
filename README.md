@@ -55,7 +55,7 @@ hankshaw --config base.cfg --param Population genome_length 0
 | S9B    | [data](data/benefitgamma.csv.bz2), [analysis](scripts/plot-benefitgamma.R), [figure](figures/benefitgamma-integral.png) | [base.cfg](configuration/base.cfg), `Population:capacity_shape` = 0.25, 0.5, 1.0, 2.0, 4.0 |
 | S10A   | [data](data/fitnessgamma.csv.bz2), [analysis](scripts/plot-fitnessgamma.R), [figure](figures/fitnessgamma-gamma.png) | - |
 | S10B   | [data](data/fitnessgamma.csv.bz2), [analysis](scripts/plot-fitnessgamma.R), [figure](figures/fitnessgamma-integral.png) | [base.cfg](configuration/base.cfg), `Population:fitness_shape` = 0.3, 0.6, 0.9, 1.0, 1.5, 2.0 |
-| S11 TODO   | [data](data/TODO), [analysis](scripts/TODO), [figure](figures/TODO) | TODO |
+| S11    | [data](data/5xpopulation.csv.bz2), [analysis](scripts/plot-5xpopulation.R), [figure](figures/5xpopulation.png) | [5xpopulation.cfg](configuration/5xpopulation.cfg) |
 | S12    | [data](data/p0sweep.csv.bz2), [analysis](scripts/plot-p0sweep.R), [figure](figures/p0sweep-integral.png) | [base.cfg](configuration/base.cfg), `Population:initial_producer_proportion` = 0.01, 0.1, 0.5, 0.9, 0.99, 1.0 |
 | S13A   | [data](data/spite-dilution.csv.bz2), [analysis](scripts/plot-spite-dilution.R]), [figure](figures/spite-avg-proportion.png) | [spite.cfg](configuration/spite.cfg) |
 | S13B   | [data](data/spite-dilution.csv.bz2), [analysis](scripts/plot-spite-dilution.R]), [figure](figures/spite-dilution.png) | [spite.cfg](configuration/spite.cfg), `dilution_prob_min` = 0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 0.75, 1.0 |
