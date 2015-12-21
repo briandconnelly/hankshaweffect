@@ -1,4 +1,4 @@
-# Model for TODO paper title
+# Model for "The Evolution of Cooperation by the Hankshaw Effect"
 
 This folder contains the source code for the model, which is maintained as a Python package named [`hankshaw`](https://pypi.python.org/pypi/hankshaw/).
 
