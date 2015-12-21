@@ -2,7 +2,10 @@
 
 import numpy as np
 from numpy import sum as nsum
+from numpy import add as nadd
 from numpy import zeros as zeros
+from numpy import nonzero
+from numpy import int32 as nint32, uint32 as nuint32
 from numpy.random import binomial
 from numpy.random import multinomial
 
@@ -60,7 +63,7 @@ class Population(object):
         elif self.initialize.lower() == 'random':
             self.randomize()
 
-        self.delta = zeros(self.abundances.size, dtype=np.int32)
+        self.delta = zeros(self.abundances.size, dtype=nint32)
         self.diluted = True
 
 
@@ -73,7 +76,7 @@ class Population(object):
 
     def empty(self):
         """Empty a population"""
-        self.abundances = zeros(2**(self.genome_length + 1), dtype=np.uint32)
+        self.abundances = zeros(2**(self.genome_length + 1), dtype=nuint32)
 
 
     def randomize(self):
@@ -148,13 +151,13 @@ class Population(object):
         if not self.diluted:
             return
 
-        mutated_population = zeros(self.abundances.size, dtype=np.uint32)
+        mutated_population = zeros(self.abundances.size, dtype=nuint32)
 
-        for i in np.nonzero(self.abundances)[0]:
-            mutated_population = np.add(mutated_population,
-                                        multinomial(self.abundances[i],
-                                                    self.metapopulation.mutation_probs[i],
-                                                    size=1)[0])
+        for i in nonzero(self.abundances)[0]:
+            mutated_population = nadd(mutated_population,
+                                      multinomial(self.abundances[i],
+                                                  self.metapopulation.mutation_probs[i],
+                                                  size=1)[0])
 
         self.abundances = mutated_population
 
@@ -203,8 +206,8 @@ class Population(object):
                                     
         """
 
-        self.abundances = np.add(self.abundances, self.delta)
-        self.delta = zeros(self.abundances.size, dtype=np.int32)
+        self.abundances = nadd(self.abundances, self.delta)
+        self.delta = zeros(self.abundances.size, dtype=nint32)
 
 
     def reset_loci(self, num_loci):
@@ -294,7 +297,7 @@ class Population(object):
         if popsize == 0:
             return 'NA'
         else:
-            return np.sum(self.abundances * landscape)/popsize
+            return nsum(self.abundances * landscape)/popsize
 
 
     def max_fitnesses(self):

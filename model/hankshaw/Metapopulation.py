@@ -4,6 +4,7 @@ import os
 
 import networkx as nx
 import numpy as np
+from numpy import zeros as zeros
 from numpy.random import binomial, choice as nchoice, exponential, random_integers
 
 from hankshaw import genome
@@ -231,7 +232,7 @@ class Metapopulation(object):
         benefit_nonzero = self.config['Population']['benefit_nonzero']
         fitness_shape = self.config['Population']['fitness_shape']
 
-        landscape = np.zeros(2**(genome_length))
+        landscape = zeros(2**(genome_length))
 
         for i in range(2**(genome_length)):
             num_ones = sum(genome.base10_as_bitarray(i))
@@ -307,7 +308,7 @@ class Metapopulation(object):
         re-distributed.
         """
 
-        abundances = np.zeros(self.fitness_landscape.size, dtype=np.int)
+        abundances = zeros(self.fitness_landscape.size, dtype=np.int)
 
         for n, d in self.topology.nodes_iter(data=True):
             abundances += d['population'].abundances

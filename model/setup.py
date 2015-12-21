@@ -20,10 +20,10 @@ import sys
 
 
 if sys.argv[-1] == 'setup.py':
-    print("To install pyfttt, run 'python setup.py install'\n")
+    print("To install hankshaw, run 'python setup.py install'\n")
 
 if sys.version_info[:2] < (2, 7):
-    print("pyfttt requires Python 2.7 or later (%d.%d detected)." % sys.version_info[:2])
+    print("hankshaw requires Python 2.7 or later (%d.%d detected)." % sys.version_info[:2])
     sys.exit(-1)
 
 
@@ -31,7 +31,7 @@ here = path.abspath(path.dirname(__file__))
 
 setup(
     name='hankshaw',
-    version='1.1.4',
+    version='2.0.0',
     description='Model for The Evolution of Cooperation by the Hankshaw Effect',
     long_description='Simulation model described and used in The Evolution of Cooperation by the Hankshaw Effect. In each simulation, a metapopulation of populations grow and evolve.',
     url='https://github.com/briandconnelly/hankshaweffect',
