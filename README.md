@@ -1,6 +1,6 @@
 # Model, Data, and Analysis Scripts for *The Evolution of Cooperation by the Hankshaw Effect*
 
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.50583.svg)](http://dx.doi.org/10.5281/zenodo.50583)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.50643.svg)](http://dx.doi.org/10.5281/zenodo.50643)
 
 
 ## Contents
