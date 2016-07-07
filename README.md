@@ -1,7 +1,8 @@
-# Model, Data, and Analysis Scripts for *The Evolution of Cooperation by the Hankshaw Effect*
+# Model, Data, and Analysis Scripts for *[The Evolution of Cooperation by the Hankshaw Effect](https://dx.doi.org/10.1111/evo.12928)*
 
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.50643.svg)](http://dx.doi.org/10.5281/zenodo.50643)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.50643.svg)](https://dx.doi.org/10.5281/zenodo.50643)
 
+[![DOI](https://img.shields.io/badge/Paper%20DOI-10.1111%2Fevo.12928-blue.svg)](https://dx.doi.org/10.1111/evo.12928)
 
 ## Contents
 
