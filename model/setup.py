@@ -57,7 +57,7 @@ setup(
     # simple. Or you can use find_packages().
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
 
-    install_requires=['numpy==1.10.1', 'networkx==1.10', 'configobj==5.0.6'],
+    install_requires=['numpy==1.21.0', 'networkx==1.10', 'configobj==5.0.6'],
 
     extras_require={},
     package_data={},
